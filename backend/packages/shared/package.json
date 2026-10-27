@@ -1,0 +1,22 @@
+{
+  "name": "@vehicle-pulse/shared",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VehiclePulse - Shared middleware, errors, correlation ID, and health check patterns",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "clean": "node -e \"const fs=require('fs'); if(fs.existsSync('dist')) fs.rmSync('dist', {recursive:true, force:true});\""
+  },
+  "dependencies": {
+    "@vehicle-pulse/logger": "*",
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}

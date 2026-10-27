@@ -1,0 +1,217 @@
+{
+  "meta": {
+    "project": "VehiclePulse",
+    "generatedAt": "2026-10-27T13:34:24.900Z",
+    "nodeCount": 29,
+    "edgeCount": 12
+  },
+  "nodes": [
+    {
+      "id": "backend/package-lock.json",
+      "label": "package-lock.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/packages/config/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/packages/config/src/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/config/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/packages/logger/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/packages/logger/src/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/logger/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/packages/shared/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/packages/shared/src/correlation.ts",
+      "label": "correlation.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/errorHandler.ts",
+      "label": "errorHandler.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/errors.ts",
+      "label": "errors.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/health.ts",
+      "label": "health.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/shutdown.ts",
+      "label": "shutdown.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/README.md",
+      "label": "README.md",
+      "type": "md"
+    },
+    {
+      "id": "backend/tsconfig.base.json",
+      "label": "tsconfig.base.json",
+      "type": "json"
+    },
+    {
+      "id": "frontend/web/app/globals.css",
+      "label": "globals.css",
+      "type": "css"
+    },
+    {
+      "id": "frontend/web/app/layout.tsx",
+      "label": "layout.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/app/page.tsx",
+      "label": "page.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/next-env.d.ts",
+      "label": "next-env.d.ts",
+      "type": "ts"
+    },
+    {
+      "id": "frontend/web/next.config.mjs",
+      "label": "next.config.mjs",
+      "type": "mjs"
+    },
+    {
+      "id": "frontend/web/package-lock.json",
+      "label": "package-lock.json",
+      "type": "json"
+    },
+    {
+      "id": "frontend/web/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "frontend/web/postcss.config.js",
+      "label": "postcss.config.js",
+      "type": "js"
+    },
+    {
+      "id": "frontend/web/README.md",
+      "label": "README.md",
+      "type": "md"
+    },
+    {
+      "id": "frontend/web/tailwind.config.js",
+      "label": "tailwind.config.js",
+      "type": "js"
+    },
+    {
+      "id": "frontend/web/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
+    }
+  ],
+  "edges": [
+    {
+      "source": "backend/packages/config/src/index.ts",
+      "target": "dotenv",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/config/src/index.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/logger/src/index.ts",
+      "target": "pino",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/correlation.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/correlation.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/errorHandler.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/errorHandler.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/errorHandler.ts",
+      "target": "./errors.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/health.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/shutdown.ts",
+      "target": "http",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/shutdown.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/layout.tsx",
+      "target": "next",
+      "relation": "IMPORTS"
+    }
+  ]
+}

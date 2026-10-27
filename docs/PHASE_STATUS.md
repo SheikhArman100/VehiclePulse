@@ -13,7 +13,7 @@
 |---|---|---|---|---|
 | **Phase 0** | Repository Inspection & Execution Baseline | **DONE** | Environment inspected, tools checked, baseline recorded | Node.js v24.22.1, npm 12.2.1, Docker CLI present (daemon not running yet), git not initialized |
 | **Phase 1** | Repository & Git Foundation | **DONE** | Separate backend/frontend roots, independent npm setups, .gitignore, clean build & type checks | Backend workspaces (`services/*`, `packages/*`, etc.) and frontend Next.js App Router verified |
-| **Phase 2** | Shared Backend Foundations | **NOT_STARTED** | Config (Zod), Pino logger, errors, correlation ID, health checks | Depends on Phase 1 |
+| **Phase 2** | Shared Backend Foundations | **DONE** | Typed config package (Zod), Pino logger, error hierarchy, correlation IDs, health check router, graceful shutdown | `@vehicle-pulse/config`, `@vehicle-pulse/logger`, `@vehicle-pulse/shared` built and type-checked |
 | **Phase 3** | Event Contracts & Domain Definitions | **NOT_STARTED** | Zod schemas, envelope, types, units, versioning | Depends on Phase 2 |
 | **Phase 4** | Local Docker Infrastructure Baseline | **NOT_STARTED** | Docker Compose config, named volumes, health checks | Docker daemon required |
 | **Phase 5** | Nginx Reverse Proxy (Local-First) | **NOT_STARTED** | Reverse proxy config, `/api/*`, `/ws` routes | Depends on Phase 4 |
@@ -82,3 +82,4 @@ Inspect the workspace, inspect environmental runtimes, check toolchains, identif
 
 - **2026-10-27**: Phase 0 baseline completed. `docs/PHASE_STATUS.md` initialized.
 - **2026-10-27**: Phase 1 completed and verified. Established separate `backend/` and `frontend/web/` application roots. Initialized backend npm workspaces with strict TypeScript base, configured independent Next.js App Router frontend with Tailwind CSS, verified independent `npm install`, zero-error `npm run type-check`, production `npm run build`, and passing workflow integrity check.
+- **2026-10-27**: Phase 2 completed and verified. Created shared backend workspace packages: `@vehicle-pulse/config` (Zod validation, fail-fast env parsing), `@vehicle-pulse/logger` (Pino structured logger with correlation ID formatting), and `@vehicle-pulse/shared` (AppError hierarchy, correlation middleware, centralized Express error handler, standardized `/health/live` and `/health/ready` router, and graceful shutdown signal handler). All packages compiled and type-checked cleanly.
