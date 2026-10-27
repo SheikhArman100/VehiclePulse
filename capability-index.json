@@ -1,0 +1,243 @@
+{
+  "$schema": "./tools/verify-workflow.mjs",
+  "generatedBy": "hand-maintained; must stay in sync with skills/ and agents/",
+  "version": "2.5.0",
+  "updated": "2026-10-14",
+  "note": "The harness dispatches skills by exact capabilities key (see docs/FOR-DEVELOPERS.md). An undeclared capability means the skill is invisible to the planner. `node tools/verify-workflow.mjs` enforces that every SKILL.md declares one.",
+  "capabilities": [
+    {
+      "id": "dev.scaffold",
+      "kind": "skill",
+      "source": "skills/team/dev-orchestrator/SKILL.md",
+      "label": "Dev Orchestrator",
+      "produces": ["dev-specs", "project-scaffold"],
+      "consumes": ["product-idea", "whitepaper"],
+      "description": "Transforms a product idea or whitepaper into a scaffolded project and a decomposed milestone plan."
+    },
+    {
+      "id": "dev.protocol",
+      "kind": "skill",
+      "source": "skills/team/claude-code-protocol/SKILL.md",
+      "label": "Agent Workflow Protocol",
+      "produces": ["session-discipline", "handoff-block"],
+      "consumes": ["pipeline-protocol", "project-state"],
+      "description": "Session discipline: scope declaration, surgical scope, verification gates, session close, and the ---AGENT-DONE--- handoff block."
+    },
+    {
+      "id": "code.frontend",
+      "kind": "skill",
+      "source": "skills/team/frontend-design/SKILL.md",
+      "label": "Frontend Design",
+      "produces": ["code", "ui-component"],
+      "consumes": ["design-spec", "requirements", "brand-guidelines"],
+      "description": "Production-grade frontend interfaces with deliberate typography, colour, spacing and interaction quality. Avoids generic default aesthetics."
+    },
+    {
+      "id": "code.simplify.lean",
+      "kind": "skill",
+      "source": "skills/team/ponytail/SKILL.md",
+      "label": "Ponytail (Lazy Senior Dev Mode)",
+      "produces": ["lean-code", "minimal-diff", "yagni-audit"],
+      "consumes": ["task-spec", "codebase", "proposed-diff"],
+      "description": "Enforces YAGNI, anti-bloat decision ladders, and minimal footprint code solutions."
+    },
+    {
+      "id": "code.analyze.graph",
+      "kind": "skill",
+      "source": "skills/team/graphify/SKILL.md",
+      "label": "Graphify (Codebase Knowledge Graph)",
+      "produces": ["knowledge-graph", "graph-report", "dependency-map"],
+      "consumes": ["codebase", "documentation", "database-schema"],
+      "description": "Constructs AST call graphs, schema mappings, and dependency graphs across codebases and docs."
+    },
+    {
+      "id": "spec.architecture",
+      "kind": "agent",
+      "source": "agents/third-party/engineering-backend-architect.md",
+      "label": "Backend Architect",
+      "gate": "0",
+      "description": "API contracts, data models, and the role-based Data Access Matrix."
+    },
+    {
+      "id": "code.implement",
+      "kind": "agent",
+      "source": "agents/third-party/engineering-senior-developer.md",
+      "label": "Senior Developer",
+      "gate": "1",
+      "description": "Full-stack production implementation."
+    },
+    {
+      "id": "code.implement.ui",
+      "kind": "agent",
+      "source": "agents/third-party/engineering-frontend-developer.md",
+      "label": "Frontend Developer",
+      "gate": "1",
+      "description": "UI implementation, component architecture, CSS and API configuration."
+    },
+    {
+      "id": "plan.ux",
+      "kind": "agent",
+      "source": "agents/custom/ux-researcher.md",
+      "label": "UX Researcher",
+      "description": "First-time and returning journeys, entry points, error recovery, session handling. Prerequisite for frontend implementation."
+    },
+    {
+      "id": "design.ui",
+      "kind": "agent",
+      "source": "agents/third-party/design-ui-designer.md",
+      "label": "UI Designer",
+      "gate": "1.5a",
+      "description": "Interface and component design, design systems, Gate 1.5a Visual Design Check."
+    },
+    {
+      "id": "verify.integration",
+      "kind": "agent",
+      "source": "agents/third-party/testing-integration-tester.md",
+      "label": "Integration Tester",
+      "gate": "1.5",
+      "modes": ["A:frontend+backend", "B:service-only"],
+      "description": "Runtime cross-service verification with real HTTP calls. Cannot return PASS (STATIC ONLY)."
+    },
+    {
+      "id": "verify.api",
+      "kind": "agent",
+      "source": "agents/third-party/testing-api-tester.md",
+      "label": "API Tester",
+      "description": "API contract and endpoint testing against spec."
+    },
+    {
+      "id": "verify.build",
+      "kind": "agent",
+      "source": "agents/custom/build-validator.md",
+      "label": "Build Validator",
+      "description": "Validates build output against the feature's Done When criteria."
+    },
+    {
+      "id": "verify.app",
+      "kind": "agent",
+      "source": "agents/custom/verify-app.md",
+      "label": "App Verifier",
+      "description": "End-to-end functional runtime verification."
+    },
+    {
+      "id": "verify.demo",
+      "kind": "agent",
+      "source": "agents/third-party/testing-demo-walkthrough-validator.md",
+      "label": "Demo Walkthrough Validator",
+      "gate": "3",
+      "description": "Fresh-start user flow, demo UX, and STUB_REGISTRY.md audit."
+    },
+    {
+      "id": "verify.evidence",
+      "kind": "agent",
+      "source": "agents/custom/evidence-collector.md",
+      "label": "Evidence Collector",
+      "description": "Compiles verifiable proof artefacts for handover. Prerequisite for Gate 3."
+    },
+    {
+      "id": "refactor.simplify",
+      "kind": "agent",
+      "source": "agents/custom/code-simplifier.md",
+      "label": "Code Simplifier",
+      "gate": "2",
+      "scope": "own-changes-only",
+      "description": "Removes dead code and needless indirection introduced by the current session's changes. Does not refactor pre-existing code."
+    },
+    {
+      "id": "audit.security",
+      "kind": "agent",
+      "source": "agents/custom/security-check.md",
+      "label": "Security Check",
+      "gate": "2",
+      "description": "Input sanitization, authentication and authorization, secret safety, dependency risk."
+    },
+    {
+      "id": "audit.security.deep",
+      "kind": "agent",
+      "source": "agents/third-party/engineering-security-engineer.md",
+      "label": "Security Engineer",
+      "description": "Threat modelling, cryptographic review, dev auth bypass verification."
+    },
+    {
+      "id": "plan.deploy",
+      "kind": "agent",
+      "source": "agents/custom/deployment-topologist.md",
+      "label": "Deployment Topologist",
+      "gate": "2.75",
+      "modes": ["FULL:client-delivery", "LIGHTWEIGHT:internal"],
+      "description": "Deployment target, infrastructure, tenancy, compliance, cost, monitoring, rollback."
+    },
+    {
+      "id": "ops.session-close",
+      "kind": "agent",
+      "source": "agents/custom/project-shepherd.md",
+      "label": "Project Shepherd",
+      "description": "Reconciles project state and progress against git, and drafts the PR description."
+    },
+    {
+      "id": "docs.technical",
+      "kind": "agent",
+      "source": "agents/third-party/engineering-technical-writer.md",
+      "label": "Technical Writer",
+      "description": "Developer documentation, API references, architecture guides."
+    },
+    {
+      "id": "build.prototype",
+      "kind": "agent",
+      "source": "agents/third-party/engineering-rapid-prototyper.md",
+      "label": "Rapid Prototyper",
+      "description": "Speed-first prototyping and MVP builds."
+    },
+    {
+      "id": "code.ai",
+      "kind": "agent",
+      "source": "agents/third-party/engineering-ai-engineer.md",
+      "label": "AI Engineer",
+      "description": "AI/ML integration, LLM implementation, prompt pipelines."
+    },
+    {
+      "id": "orchestrate.multi",
+      "kind": "agent",
+      "source": "agents/third-party/agents-orchestrator.md",
+      "label": "Agents Orchestrator",
+      "description": "Coordinates multi-agent pipelines from spec to ship."
+    }
+  ],
+  "optionalRoles": [
+    {
+      "id": "legacy-codebase-analyst",
+      "neededBy": ["PIPELINE-BROWNFIELD"],
+      "effect": "template-unavailable"
+    },
+    {
+      "id": "modernization-strategist",
+      "neededBy": ["PIPELINE-BROWNFIELD"],
+      "effect": "template-unavailable"
+    },
+    {
+      "id": "data-migration-planner",
+      "neededBy": ["Gate 0.5"],
+      "effect": "skip-inline"
+    },
+    {
+      "id": "devops-automator",
+      "neededBy": ["PIPELINE-DEVOPS", "PIPELINE-ANDROID"],
+      "effect": "skip-inline"
+    },
+    {
+      "id": "accessibility-auditor",
+      "neededBy": ["PIPELINE-UI-FRONTEND"],
+      "effect": "skip-fold-into-gate-1.5a"
+    },
+    {
+      "id": "reality-checker",
+      "neededBy": ["PIPELINE-SPEC"],
+      "effect": "skip-inline"
+    },
+    {
+      "id": "performance-benchmarker",
+      "neededBy": ["PIPELINE-INTEGRATION-TEST"],
+      "effect": "template-unavailable"
+    }
+  ]
+}

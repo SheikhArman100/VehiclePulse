@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI OS — Team Guide · Builder Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f8f6f1;--ink:#191b20;--muted:#5f636b;--rule:#e2ded4;
+    --accent:#284a86;--accent-soft:#eef1f8;--caution:#8a4d0f;--caution-soft:#f6eede;
+    --live:#2c6a4d;--live-soft:#e8f1ea;--measure:68ch;
+    --sans:"Space Grotesk",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.6;font-variation-settings:"opsz" 16}
+  .wrap{max-width:880px;margin:0 auto;padding:72px 32px 120px}
+  p,li{max-width:var(--measure)}
+  h1,h2,h3,h4{font-family:var(--sans);font-weight:600;line-height:1.14;letter-spacing:-0.01em}
+  a{color:var(--accent);text-underline-offset:2px}
+  .mast{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:14px}
+  .mast .kicker{font-family:var(--sans);font-size:.82rem;font-weight:500;color:var(--muted);letter-spacing:.02em}
+  h1{font-size:clamp(2.4rem,5.5vw,3.5rem);font-weight:700;margin:.28em 0 .12em}
+  .mast .lede{font-size:1.18rem;color:var(--ink);max-width:60ch;margin:.2em 0 0}
+  .meta{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin-top:20px;display:flex;flex-wrap:wrap;gap:6px 20px}
+  .meta b{color:var(--ink);font-weight:600}
+  .intro{margin:36px 0 8px}.intro p{font-size:1.04rem}
+  h2{font-size:1.5rem;margin:56px 0 6px;padding-top:10px}
+  .sec-rule{border:0;border-top:1px solid var(--rule);margin:0 0 24px}
+  h2 .idx{color:var(--accent);font-weight:700;margin-right:.5ch;font-variant-numeric:tabular-nums}
+  pre{font-family:var(--mono);font-size:13px;line-height:1.62;background:#1c1f27;color:#e6e6e6;padding:18px 20px;border-radius:6px;overflow-x:auto;margin:16px 0;max-width:none}
+  pre .c{color:#8b93a3}pre .k{color:#e0b060}pre .v{color:#7fb3d5}pre .s{color:#9ccf8f}pre .p{color:#c58bd6}pre .d{color:#e0b060}
+  code{font-family:var(--mono);font-size:.86em;background:#eceae3;padding:1px 5px;border-radius:3px}
+  pre code{background:none;padding:0;font-size:inherit}
+  .prompt{border:1px dashed var(--accent);background:var(--accent-soft);border-radius:8px;padding:11px 16px;margin:14px 0;max-width:none}
+  .prompt .who{font-family:var(--sans);font-size:.72rem;font-weight:600;color:var(--accent);letter-spacing:.02em;display:block;margin-bottom:4px}
+  .prompt .txt{font-size:.98rem;font-style:italic}
+  .surface-key{display:flex;flex-wrap:wrap;gap:8px 20px;margin:16px 0 0;font-family:var(--sans);font-size:.8rem;color:var(--muted)}
+  .surface-key span{display:flex;align-items:center;gap:7px}
+  .chip{width:22px;height:13px;border-radius:3px;display:inline-block}
+  .chip.term{background:#1c1f27}
+  .chip.desk{background:var(--accent-soft);border:1px dashed var(--accent)}
+  .harnessnote{font-family:var(--sans);font-size:.82rem;color:var(--muted);background:#efece4;border-radius:6px;padding:11px 15px;margin:16px 0 0;max-width:none}
+  .harnessnote b{color:var(--ink)}
+  .stage{display:grid;grid-template-columns:52px 1fr;gap:0 20px;margin:30px 0;align-items:start}
+  .stage .no{font-family:var(--sans);font-weight:700;font-size:1rem;color:#fff;background:var(--accent);width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums;margin-top:2px}
+  .stage .no.zero{background:#fff;color:var(--accent);border:1.5px solid var(--accent)}
+  .stage .body{min-width:0}.stage h3{margin:4px 0 2px;font-size:1.18rem}
+  .stage .where{font-family:var(--sans);font-size:.74rem;font-weight:600;color:var(--muted);letter-spacing:.02em;margin-bottom:6px}
+  .stage p{margin:.5em 0;font-size:.99rem}
+  .cycle{border:1.5px solid var(--accent);border-radius:10px;padding:2px 24px 16px;margin:30px 0;background:#fbfaf7}
+  .cycle-tab{font-family:var(--sans);font-weight:700;font-size:.78rem;letter-spacing:.04em;color:#fff;background:var(--accent);display:inline-block;padding:5px 14px;border-radius:0 0 7px 7px;margin:0 0 6px}
+  .step{display:grid;grid-template-columns:34px 1fr;gap:0 16px;margin:20px 0;align-items:start}
+  .step .ltr{font-family:var(--sans);font-weight:700;color:var(--accent);font-size:1.15rem;line-height:1.1;margin-top:1px}
+  .step .body{min-width:0}.step h4{margin:0 0 3px;font-size:1.04rem}
+  .step .where{font-family:var(--sans);font-size:.72rem;font-weight:600;color:var(--muted);letter-spacing:.02em;margin-bottom:6px}
+  .step p{margin:.4em 0;font-size:.96rem}
+  .loopback{text-align:center;font-family:var(--sans);font-size:.84rem;font-weight:600;color:var(--accent);margin:6px 0 2px}
+  .note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:12px 18px;margin:16px 0;border-radius:0 3px 3px 0}
+  .note.warn{border-left-color:var(--caution);background:var(--caution-soft)}
+  .note.good{border-left-color:var(--live);background:var(--live-soft)}
+  .note p{margin:.3em 0;font-size:.94rem;max-width:none}
+  .note .lbl{font-family:var(--sans);font-size:.75rem;font-weight:600;letter-spacing:.02em;display:block;margin-bottom:2px;color:var(--accent)}
+  .note.warn .lbl{color:var(--caution)}.note.good .lbl{color:var(--live)}
+  ul.check{list-style:none;padding:0;margin:12px 0}
+  ul.check>li{position:relative;padding:0 0 9px 28px;max-width:var(--measure);font-size:.96rem}
+  ul.check>li::before{content:"";position:absolute;left:2px;top:.5em;width:8px;height:8px;border:1.5px solid var(--accent);border-radius:2px}
+  .brain{font-family:var(--mono);font-size:12.5px;background:#efece4;padding:12px 16px;border-radius:5px;line-height:1.7;margin:16px 0;max-width:none;color:var(--ink)}
+  .brain .dim{color:#8a8f98}
+  footer{margin-top:76px;padding-top:20px;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;color:var(--muted)}
+  @media (max-width:560px){body{font-size:16.5px}.wrap{padding:48px 20px 90px}.stage,.step{grid-template-columns:1fr;gap:0}.stage .no{margin-bottom:6px}.cycle{padding:2px 16px 14px}}
+  @media print{:root{--paper:#fff}body{font-size:11pt;line-height:1.48}pre{background:#f2f1ec;color:#1a1a1a;border:1px solid #ddd}pre .c{color:#6a7280}pre .k{color:#7a5a10}pre .v{color:#2a5a86}pre .s{color:#2f6b3a}pre .p{color:#7a4a86}.prompt{background:#f0f2f8}.cycle{background:#fafafa}h2{page-break-after:avoid}.stage,.step,.note,pre,.brain,.cycle{page-break-inside:avoid}a{color:var(--ink);text-decoration:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="kicker">Softograph · Internal engineering enablement · Playbook</div>
+    <h1>Builder Playbook</h1>
+    <p class="lede">One project, start to finish, in commands. The moves, the exact prompts, and the decision points — no implementation code.</p>
+    <div class="meta">
+      <span><b>Pairs with:</b> the AI OS Team Guide</span>
+      <span><b>Sample:</b> a small internal web app, greenfield</span>
+      <span><b>Do §1 literally.</b> Read §2 if you want the why.</span>
+    </div>
+  </header>
+
+  <section class="intro">
+    <p><b>No new language to learn.</b> Two scripts, your coding agent, <code>git</code>, and typing plain requests to the desktop app. That's the whole toolset. If you read nothing else, read §1 and copy the lines.</p>
+    <p>Two surfaces, and you're always on exactly one of them. Know which:</p>
+    <div class="surface-key">
+      <span><span class="chip term"></span> dark block = a <b>terminal command</b> you run</span>
+      <span><span class="chip desk"></span> dashed block = a <b>message you type to the desktop app</b></span>
+    </div>
+    <div class="harnessnote"><b>Harness-neutral.</b> Examples show <b>opencode</b> (the team's default) and <b>AGENTS.md</b> (the portable instruction file). On Antigravity, same <code>AGENTS.md</code>. On Claude Code, launch <code>claude</code> and symlink <code>CLAUDE.md → AGENTS.md</code>. Full swap table: the Team Guide §3.</div>
+  </section>
+
+  <h2><span class="idx">§1</span>Quickstart — copy the lines</h2>
+  <hr class="sec-rule">
+  <p>The whole loop, minimal words. Sample project: <code>acme-portal</code>. Swap the name and follow along.</p>
+<pre><code><span class="c">#### ONE-TIME (per machine) #############################</span>
+<span class="d">agent →</span> <span class="s">"run the dev-orchestrator pre-flight check"</span>   <span class="c"># Node, Git, SSH, agent — all green?</span>
+
+<span class="c">#### NEW PROJECT ########################################</span>
+<span class="d">desktop →</span> <span class="s">"scaffold acme-portal as a web-app via dev-orchestrator"</span>   <span class="c"># agent builds the tree — no script</span>
+ln -s CLAUDE.md AGENTS.md                  <span class="c"># one instruction file for every harness</span>
+<span class="d">desktop →</span> <span class="s">"interview me, then fill knowledge/BRD.md and knowledge/SCHEMA.md"</span>
+<span class="c"># add Notion + Filesystem to your harness's MCP config ; paste the record protocol into AGENTS.md (§2 stage 3)</span>
+
+<span class="c">#### PER FEATURE — repeat until done ####################</span>
+<span class="d">desktop →</span> <span class="s">"read playbook/features + PROGRESS.md, give me the coding-agent</span>
+<span class="s">           prompt for the next feature. don't write code, write the prompt."</span>
+cd acme-portal &amp;&amp; opencode               <span class="c"># paste that prompt, let it build  (or: antigravity · claude)</span>
+  <span class="c"># run the project's test command — e.g. bun test / npm test</span>
+<span class="d">desktop →</span> <span class="s">"read the changes in ~/Developer/acme-portal, verify them against</span>
+<span class="s">           the feature spec, flag any weakened test, then give me the next prompt."</span>
+git rev-parse HEAD                        <span class="c"># write this down = your revert target</span>
+git commit -am <span class="s">"feat: ..."</span> &amp;&amp; git push  <span class="c"># human ships. the agent never pushes.</span>
+<span class="c"># ↺ back to the top of PER FEATURE</span></code></pre>
+  <div class="note good">
+    <span class="lbl">That's it</span>
+    <p>Everything below is the same handful of lines, explained. If the quickstart already makes sense, stop reading and start building.</p>
+  </div>
+
+  <h2><span class="idx">§2</span>The run, explained</h2>
+  <hr class="sec-rule">
+  <p>Sample: <b>Acme Portal</b>, a small internal status dashboard, greenfield. The spine underneath every step is <b>Brain before Body</b> — knowledge first, source last, because an agent that codes before the spec is real just produces confident nonsense faster.</p>
+
+  <h3 style="margin-top:34px">One-time, per project</h3>
+
+  <div class="stage">
+    <div class="no zero">0</div>
+    <div class="body">
+      <h3>Set the context</h3>
+      <div class="where">■ Desktop app</div>
+      <p>Open the scoped Project for this surface; confirm its instruction doc is pinned. Drop in what you're starting from — an idea, a whitepaper, a PDF. The quality of the whole build is set here. Don't jump to the terminal yet.</p>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="no">1</div>
+    <div class="body">
+      <h3>Check the machine, then scaffold</h3>
+      <div class="where">■ Terminal</div>
+      <p>Confirm the environment, then lay down the structure. The <code>dev-orchestrator</code> skill does both — trigger it from the desktop project or the agent; it runs the pre-flight check and creates the tree directly, no script.</p>
+<pre><code><span class="c"># ask the agent to run the dev-orchestrator pre-flight check</span>
+<span class="c"># (references/claude-code-setup-guide.md, Part 8): Node, Git, SSH, agent, configs</span>
+<span class="c"># then trigger the skill to scaffold — it reads references/project-archetypes.md</span>
+<span class="c"># and creates the acme-portal web-app tree directly. No script.</span>
+ln -s CLAUDE.md AGENTS.md          <span class="c"># scaffolder emits CLAUDE.md; this makes it portable</span></code></pre>
+      <p>What lands — Brain→Soul→Body, plus the files the agent reads:</p>
+      <div class="brain">acme-portal/
+├── knowledge/          <span class="dim">← Brain (first): BRD.md, SCHEMA.md — still empty</span>
+├── design/             <span class="dim">← Soul (second): look &amp; feel</span>
+├── specs/              <span class="dim">← chunked 8–15k tokens: architecture, data, API</span>
+├── playbook/
+│   ├── features/       <span class="dim">← one file per feature, worked in order</span>
+│   └── PROGRESS.md     <span class="dim">← updated every session</span>
+├── src/                <span class="dim">← Body (last): the agent fills this</span>
+├── AGENTS.md           <span class="dim">← the agent reads this first  (→ CLAUDE.md on Claude Code)</span>
+└── (MCP config)        <span class="dim">← .mcp.json / opencode.json / ~/.gemini per harness</span></div>
+      <div class="note warn">
+        <span class="lbl">Decision point — risk gate</span>
+        <p>The scaffolder runs a risk assessment before writing specs. If it returns 🔴 High or ⛔ No-Go, stop and revise scope <em>now</em> — not after the agent has built a week of code on a bad premise.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="no">2</div>
+    <div class="body">
+      <h3>Fill the Brain</h3>
+      <div class="where">■ Desktop app</div>
+      <p>The scaffolder interviews you — vision, platforms, stack, key flows, trade-offs. Its answers become <code>knowledge/BRD.md</code> (what it does) and <code>knowledge/SCHEMA.md</code> (how the data relates). Hold the line: <b>no <code>src/</code> until the Brain is real.</b> An agent building against an empty spec is the most common way these go sideways.</p>
+    </div>
+  </div>
+
+  <div class="stage">
+    <div class="no">3</div>
+    <div class="body">
+      <h3>Wire the record</h3>
+      <div class="where">■ Terminal + Notion</div>
+      <p>Give the harness its memory. Add Notion to your harness's MCP config, create this project's <b>Project State</b> row, and paste the protocol into <code>AGENTS.md</code>.</p>
+<pre><code><span class="c"># MCP config — same server, config file differs per harness (the Team Guide §3):</span>
+<span class="c">#   Claude Code   .mcp.json          { "notion": { "type":"http", "url":"https://mcp.notion.com/mcp" } }</span>
+<span class="c">#   Antigravity   ~/.gemini/…        { "notion": { "serverUrl":"https://mcp.notion.com/mcp" } }   ← serverUrl</span>
+<span class="c">#   opencode      opencode.json      (mcp section — see opencode docs)</span>
+<span class="c"># also add the Filesystem MCP here — it's what lets desktop verify from source (step C).</span>
+
+<span class="c"># AGENTS.md — the record protocol, as rules the agent follows</span>
+<span class="k">START</span> read Project State &lt;<span class="v">row-id</span>&gt; + Canonical Facts &lt;<span class="v">page-id</span>&gt;
+<span class="k">END</span>   rewrite Project State if it moved; log decisions to &lt;<span class="v">db-id</span>&gt;</code></pre>
+      <div class="note">
+        <span class="lbl">Filing reminder (the Team Guide §2)</span>
+        <p>The <b>company</b>, your <b>project states</b>, your <b>decisions</b>, and the <b>canonical IDs</b> go in Notion. The <b>BRD, schema, and specs</b> stay in the repo. Project State is a one-line row that says where this project stands — not the place for the spec.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:44px">Per feature — the build cycle</h3>
+  <p>This is the loop you'll live in. A four-beat ping-pong between the desktop app (which plans and verifies) and your coding agent (which builds). You are the hand carrying prompts across.</p>
+
+  <div class="cycle">
+    <div class="cycle-tab">REPEAT PER FEATURE</div>
+
+    <div class="step">
+      <div class="ltr">A</div>
+      <div class="body">
+        <h4>Desktop writes the prompt</h4>
+        <div class="where">■ Desktop app</div>
+        <p>Don't hand-write prompts for the coding agent. Ask the desktop project to write them — it has the specs and the record, so it writes better ones than you will.</p>
+        <div class="prompt"><span class="who">You → Desktop</span><span class="txt">"Read <code>playbook/features/FEATURE_01_auth.md</code> and <code>PROGRESS.md</code>. Write the exact prompt for the coding agent to implement Feature 01 — name the files to touch, the tests to add, and the acceptance check. Don't write code; write the prompt."</span></div>
+        <p>Copy what it gives back.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="ltr">B</div>
+      <div class="body">
+        <h4>The coding agent builds</h4>
+        <div class="where">■ Terminal</div>
+        <p>Open the agent, paste the prompt, let it work. Then run the project's tests.</p>
+<pre><code>cd acme-portal &amp;&amp; opencode     <span class="c"># or: antigravity · claude</span>
+<span class="c"># paste the prompt from step A, let it implement</span>
+bun test                       <span class="c"># the project's test command (npm test, etc.)</span></code></pre>
+        <div class="note">
+          <span class="lbl">Context hygiene</span>
+          <p>Break at feature boundaries, not mid-feature. Keep <code>PROGRESS.md</code> current so a fresh session re-reads <code>AGENTS.md</code> + <code>PROGRESS.md</code> and knows where it is. Each harness has its own way to trim or restart a long session (Claude Code <code>/compact</code>, opencode session revert, Antigravity's manager) — use it before context gets heavy.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="ltr">C</div>
+      <div class="body">
+        <h4>Desktop verifies, and writes the next prompt</h4>
+        <div class="where">■ Desktop app</div>
+        <p>Back to the desktop project. Because it can read the repo directly over the Filesystem MCP, you don't paste the diff — you point it at the folder.</p>
+        <div class="prompt"><span class="who">You → Desktop</span><span class="txt">"Read the changes in <code>~/Developer/acme-portal</code>. Verify Feature 01 against <code>FEATURE_01_auth.md</code>: did it meet the spec, were tests added, was any test weakened to pass? If it's good, give me the prompt for the next feature. If not, give me the prompt to fix it."</span></div>
+        <p>It reads the actual files, gives you a verdict, and hands back the next prompt — which is step A again.</p>
+        <div class="note warn">
+          <span class="lbl">If your desktop project can't see the repo</span>
+          <p>No Filesystem MCP? Fall back to pasting the diff: run <code>git diff</code> in the terminal, copy the output, and give it to the desktop with the same verify request.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="ltr">D</div>
+      <div class="body">
+        <h4>Human ships</h4>
+        <div class="where">■ Terminal</div>
+        <p>Only once the desktop says it's verified. Note the revert target first, then push. The agent never does this.</p>
+<pre><code>git rev-parse HEAD                    <span class="c"># write this hash down = revert target</span>
+git commit -am <span class="s">"feat: auth"</span> &amp;&amp; git push  <span class="c"># human ships</span></code></pre>
+      </div>
+    </div>
+
+    <div class="loopback">↺ next feature → back to A</div>
+  </div>
+
+  <div class="note good">
+    <span class="lbl">What just happened</span>
+    <p>Desktop wrote the prompt → you carried it to the agent → the agent built → you carried the result back → desktop verified from source and wrote the next prompt → you shipped. The record updated itself over MCP at session end. That four-beat carry is the entire day-to-day. Everything else is setup you did once.</p>
+  </div>
+
+  <h2><span class="idx">§3</span>Variants &amp; graduation</h2>
+  <hr class="sec-rule">
+
+  <h3>Existing repo, not greenfield</h3>
+  <p>Skip stage 1's scaffold. Drop an <code>AGENTS.md</code> and your harness's MCP config into the repo, create the Project State row (stage 3), and start the cycle at step A. You inherit the code; you're wrapping the loop around it.</p>
+
+  <h3>When you've done this enough</h3>
+  <p>Once features are testable specs and you trust the loop, stop carrying prompts by hand. Declare the feature as a <b>spec</b> — goal, mandatory verifier, constraints, autonomy notch — and let the runtime decompose, dispatch, run, and verify it across whichever harness fits (it drives opencode, Claude Code, headless, and n8n alike). The verifier's verdict outranks the agent's self-report; autonomy is earned on clean runs. That's the graduation (the Team Guide §7). Don't reach for it before the four-beat carry is second nature.</p>
+
+  <footer>AI OS — Team Guide · Builder Playbook · v3 · Softograph — pairs with the Team Guide &amp; the Reference System</footer>
+
+</div>
+</body>
+</html>

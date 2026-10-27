@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI OS — Team Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f8f6f1;--ink:#191b20;--muted:#5f636b;--rule:#e2ded4;
+    --accent:#284a86;--accent-soft:#eef1f8;--caution:#8a4d0f;--caution-soft:#f6eede;
+    --live:#2c6a4d;--live-soft:#e8f1ea;--measure:68ch;
+    --sans:"Space Grotesk",system-ui,sans-serif;--serif:"Source Serif 4",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.62;font-variation-settings:"opsz" 16}
+  .wrap{max-width:860px;margin:0 auto;padding:72px 32px 120px}
+  p,li{max-width:var(--measure)}
+  h1,h2,h3,h4{font-family:var(--sans);font-weight:600;line-height:1.14;letter-spacing:-0.01em}
+  a{color:var(--accent);text-underline-offset:2px}
+  .mast{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:14px}
+  .mast .kicker{font-family:var(--sans);font-size:.82rem;font-weight:500;color:var(--muted);letter-spacing:.02em}
+  h1{font-size:clamp(2.6rem,6vw,3.8rem);font-weight:700;margin:.28em 0 .12em}
+  .mast .lede{font-size:1.22rem;color:var(--ink);max-width:60ch;margin:.2em 0 0}
+  .meta{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin-top:20px;display:flex;flex-wrap:wrap;gap:6px 20px}
+  .meta b{color:var(--ink);font-weight:600}
+  .intro{margin:40px 0 8px}.intro p{font-size:1.06rem}
+  figure.loop{margin:44px 0 8px;padding:0}figure.loop svg{width:100%;height:auto;display:block}
+  figcaption{font-family:var(--sans);font-size:.82rem;color:var(--muted);margin-top:12px;max-width:none}
+  h2{font-size:1.7rem;margin:64px 0 6px;padding-top:10px}
+  .sec-rule{border:0;border-top:1px solid var(--rule);margin:0 0 26px}
+  h2 .idx{color:var(--accent);font-weight:700;margin-right:.5ch;font-variant-numeric:tabular-nums}
+  h3{font-size:1.16rem;margin:34px 0 4px}
+  .practice{display:grid;grid-template-columns:52px 1fr;gap:0 22px;margin:38px 0;align-items:start}
+  .practice .num{font-family:var(--sans);font-weight:700;font-size:1.5rem;color:var(--accent);line-height:1;padding-top:2px;font-variant-numeric:tabular-nums;border-top:3px solid var(--accent)}
+  .practice .body{min-width:0}.practice h3{margin-top:0;font-size:1.32rem}
+  .practice .role{font-family:var(--sans);font-size:.76rem;font-weight:600;letter-spacing:.02em;display:inline-block;padding:2px 9px;border-radius:2px;margin:8px 0 12px;vertical-align:middle}
+  .role.live{background:var(--live-soft);color:var(--live)}.role.partial{background:var(--accent-soft);color:var(--accent)}.role.adv{background:var(--caution-soft);color:var(--caution)}
+  .practice dl{margin:10px 0 0}
+  .practice dt{font-family:var(--sans);font-size:.82rem;font-weight:600;color:var(--muted);margin-top:14px}
+  .practice dd{margin:2px 0 0}
+  .note{border-left:3px solid var(--accent);background:var(--accent-soft);padding:14px 20px;margin:22px 0;border-radius:0 3px 3px 0}
+  .note.warn{border-left-color:var(--caution);background:var(--caution-soft)}
+  .note p{margin:.3em 0;font-size:.98rem;max-width:none}
+  .note .lbl{font-family:var(--sans);font-size:.78rem;font-weight:600;letter-spacing:.02em;display:block;margin-bottom:2px;color:var(--accent)}
+  .note.warn .lbl{color:var(--caution)}
+  ol.steps{counter-reset:s;list-style:none;padding:0;margin:24px 0}
+  ol.steps>li{counter-increment:s;position:relative;padding:0 0 18px 46px;max-width:var(--measure)}
+  ol.steps>li::before{content:counter(s);position:absolute;left:0;top:-1px;font-family:var(--sans);font-weight:600;font-size:.9rem;color:var(--accent);width:30px;height:30px;border:1.5px solid var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+  ol.steps>li b{font-family:var(--sans);font-weight:600;font-size:.98rem}
+  .tablewrap{overflow-x:auto;margin:18px 0}
+  table.htable{border-collapse:collapse;width:100%;min-width:520px;font-size:.9rem}
+  table.htable th,table.htable td{border:1px solid var(--rule);padding:8px 11px;text-align:left;vertical-align:top}
+  table.htable th{background:var(--accent-soft);color:var(--accent);font-family:var(--sans);font-weight:600;font-size:.8rem}
+  table.htable td{font-size:.9rem}
+  table.htable td:first-child{font-family:var(--sans);font-size:.82rem;color:var(--muted);font-weight:600;white-space:nowrap}
+  table.htable code{font-size:.82em}
+  ul.check{list-style:none;padding:0;margin:20px 0}
+  ul.check>li{position:relative;padding:0 0 12px 30px;max-width:var(--measure)}
+  ul.check>li::before{content:"";position:absolute;left:2px;top:.55em;width:9px;height:9px;border:1.5px solid var(--accent);border-radius:2px}
+  .homes{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:22px 0}
+  .home{border:1px solid var(--rule);border-radius:5px;padding:16px 18px;background:#fff}
+  .home.notion{border-top:3px solid var(--accent)}
+  .home.repo{border-top:3px solid var(--live)}
+  .home h4{font-size:1.04rem;margin:0 0 2px}
+  .home .sub{font-family:var(--mono);font-size:.72rem;color:var(--muted);display:block;margin-bottom:8px}
+  .home ul{margin:0;padding-left:18px}
+  .home li{font-size:.93rem;margin:3px 0;max-width:none}
+  @media (max-width:560px){.homes{grid-template-columns:1fr}}
+  .stores{margin:24px 0}
+  .store{border:1px solid var(--rule);border-left:3px solid var(--accent);border-radius:0 4px 4px 0;padding:16px 20px;margin:14px 0;max-width:none}
+  .store h4{font-size:1.02rem;margin:0 0 3px}
+  .store .tag{font-family:var(--mono);font-size:.74rem;color:var(--muted);font-weight:500}
+  .store p{margin:.5em 0 0;font-size:.97rem;max-width:64ch}
+  .store .fields{font-family:var(--mono);font-size:12.5px;color:var(--ink);background:#efece4;padding:9px 12px;border-radius:4px;margin-top:10px;line-height:1.7;max-width:none}
+  pre{font-family:var(--mono);font-size:13.5px;line-height:1.6;background:#1c1f27;color:#e6e6e6;padding:22px 24px;border-radius:6px;overflow-x:auto;margin:22px 0;max-width:none}
+  pre .c{color:#8b93a3}pre .k{color:#e0b060}pre .v{color:#7fb3d5}pre .s{color:#9ccf8f}
+  code{font-family:var(--mono);font-size:.86em;background:#eceae3;padding:1px 5px;border-radius:3px}
+  pre code{background:none;padding:0;font-size:inherit}
+  footer{margin-top:80px;padding-top:20px;border-top:1px solid var(--rule);font-family:var(--sans);font-size:.8rem;color:var(--muted)}
+  @media (max-width:560px){body{font-size:16.5px}.wrap{padding:48px 20px 90px}.practice{grid-template-columns:1fr;gap:0}.practice .num{border-top:none;font-size:1.2rem;margin-bottom:4px}}
+  @media print{:root{--paper:#fff}body{font-size:11.5pt;line-height:1.5}pre{background:#f2f1ec;color:#1a1a1a;border:1px solid #ddd}pre .c{color:#6a7280}pre .k{color:#7a5a10}pre .v{color:#2a5a86}pre .s{color:#2f6b3a}h2{page-break-after:avoid;margin-top:34px}.practice,ol.steps>li,.note,pre,.store,figure.loop{page-break-inside:avoid}a{color:var(--ink);text-decoration:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="mast">
+    <div class="kicker">Softograph · Internal engineering enablement · Team Guide · start here</div>
+    <h1>AI OS — Team Guide</h1>
+    <p class="lede">The method the founder uses to build with AI, written down — how one person's disciplined AI-assisted development loop becomes the team's default.</p>
+    <div class="meta">
+      <span><b>Track:</b> Builders (terminal + coding agent)</span>
+      <span><b>Companion:</b> the <a href="ai-os-operator-guide.html">Operator Guide</a> for non-terminal roles</span>
+      <span><b>Status:</b> internal — not for public surfaces</span>
+    </div>
+  </header>
+
+  <section class="intro">
+    <p>This is not a tool. It's a <em>loop</em> — six practices that turn an AI assistant and a coding agent from a clever autocomplete into a reliable production partner. Followed loosely, they save a little typing. Followed as a system, they remove the two things that quietly wreck AI-assisted work: re-explaining your context every session, and letting your record of what's true drift out from under you.</p>
+    <p>Most of the value is in the first four practices, and most people skip them because they feel like overhead before the "real" work. They aren't overhead. They're what makes the real work repeatable.</p>
+    <p>And if the word <b>Notion</b> just made you wince — you're a terminal person, not a docs-app person — read <a href="#record">§2</a> first. You will almost never open Notion by hand. It's a structured store your harness reads and writes over MCP, under a protocol you hand the agent once. The discipline is instructions in a file, not clicks in an app.</p>
+  </section>
+
+  <!-- ZERO-TH LAYER: THE TWO TOOLS -->
+  <h2 id="tools"><span class="idx">§0</span>The two tools — start here</h2>
+  <hr class="sec-rule">
+  <p>Before any of the practices below, get the ground floor right. This whole method runs on <b>two tools</b>; everything else is how you make them work together. If unfamiliar tooling makes you uneasy, this is the one section to absorb before starting — the rest becomes obvious once these two are in place.</p>
+
+  <div class="homes">
+    <div class="home notion">
+      <h4>1 · The desktop assistant</h4>
+      <span class="sub">planner + verifier · the cockpit</span>
+      <ul>
+        <li>Where you <b>plan, write specs, and verify</b> — in plain language. Claude on desktop, or any capable chat app.</li>
+        <li><b>Install:</b> download the desktop app and sign in. That's it.</li>
+        <li><b>How the method loads:</b> you make one scoped Project per surface and pin its instruction doc (Practice 1). That instruction <em>is</em> how it knows your rules.</li>
+      </ul>
+    </div>
+    <div class="home repo">
+      <h4>2 · The coding agent</h4>
+      <span class="sub">builder · runs in the terminal</span>
+      <ul>
+        <li>Where code actually gets <b>written</b>. Team preference order: <b>opencode</b> (default) → <b>Antigravity</b> → <b>Claude Code</b> → an OpenAI coding agent (rarely).</li>
+        <li><b>Install:</b> install the CLI/IDE for the one you pick; per-harness file names and launch command are in the <a href="#setup">§3</a> table.</li>
+        <li><b>How the method loads:</b> it reads <code>AGENTS.md</code> first (Claude Code: symlink <code>CLAUDE.md → AGENTS.md</code>), and the AI OS team skills — <code>dev-orchestrator</code> and the rest — sit in the harness's skill directory so the agent can trigger them.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="lbl">Wire two MCP servers — that's the plumbing</span>
+    <p><b>Notion</b> is the record (<a href="#record">§2</a>): the agent reads and writes your project state and canonical facts over it. <b>Filesystem</b> lets the desktop assistant read your repo directly, so it can verify the agent's work <em>from source</em> instead of trusting a summary. Wire both once per harness — exact config is in <a href="#setup">§3</a>. With those two connected, the loop below is the entire method.</p>
+  </div>
+
+  <figure class="loop" aria-label="The build loop: Context, Source of Truth, Scoped Project, Build, Verify, Update — repeating every session.">
+    <svg viewBox="0 0 860 240" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="6.5" refY="3.2" orient="auto"><path d="M0,0 L7,3.2 L0,6.4 Z" fill="#284a86"/></marker></defs>
+      <g font-family="Space Grotesk, sans-serif">
+        <g><rect x="6" y="66" width="120" height="56" rx="6" fill="#eef1f8" stroke="#284a86" stroke-width="1.4"/><text x="66" y="90" text-anchor="middle" font-size="13.5" font-weight="600" fill="#191b20">Context</text><text x="66" y="107" text-anchor="middle" font-size="10.5" fill="#5f636b">instruction doc</text></g>
+        <g><rect x="152" y="66" width="120" height="56" rx="6" fill="#eef1f8" stroke="#284a86" stroke-width="1.4"/><text x="212" y="90" text-anchor="middle" font-size="13.5" font-weight="600" fill="#191b20">Source of truth</text><text x="212" y="107" text-anchor="middle" font-size="10.5" fill="#5f636b">Notion via MCP</text></g>
+        <g><rect x="298" y="66" width="120" height="56" rx="6" fill="#eef1f8" stroke="#284a86" stroke-width="1.4"/><text x="358" y="90" text-anchor="middle" font-size="13.5" font-weight="600" fill="#191b20">Scoped project</text><text x="358" y="107" text-anchor="middle" font-size="10.5" fill="#5f636b">desktop app</text></g>
+        <g><rect x="444" y="66" width="120" height="56" rx="6" fill="#284a86" stroke="#284a86" stroke-width="1.4"/><text x="504" y="90" text-anchor="middle" font-size="13.5" font-weight="600" fill="#ffffff">Build</text><text x="504" y="107" text-anchor="middle" font-size="10.5" fill="#c9d4ec">coding agent</text></g>
+        <g><rect x="590" y="66" width="120" height="56" rx="6" fill="#eef1f8" stroke="#284a86" stroke-width="1.4"/><text x="650" y="90" text-anchor="middle" font-size="13.5" font-weight="600" fill="#191b20">Verify</text><text x="650" y="107" text-anchor="middle" font-size="10.5" fill="#5f636b">from source</text></g>
+        <g><rect x="736" y="66" width="120" height="56" rx="6" fill="#eef1f8" stroke="#284a86" stroke-width="1.4"/><text x="796" y="90" text-anchor="middle" font-size="13.5" font-weight="600" fill="#191b20">Update</text><text x="796" y="107" text-anchor="middle" font-size="10.5" fill="#5f636b">the record</text></g>
+        <g stroke="#284a86" stroke-width="1.6" marker-end="url(#ah)"><line x1="128" y1="94" x2="150" y2="94"/><line x1="274" y1="94" x2="296" y2="94"/><line x1="420" y1="94" x2="442" y2="94"/><line x1="566" y1="94" x2="588" y2="94"/><line x1="712" y1="94" x2="734" y2="94"/></g>
+        <path d="M796,122 L796,168 Q796,182 782,182 L80,182 Q66,182 66,168 L66,124" fill="none" stroke="#284a86" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#ah)"/>
+        <text x="431" y="176" text-anchor="middle" font-size="11" fill="#5f636b" font-style="italic">every session</text>
+      </g>
+    </svg>
+    <figcaption>Practices 1–3 set up and maintain the record. Practices 4–5 do the work. Practice 6 (a desktop-to-agent bridge) is optional and comes last.</figcaption>
+  </figure>
+
+  <h2><span class="idx">§1</span>The six practices</h2>
+  <hr class="sec-rule">
+
+  <div class="practice">
+    <div class="num">1</div>
+    <div class="body">
+      <h3>Front-load the context</h3>
+      <span class="role live">Essential</span>
+      <p>Before any work on a surface — a product, an automation, a repo — write a <b>project-instruction document</b> that states scope, constraints, conventions, and the references that never change. It gets pinned to the project and read at the start of every session.</p>
+      <dl>
+        <dt>Why it matters</dt>
+        <dd>The model can't infer your team's rules. If they aren't written down, you re-brief from zero every session and the output drifts toward generic. This document is the single highest-leverage artifact in the method: a weak one makes every later practice weaker.</dd>
+        <dt>Do this</dt>
+        <dd>Use the template in <a href="#template">§4</a>. One document per surface. Keep it scoped — what's in, what's out, the constraints that must never break, the IDs that never change. Revise it when a rule changes, not mid-task.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="practice">
+    <div class="num">2</div>
+    <div class="body">
+      <h3>Keep one source of truth</h3>
+      <span class="role live">Essential</span>
+      <p>One canonical place — Notion — holds each project's live state and durable facts. Your harness reads it before asserting anything about where a project stands, and never lets a chat's memory or a stale copy override it. Every line is timestamped; the <b>most recent timestamp wins</b>.</p>
+      <dl>
+        <dt>Why it matters</dt>
+        <dd>Work spreads across many chats and many days. Without one authority, two sessions hold contradictory state and nobody can tell which is real. The record is the arbiter — not your memory, and not the assistant's.</dd>
+        <dt>The part that matters for you</dt>
+        <dd>You will rarely open Notion by hand. It's a structured store your harness reads and writes over MCP, following a protocol you hand the agent once. <a href="#record">§2</a> gives the exact schema and the wiring.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="practice">
+    <div class="num">3</div>
+    <div class="body">
+      <h3>Update the record at session end — only when it moved</h3>
+      <span class="role live">Essential</span>
+      <p>At the end of a working session, the state entry is rewritten <b>if and only if</b> Focus, Decisions, Next action, or Blocked-on actually changed. Durable decisions get appended to a log. If nothing moved, the entry and its timestamp are left alone.</p>
+      <dl>
+        <dt>Why it matters</dt>
+        <dd>The record reports where attention has and hasn't gone. Bumping a timestamp on a session that changed nothing turns that signal into noise. A stale-but-honest date is information — it tells the next person where the work hasn't been.</dd>
+        <dt>Do this</dt>
+        <dd>Run the four-line check in <a href="#endcheck">§6</a>. Decide what's <em>canonical</em> with the promotion test: a fact earns a permanent place only if it's still true in ~90 days <b>and</b> at least one other person or project would act differently knowing it. Otherwise it's a log line, or nothing. Nothing is usually right.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="practice">
+    <div class="num">4</div>
+    <div class="body">
+      <h3>Open a dedicated, scoped project in the desktop app</h3>
+      <span class="role live">Essential</span>
+      <p>Create a <b>Project</b> in the desktop assistant (Claude Projects; the ChatGPT equivalent is a Custom GPT — the pattern ports). Paste the instruction doc from Practice 1 as the project's instruction. Attach the reference files it needs. One project per surface.</p>
+      <dl>
+        <dt>Why it matters</dt>
+        <dd>A scoped project with a pinned instruction makes the assistant behave consistently without re-briefing. It's where specs get authored and work gets managed — the cockpit, not the workshop.</dd>
+        <dt>Do this</dt>
+        <dd>Follow <a href="#setup">§3</a>. Keep scope tight; resist the mega-project. Attach only reference input that's actually load-bearing — every extra file dilutes attention.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="practice">
+    <div class="num">5</div>
+    <div class="body">
+      <h3>Desktop plans and verifies; the coding agent builds</h3>
+      <span class="role partial">Core — mechanism varies</span>
+      <p>The desktop project is the <b>planner and verifier</b>. The coding agent — <b>opencode, Antigravity, or Claude Code</b> (§3) — is the <b>builder</b>. You author the prompt in desktop, the agent executes it, you verify the result <b>from source</b> in desktop, and a human pushes after verification. The agent never pushes.</p>
+      <dl>
+        <dt>Why it matters</dt>
+        <dd>This keeps a verification gate between generation and your repository. The builder can be confidently wrong; the gate is where you catch it. Verifying from the agent's own summary defeats the gate — read the actual files.</dd>
+        <dt>Do this</dt>
+        <dd>Plan in desktop → paste to the agent → agent builds → verify from source in desktop → capture a revert target → human commits and pushes. Three rules don't bend: <b>the agent never pushes</b>; <b>you verify from source, not from a summary</b>; <b>you capture a revert target before pushing</b>. The full walk is the <a href="#" onclick="return false">Builder Playbook</a> (companion doc).</dd>
+      </dl>
+    </div>
+  </div>
+
+  <div class="practice">
+    <div class="num">6</div>
+    <div class="body">
+      <h3>Bridge the desktop app to the agent</h3>
+      <span class="role adv">Advanced — optional, do last</span>
+      <p>A script that connects the desktop app to the coding agent so hand-off is automated (on macOS, an <code>osascript</code>/AppleScript bridge).</p>
+      <dl>
+        <dt>Why you can skip it</dt>
+        <dd>It's the most fragile and platform-specific piece, and the least necessary. Use the coding agent directly, connect tools with MCP, and paste by hand. A bridge that drives the GUI by injecting keystrokes breaks the moment a window moves. Add one only after the loop is reflex, and prefer a CLI or MCP path over screen-driving. Cross-platform recipes are in Appendix A.</dd>
+      </dl>
+    </div>
+  </div>
+
+  <!-- THE RECORD, CONCRETELY -->
+  <h2 id="record"><span class="idx">§2</span>What context lives where</h2>
+  <hr class="sec-rule">
+  <p>The one thing that trips everyone up: there are <b>two kinds of context</b>, and they live in two different places. Mix them and you get a mess — company facts buried in a repo nobody else can see, or a single project's build spec clogging the shared record. Keep them separate.</p>
+
+  <div class="homes">
+    <div class="home notion">
+      <h4>Standing context → Notion</h4>
+      <span class="sub">durable · cross-project · read by any session</span>
+      <ul>
+        <li>The <b>company</b>: what Softograph is, brand and identity rules, the do-not-use list, conventions that apply to all work.</li>
+        <li>Your <b>work across every repo</b>: the current state of each project (one row each), the decisions you've made and why, the IDs that never change.</li>
+        <li>Anything you'd still need if a repo vanished tomorrow.</li>
+      </ul>
+    </div>
+    <div class="home repo">
+      <h4>Project context → the repo</h4>
+      <span class="sub">specific · per-project · read by the coding agent</span>
+      <ul>
+        <li>What this one product <b>is and does</b>: BRD / PRD.</li>
+        <li>How it's <b>shaped</b>: SCHEMA, and the specs (architecture, API).</li>
+        <li>The <b>build plan and progress</b>: the playbook features, PROGRESS.md, CLAUDE.md.</li>
+        <li>Things that only make sense inside this repo, and die with it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    <span class="lbl">The filing rule — say this to a confused dev</span>
+    <p>Would you still need it if this repo vanished? <b>Yes → Notion.</b> Is it "what this one product is and how to build it"? <b>Repo.</b> The company, your project states, your decisions, and the canonical IDs live in Notion. The BRD, the schema, and the specs live in the repo. That's the whole distinction.</p>
+  </div>
+
+  <h3>The three Notion stores</h3>
+  <p>Standing context is held in three stores, all driven by your agent over the <b>Notion MCP server</b>. You set them up once and tell the agent how to use them; after that it reads at session start and writes at session end without you clicking anything. IDs below are placeholders — use your own.</p>
+
+  <div class="stores">
+    <div class="store">
+      <h4>1 · Project State</h4>
+      <span class="tag">Notion database · one row per project · read at start, rewritten at end (only if it moved)</span>
+      <p>The live snapshot. This is what any session — or any teammate — reads to know exactly where a project stands right now.</p>
+      <div class="fields">Focus            <span style="color:#7a7f88">— one line: what's in hand</span>
+Decisions (last 3) <span style="color:#7a7f88">— recent calls, newest first</span>
+Next action      <span style="color:#7a7f88">— the single next move</span>
+Blocked on       <span style="color:#7a7f88">— one line, or "—"</span>
+Updated          <span style="color:#7a7f88">— date (do not bump if nothing changed)</span>
+Pointers         <span style="color:#7a7f88">— issue IDs · workflow IDs · repo paths</span></div>
+    </div>
+
+    <div class="store">
+      <h4>2 · Decision Log</h4>
+      <span class="tag">Notion database · append-only · never edited in place</span>
+      <p>The history. Every durable decision lands here with a date and a scope. Newer decisions supersede older ones by pointer, not by deletion — history is useful. This is where execution IDs, commit SHAs, and root-cause notes go — never in Project State.</p>
+      <div class="fields">Statement        <span style="color:#7a7f88">— the decision, one line (title)</span>
+Date             <span style="color:#7a7f88">— when</span>
+Scope            <span style="color:#7a7f88">— Local | Cross (does another project care?)</span>
+Supersedes       <span style="color:#7a7f88">— relation to the row this overrides</span>
+Superseded by    <span style="color:#7a7f88">— back-filled automatically</span></div>
+    </div>
+
+    <div class="store">
+      <h4>3 · Canonical Facts</h4>
+      <span class="tag">Notion page or small database · the authority · guarded</span>
+      <p>The things that don't change: IDs, conventions, and the do-not-use list. The agent cross-references this before asserting a fact. Getting something <em>into</em> Canonical Facts goes through a review gate — the promotion test — so what's here stays trustworthy.</p>
+    </div>
+  </div>
+
+  <h3>What to actually write — copy these</h3>
+  <p>The next question is always "fine, but what do I <em>put</em> in it?" Here's each store filled with real values from the Acme Portal run. Copy the shape, swap the content. Two rules save you: date everything, and never type the do-not-use list or the canonical IDs from memory — pull them from the live page.</p>
+
+  <p><b>Project State</b> — one row, filled:</p>
+<pre><code><span class="k">Focus</span>        Auth flow: email+password login with session tokens
+<span class="k">Decisions</span>    - [2026-09-16] JWT over server sessions — stateless, simpler deploy
+             - [2026-09-15] Postgres over SQLite — need concurrent writes
+             - [2026-09-14] Next.js app-router, not pages
+<span class="k">Next action</span>  Wire /login to the token endpoint; add refresh rotation
+<span class="k">Blocked on</span>   —
+<span class="k">Updated</span>      2026-09-16
+<span class="k">Pointers</span>     repo: acme-portal · issue: ACME-12 · feature: FEATURE_01_auth
+<span class="c"># Focus and Next action are one line each. Keep only ~3 recent decisions here —</span>
+<span class="c"># older ones live in the Decision Log, not clogging the state.</span></code></pre>
+
+  <p><b>Decision Log</b> — append-only, two entries:</p>
+<pre><code><span class="k">Statement</span>    JWT over server sessions for Acme Portal auth
+<span class="k">Date</span>         2026-09-16
+<span class="k">Scope</span>        Local          <span class="c"># only this project cares</span>
+<span class="k">Supersedes</span>   —
+
+<span class="k">Statement</span>    Automations write to the Notion review queue, never the task spine
+<span class="k">Date</span>         2026-09-11
+<span class="k">Scope</span>        Cross          <span class="c"># every automation project follows this</span>
+<span class="k">Supersedes</span>   —
+<span class="c"># Scope = Cross is also the bar for logging at all: would another project act</span>
+<span class="c"># differently knowing this? If no, it's probably not worth a row.</span></code></pre>
+
+  <p><b>Canonical Facts</b> — the authority, an excerpt:</p>
+<pre><code><span class="c">## Conventions (apply to all work)</span>
+- Automation code nodes: ES5 only — var, string concat, explicit for-loops.
+- Email from automations: the shared Gmail node, never SMTP.
+- People referred to by title in any output, never by name.
+
+<span class="c">## Canonical IDs   — copy real values from the live page, never from memory</span>
+- n8n host:           &lt;<span class="v">url</span>&gt;
+- Prospect DB:        &lt;<span class="v">id</span>&gt;
+- RFP tracker sheet:  &lt;<span class="v">id</span>&gt;
+
+<span class="c">## Do-not-use (permanent)   — lives on the live shared page; it changes, memory drifts</span>
+- &lt;<span class="v">pull the eliminated channels/tools list from the page — don't retype it here</span>&gt;</code></pre>
+
+  <p><b>Blank template</b> — start from this:</p>
+<pre><code><span class="c"># Project State — one row per project</span>
+<span class="k">Focus</span>        <span class="v">&lt;one line: what's in hand right now&gt;</span>
+<span class="k">Decisions</span>    - [<span class="v">&lt;date&gt;</span>] <span class="v">&lt;recent call + one-clause why&gt;</span>
+<span class="k">Next action</span>  <span class="v">&lt;the single next move&gt;</span>
+<span class="k">Blocked on</span>   <span class="v">&lt;one line, or —&gt;</span>
+<span class="k">Updated</span>      <span class="v">&lt;date — do NOT bump if nothing changed&gt;</span>
+<span class="k">Pointers</span>     repo: <span class="v">&lt;name&gt;</span> · issue: <span class="v">&lt;id&gt;</span> · feature: <span class="v">&lt;file&gt;</span>
+
+<span class="c"># Decision Log — append a row when you decide something durable</span>
+<span class="k">Statement</span>    <span class="v">&lt;the decision, one line&gt;</span>
+<span class="k">Date</span>         <span class="v">&lt;date&gt;</span>
+<span class="k">Scope</span>        <span class="v">Local | Cross</span>
+<span class="k">Supersedes</span>   <span class="v">&lt;old row, or —&gt;</span></code></pre>
+
+  <h3>Wiring it to your harness</h3>
+  <p>Two portable conventions make this work on any coding agent — opencode, Antigravity, or Claude Code (full table in <a href="#setup">§3</a>):</p>
+  <p><b>1 · The protocol goes in <code>AGENTS.md</code>.</b> That's the instruction file opencode and Antigravity read natively; for Claude Code, keep the same file and symlink <code>CLAUDE.md → AGENTS.md</code>. One source, every tool. The record protocol lives there as plain rules the agent follows — not clicks you make:</p>
+<pre><code><span class="c"># AGENTS.md — the record protocol</span>
+<span class="k">SESSION START</span>  read Project State &lt;<span class="v">db-id</span>&gt; and Canonical Facts &lt;<span class="v">page-id</span>&gt;.
+<span class="k">DURING</span>         cross-reference Canonical Facts before asserting a fact.
+               on conflict, the most recent timestamp wins.
+<span class="k">SESSION END</span>    rewrite Project State only if it moved; append durable
+               decisions to Decision Log &lt;<span class="v">db-id</span>&gt; with Scope = Local | Cross.</code></pre>
+  <p><b>2 · Connect the Notion MCP server</b> to whatever's doing the work. Same server, but the config lives in a different place per harness:</p>
+<pre><code><span class="c"># Claude Code — .mcp.json (project root)</span>
+{ <span class="k">"mcpServers"</span>: { <span class="k">"notion"</span>: { <span class="k">"type"</span>:<span class="s">"http"</span>, <span class="k">"url"</span>:<span class="s">"https://mcp.notion.com/mcp"</span> } } }
+
+<span class="c"># opencode — the "mcp" section of opencode.json  (see opencode docs for exact keys)</span>
+<span class="c"># Antigravity — ~/.gemini/config/mcp_config.json  — note: "serverUrl", NOT "url"</span>
+{ <span class="k">"mcpServers"</span>: { <span class="k">"notion"</span>: { <span class="k">"serverUrl"</span>:<span class="s">"https://mcp.notion.com/mcp"</span> } } }</code></pre>
+  <p>That's the whole trick: the structure is a database, the discipline is <code>AGENTS.md</code>, and the agent does the reading and writing over MCP. <b>You review; you don't transcribe.</b> For <em>why</em> this records reliably with no scheduler, see the <b>Reference System</b> doc, §3.</p>
+
+  <div class="note">
+    <span class="lbl">First five minutes, on a new project</span>
+    <p>The full walk is the Builder Playbook. The shape (coding agent shown as opencode — swap per the <a href="#setup">§3</a> table):</p>
+<pre style="margin:12px 0 0"><code><span class="c"># 1 · readiness — ask the agent to run the dev-orchestrator pre-flight check</span>
+<span class="c">#     (references/claude-code-setup-guide.md, Part 8): Node, Git, SSH, agent, configs</span>
+
+<span class="c"># 2 · scaffold — trigger the dev-orchestrator skill; it reads</span>
+<span class="c">#     references/project-archetypes.md and lays down Brain→Soul→Body, the</span>
+<span class="c">#     instruction file, specs/, playbook/ directly. No script to run.</span>
+
+<span class="c"># 3 · hand off to your coding agent, which reads AGENTS.md first</span>
+cd acme-portal &amp;&amp; opencode        <span class="c"># or: antigravity · claude</span></code></pre>
+  </div>
+  <p>The <code>dev-orchestrator</code> skill does the scaffolding — it reads <code>references/project-archetypes.md</code> and creates the tree directly, emitting <code>CLAUDE.md</code> as the handoff file; on opencode or Antigravity, symlink or rename it to <code>AGENTS.md</code> — same content. From there it's the loop.</p>
+
+  <!-- SETUP -->
+  <h2 id="setup"><span class="idx">§3</span>Setup — run once</h2>
+  <hr class="sec-rule">
+  <p>One-time environment setup, in order. Per-project initialisation lives in the Playbook — this is the machine underneath it.</p>
+
+  <p><b>Pick your harness first.</b> The method is identical on all of them; only the file names and the launch command change. This is why the docs are written tool-neutral — substitute your column.</p>
+  <div class="tablewrap">
+  <table class="htable">
+    <tr><th></th><th>opencode</th><th>Antigravity</th><th>Claude Code</th></tr>
+    <tr><td>Instruction file</td><td><code>AGENTS.md</code></td><td><code>AGENTS.md</code></td><td><code>CLAUDE.md</code> (symlink → AGENTS.md)</td></tr>
+    <tr><td>MCP config</td><td><code>opencode.json</code> (mcp section)</td><td><code>~/.gemini/config/mcp_config.json</code> — uses <code>serverUrl</code></td><td><code>.mcp.json</code></td></tr>
+    <tr><td>Launch</td><td><code>opencode</code></td><td>Antigravity IDE / CLI</td><td><code>claude</code></td></tr>
+    <tr><td>Test / ship</td><td>the project's test cmd + git</td><td>Planning mode → run + git</td><td><code>/quick-test</code> · <code>/commit-push-pr</code></td></tr>
+  </table>
+  </div>
+  <p><b>Keep one instruction file — <code>AGENTS.md</code>.</b> opencode and Antigravity read it natively; for Claude Code, <code>ln -s AGENTS.md CLAUDE.md</code>. Everywhere these docs show <code>CLAUDE.md</code>, <code>.mcp.json</code>, or <code>claude</code>, read it as your harness's column. (The method is harness-agnostic by design — the runtime it graduates into drives opencode, Claude Code, headless, and n8n alike.)</p>
+
+  <ol class="steps">
+    <li><b>Install the desktop assistant and sign in.</b> This is your cockpit — planning, spec-writing, and verification all happen here. Any capable chat app works.</li>
+    <li><b>Install your coding agent</b> (opencode / Antigravity / Claude Code) and ask it to run the <code>dev-orchestrator</code> pre-flight check (<code>references/claude-code-setup-guide.md</code>, Part 8) to confirm Node, Git, SSH, and the agent are ready.</li>
+    <li><b>Set your agent config</b> once: a permission preset so you're not approving every command, and — where your harness supports them — the shortcuts you'll reuse (test, commit-and-push, end-session). On Claude Code these are <code>~/.claude/</code> slash commands; opencode and Antigravity have their own.</li>
+    <li><b>Wire your MCP servers.</b> Add the two this method needs — <b>Notion</b> (the record) and <b>Filesystem</b> (lets the desktop assistant read your repo to verify from source) — plus any tools a surface touches, in your harness's MCP config from the table above. Notion lets the agent drive the record; Filesystem is what makes verify-from-source work.</li>
+    <li><b>Create the three Notion stores</b> — Project State, Decision Log, Canonical Facts (§2). One set covers all your projects; Project State just gets a new row each time.</li>
+    <li><b>Create a scoped desktop Project</b> per surface and paste its instruction doc (§4 template). Attach only load-bearing references.</li>
+    <li><b>Prove the loop on something small</b> before trusting it — context → project → build → verify from source → update the record. Fix anything unclear now, on a task that doesn't matter.</li>
+  </ol>
+
+  <!-- TEMPLATE -->
+  <h2 id="template"><span class="idx">§4</span>Project-instruction template</h2>
+  <hr class="sec-rule">
+  <p>Copy this into a new project. Fill every <code>&lt;placeholder&gt;</code>. Delete sections that genuinely don't apply — but think twice before deleting Constraints or Canonical references; those are what stop drift.</p>
+<pre><code><span class="c"># Project Instruction — &lt;surface name&gt;</span>
+
+<span class="k">PURPOSE</span>
+<span class="v">&lt;One or two sentences: what this surface is and what it's for.&gt;</span>
+
+<span class="k">SCOPE</span>
+In:  <span class="v">&lt;what this project covers&gt;</span>
+Out: <span class="v">&lt;what it explicitly does NOT cover — route elsewhere&gt;</span>
+
+<span class="k">HARD CONSTRAINTS</span>  <span class="c"># never break, even on request</span>
+- <span class="v">&lt;cost rule, e.g. free tier / open-source only&gt;</span>
+- <span class="v">&lt;stack rule, e.g. AI synthesis = &lt;model&gt; only&gt;</span>
+- <span class="v">&lt;channel rule: what's permanently off the table&gt;</span>
+
+<span class="k">TOOL &amp; TECH CONVENTIONS</span>
+- <span class="v">&lt;language/style rules the agent must follow&gt;</span>
+- <span class="v">&lt;integration/node conventions&gt;</span>
+- <span class="v">&lt;error-handling / naming conventions&gt;</span>
+
+<span class="k">THE RECORD</span>  <span class="c"># the three Notion stores, over MCP</span>
+- Project State: &lt;<span class="v">db-id</span>&gt;   Canonical Facts: &lt;<span class="v">page-id</span>&gt;
+- Decision Log:  &lt;<span class="v">db-id</span>&gt;
+- Protocol: read at start · cross-reference before asserting · write at end if moved
+
+<span class="k">CANONICAL REFERENCES</span>
+- Repos: <span class="v">&lt;paths — mark which are source vs build output&gt;</span>
+- Task spine: <span class="v">&lt;where issues live&gt;</span>
+
+<span class="k">WORKING STYLE</span>
+- Execute, don't interview. State assumptions after acting.
+- Report state, not narrative. Verify from source, not summaries.
+- The coding agent never pushes; a human pushes after verification.</code></pre>
+
+  <!-- WORKED EXAMPLE -->
+  <h2 id="example"><span class="idx">§5</span>Worked example</h2>
+  <hr class="sec-rule">
+  <p>A filled instruction for a plausible surface — a marketing-content scanner automation. IDs are placeholders on purpose; never hardcode live IDs into a template others copy.</p>
+<pre><code><span class="c"># Project Instruction — Marketing Content Scanner</span>
+
+<span class="k">PURPOSE</span>
+An automation that scans configured sources on a schedule, scores items for
+relevance, and files the keepers for a human to review. No auto-publishing.
+
+<span class="k">SCOPE</span>
+In:  the scanner workflow, its scoring step, and the review queue it writes to.
+Out: anything that sends outbound messages or publishes — separate surfaces.
+
+<span class="k">HARD CONSTRAINTS</span>
+- Zero paid services. Free tiers and open-source only.
+- AI synthesis = one designated model only. Not a mix.
+- Automations never write to the task spine. They write to the review queue.
+
+<span class="k">TOOL &amp; TECH CONVENTIONS</span>
+- Code nodes: the team's baseline dialect only — no newer syntax.
+- IF/Filter nodes: strict type validation + explicit combinator, always.
+- Workflow name: "&lt;Team&gt; Content Scanner — &lt;frequency&gt;". No issue-id prefix.
+
+<span class="k">THE RECORD</span>
+- Project State: &lt;db-id&gt;   Canonical Facts: &lt;page-id&gt;   Decision Log: &lt;db-id&gt;
+
+<span class="k">WORKING STYLE</span>
+- People are referred to by title, never by name, in any output.
+- Execute on reasonable assumptions; state them at the end. One question max.</code></pre>
+
+  <!-- SESSION END -->
+  <h2 id="endcheck"><span class="idx">§6</span>The session-end check</h2>
+  <hr class="sec-rule">
+  <p>Four questions, thirty seconds. This is what keeps the record trustworthy.</p>
+  <ul class="check">
+    <li><b>Did state actually change?</b> If Focus, Decisions, Next action, or Blocked-on moved, rewrite the row in full and stamp it today. If not, leave it — and leave the date.</li>
+    <li><b>Any durable decision?</b> Append it to the Decision Log with today's date. If it overrides an older one, set Supersedes rather than deleting.</li>
+    <li><b>Is anything canonical?</b> Run the promotion test — true in ~90 days <em>and</em> changes another actor's behavior. Both, or it's not canonical.</li>
+    <li><b>Did this session write files into a source repo?</b> If yes, commit and push. If it was planning only, don't. Obligations attach to artifacts, not to conversations.</li>
+  </ul>
+
+  <!-- GRADUATION -->
+  <h2><span class="idx">§7</span>Graduating to the runtime</h2>
+  <hr class="sec-rule">
+  <p>Once the manual loop is reliable, some tasks become clean enough to hand off whole. That's when you write a <b>spec</b> the runtime can run instead of steering the build by hand.</p>
+  <p>A spec declares a goal, at least one mandatory <b>verifier</b>, its constraints, and how much autonomy it's allowed. The runtime decomposes it into a plan, binds each step to a real capability (an unmet need surfaces as a gap — never a made-up binding), runs it, and checks the result against the verifier. The <b>verifier's verdict outranks the agent's self-report</b>, and autonomy is <em>earned</em> on clean-run evidence: a held task holds, an escalation demotes. Same paradigm at both scopes — the full set for you, a team-scoped slice for the team.</p>
+  <p>Don't start here. Start with the loop. The runtime is what the loop becomes once you trust it — and a good spec is only as good as the scoped context (Practice 1) it's written in.</p>
+
+  <!-- APPENDIX A -->
+  <h2><span class="idx">A</span>Appendix — the bridge, cross-platform</h2>
+  <hr class="sec-rule">
+  <p>Only if you've decided you want it (Practice 6). The principle on every platform: <b>prefer a CLI or MCP call over driving the GUI.</b> Keystroke injection into a chat window is a last resort, not a design.</p>
+  <h3>macOS</h3>
+  <p><code>osascript</code> (AppleScript / JXA) can activate the app, insert text, and manage windows — the most mature option because the accessibility APIs are stable. Still reach for the agent's CLI first.</p>
+  <h3>Linux</h3>
+  <p>Under X11, <code>xdotool</code> handles keystrokes and windows; under Wayland, <code>ydotool</code> or <code>wtype</code> for input and <code>wmctrl</code> for windows. Wayland deliberately restricts synthetic input, so a CLI/MCP path is even more clearly right here.</p>
+  <h3>Windows</h3>
+  <p><code>AutoHotkey</code> is the pragmatic choice; PowerShell with <code>System.Windows.Automation</code> is the more robust one. Or sidestep GUI automation entirely by running the agent CLI-first under WSL.</p>
+  <div class="note warn">
+    <span class="lbl">Honest assessment</span>
+    <p>This bridge is the piece most likely to be unnecessary. MCP connects tools directly, the coding agent is a first-class CLI, and the runtime handles declared specs. If you're building elaborate window automation, step back and ask whether an MCP server or a direct CLI call does the same job without the fragility.</p>
+  </div>
+
+  <!-- APPENDIX B -->
+  <h2><span class="idx">B</span>Appendix — for maintainers</h2>
+  <hr class="sec-rule">
+  <div class="note warn">
+    <span class="lbl">Where this document lives</span>
+    <p>Author and version it in the <b>master</b> repository under <code>docs/</code> (flat — the team-sync allowlist copies per file). Let the team-sync script carry it into the team distribution. <b>Never edit it directly in the team repo</b> — that repo is a build output; direct edits get overwritten on the next sync and break the derivation contract. You do not version a build output.</p>
+  </div>
+  <div class="note warn">
+    <span class="lbl">Internal only</span>
+    <p>This guide contains operational specifics. It stays internal and off the public hub. A public version — if one is ever wanted — is a separate, sanitized, reasoning-topology-only piece that exposes no wiring, routed through the standing publishing pipeline. Two artifacts, never merged.</p>
+  </div>
+
+  <footer>AI OS — Team Guide · v1 · Softograph — pairs with the Builder Playbook &amp; the Reference System</footer>
+
+</div>
+</body>
+</html>

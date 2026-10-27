@@ -1,0 +1,65 @@
+name: verify
+
+# This repository IS the workflow. A dead link, an unlisted agent role, or a
+# skill with no `capabilities:` key silently degrades every future build loop.
+# This job is the enforcement point.
+
+on:
+  push:
+    branches: [main, 'ai/**']
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    name: Workflow integrity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      # Link integrity · agent registry · skill capabilities · gate taxonomy
+      - name: Verify workflow integrity
+        run: node tools/verify-workflow.mjs
+
+      # The capability index must parse and every entry must point at a real file.
+      - name: Verify capability index
+        run: |
+          node -e '
+            const fs = require("fs");
+            const idx = JSON.parse(fs.readFileSync("capability-index.json", "utf8"));
+            const missing = (idx.capabilities || [])
+              .filter(c => !fs.existsSync(c.source))
+              .map(c => `${c.id} -> ${c.source}`);
+            if (missing.length) {
+              console.error("capability-index.json points at missing files:");
+              missing.forEach(m => console.error("  " + m));
+              process.exit(1);
+            }
+            console.log("ok: " + (idx.capabilities || []).length + " capabilities resolve");
+          '
+
+      # install.sh must parse. Run with -n so nothing is installed.
+      - name: Syntax check install.sh
+        run: bash -n docs/install.sh
+
+      # No secrets committed to a repo that teaches agents about secret handling.
+      - name: Scan for committed secrets
+        run: |
+          if git grep -nEI '(api[_-]?key|secret|password|token)[[:space:]]*[:=][[:space:]]*["'\''][A-Za-z0-9/+_-]{16,}' -- \
+             ':!*lock*' ':!*.example' ':!*.template' ':!docs/*.md' ':!agents/**' ':!skills/**'; then
+            echo "::error::possible committed secret found"
+            exit 1
+          fi
+          echo "ok: no obvious secrets"
+
+      - name: Confirm every referenced skill ships a capabilities key
+        run: |
+          missing=0
+          for f in skills/team/*/SKILL.md; do
+            grep -q '^capabilities:' "$f" || { echo "::error::$f has no capabilities: key"; missing=1; }
+          done
+          exit $missing
