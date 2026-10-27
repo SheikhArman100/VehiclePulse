@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-27T13:34:24.900Z",
-    "nodeCount": 29,
-    "edgeCount": 12
+    "generatedAt": "2026-10-27T13:40:37.060Z",
+    "nodeCount": 38,
+    "edgeCount": 24
   },
   "nodes": [
     {
@@ -28,6 +28,51 @@
     },
     {
       "id": "backend/packages/config/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/packages/event-contracts/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/alert.ts",
+      "label": "alert.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/command.ts",
+      "label": "command.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/contracts.test.ts",
+      "label": "contracts.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/envelope.ts",
+      "label": "envelope.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/state.ts",
+      "label": "state.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/telemetry.ts",
+      "label": "telemetry.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/tsconfig.json",
       "label": "tsconfig.json",
       "type": "json"
     },
@@ -161,6 +206,66 @@
     {
       "source": "backend/packages/config/src/index.ts",
       "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/alert.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/alert.ts",
+      "target": "./envelope.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/command.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/command.ts",
+      "target": "./envelope.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/contracts.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/contracts.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/envelope.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/state.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/state.ts",
+      "target": "./envelope.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/state.ts",
+      "target": "./telemetry.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/telemetry.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/telemetry.ts",
+      "target": "./envelope.js",
       "relation": "IMPORTS"
     },
     {

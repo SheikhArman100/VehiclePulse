@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-27T13:34:24.900Z
+Generated on: 2026-10-27T13:40:37.060Z
 
 ## Summary
-- Total Tracked Artifacts: 29
-- Total Dependency Relationships: 12
+- Total Tracked Artifacts: 38
+- Total Dependency Relationships: 24
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -18,6 +18,18 @@ Generated on: 2026-10-27T13:34:24.900Z
 ## Key Dependency Edges
 - `backend/packages/config/src/index.ts` -> `dotenv`
 - `backend/packages/config/src/index.ts` -> `zod`
+- `backend/packages/event-contracts/src/alert.ts` -> `zod`
+- `backend/packages/event-contracts/src/alert.ts` -> `./envelope.js`
+- `backend/packages/event-contracts/src/command.ts` -> `zod`
+- `backend/packages/event-contracts/src/command.ts` -> `./envelope.js`
+- `backend/packages/event-contracts/src/contracts.test.ts` -> `node:test`
+- `backend/packages/event-contracts/src/contracts.test.ts` -> `node:assert/strict`
+- `backend/packages/event-contracts/src/envelope.ts` -> `zod`
+- `backend/packages/event-contracts/src/state.ts` -> `zod`
+- `backend/packages/event-contracts/src/state.ts` -> `./envelope.js`
+- `backend/packages/event-contracts/src/state.ts` -> `./telemetry.js`
+- `backend/packages/event-contracts/src/telemetry.ts` -> `zod`
+- `backend/packages/event-contracts/src/telemetry.ts` -> `./envelope.js`
 - `backend/packages/logger/src/index.ts` -> `pino`
 - `backend/packages/shared/src/correlation.ts` -> `express`
 - `backend/packages/shared/src/correlation.ts` -> `node:crypto`

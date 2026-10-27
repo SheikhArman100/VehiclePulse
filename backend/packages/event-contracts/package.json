@@ -1,0 +1,21 @@
+{
+  "name": "@vehicle-pulse/event-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VehiclePulse - Shared event contracts, envelope schema, domain definitions, and Zod validators",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "type-check": "tsc --noEmit",
+    "test": "node --test dist/**/*.test.js",
+    "clean": "node -e \"const fs=require('fs'); if(fs.existsSync('dist')) fs.rmSync('dist', {recursive:true, force:true});\""
+  },
+  "dependencies": {
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "typescript": "^5.7.3"
+  }
+}
