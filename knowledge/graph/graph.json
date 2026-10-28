@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-28T09:06:47.356Z",
-    "nodeCount": 70,
-    "edgeCount": 100
+    "generatedAt": "2026-10-28T10:17:32.910Z",
+    "nodeCount": 77,
+    "edgeCount": 110
   },
   "nodes": [
     {
@@ -293,6 +293,41 @@
     },
     {
       "id": "backend/services/telemetry-service/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/simulator/telemetry-generator/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/simulator/telemetry-generator/README.md",
+      "label": "README.md",
+      "type": "md"
+    },
+    {
+      "id": "backend/simulator/telemetry-generator/src/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/simulator/telemetry-generator/src/tests/simulator.test.ts",
+      "label": "simulator.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/simulator/telemetry-generator/src/utils/random.ts",
+      "label": "random.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/simulator/telemetry-generator/src/vehicleModel.ts",
+      "label": "vehicleModel.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/simulator/telemetry-generator/tsconfig.json",
       "label": "tsconfig.json",
       "type": "json"
     },
@@ -851,6 +886,56 @@
     {
       "source": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
       "target": "../app/modules/device/device.model.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/index.ts",
+      "target": "commander",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/index.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/index.ts",
+      "target": "./vehicleModel.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/tests/simulator.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/tests/simulator.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/tests/simulator.test.ts",
+      "target": "../vehicleModel.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/tests/simulator.test.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/vehicleModel.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/vehicleModel.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/simulator/telemetry-generator/src/vehicleModel.ts",
+      "target": "./utils/random.js",
       "relation": "IMPORTS"
     },
     {

@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-28T09:06:47.356Z
+Generated on: 2026-10-28T10:17:32.910Z
 
 ## Summary
-- Total Tracked Artifacts: 70
-- Total Dependency Relationships: 100
+- Total Tracked Artifacts: 77
+- Total Dependency Relationships: 110
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -118,4 +118,14 @@ Generated on: 2026-10-28T09:06:47.356Z
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `../app/modules/device/device.service.js`
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `../app/modules/vehicle/vehicle.model.js`
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `../app/modules/device/device.model.js`
+- `backend/simulator/telemetry-generator/src/index.ts` -> `commander`
+- `backend/simulator/telemetry-generator/src/index.ts` -> `@vehicle-pulse/logger`
+- `backend/simulator/telemetry-generator/src/index.ts` -> `./vehicleModel.js`
+- `backend/simulator/telemetry-generator/src/tests/simulator.test.ts` -> `node:test`
+- `backend/simulator/telemetry-generator/src/tests/simulator.test.ts` -> `node:assert/strict`
+- `backend/simulator/telemetry-generator/src/tests/simulator.test.ts` -> `../vehicleModel.js`
+- `backend/simulator/telemetry-generator/src/tests/simulator.test.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/simulator/telemetry-generator/src/vehicleModel.ts` -> `node:crypto`
+- `backend/simulator/telemetry-generator/src/vehicleModel.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/simulator/telemetry-generator/src/vehicleModel.ts` -> `./utils/random.js`
 - `frontend/web/app/layout.tsx` -> `next`
