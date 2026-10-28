@@ -1,0 +1,29 @@
+{
+  "timestamp": "2026-10-28T13:22:33.022Z",
+  "hardware": {
+    "cpuModel": "AMD Ryzen 5 5600 6-Core Processor              ",
+    "cpuCores": 12,
+    "totalMemGB": "15.93",
+    "freeMemGB": "0.78",
+    "platform": "win32 (x64)"
+  },
+  "config": {
+    "targetEvents": 25000,
+    "batchSize": 500,
+    "vehicleCount": 200,
+    "compression": "gzip",
+    "concurrency": 1
+  },
+  "results": {
+    "totalEventsSent": 25000,
+    "totalBytesSent": 11274477,
+    "elapsedMs": 2920,
+    "throughputEventsSec": 8561.6,
+    "throughputMBs": 3.68,
+    "avgLatencyMs": 56.6,
+    "p50LatencyMs": 58,
+    "p95LatencyMs": 68,
+    "p99LatencyMs": 77,
+    "errorCount": 0
+  }
+}

@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-28T11:55:33.251Z",
-    "nodeCount": 91,
-    "edgeCount": 142
+    "generatedAt": "2026-10-28T13:23:15.629Z",
+    "nodeCount": 94,
+    "edgeCount": 150
   },
   "nodes": [
     {
@@ -12,9 +12,24 @@
       "type": "yml"
     },
     {
+      "id": "backend/docs/benchmarks/kafka_benchmark_1000_batch50_none.json",
+      "label": "kafka_benchmark_1000_batch50_none.json",
+      "type": "json"
+    },
+    {
       "id": "backend/infrastructure/kafka/package.json",
       "label": "package.json",
       "type": "json"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/benchmark.ts",
+      "label": "benchmark.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/benchmarkCli.ts",
+      "label": "benchmarkCli.ts",
+      "type": "ts"
     },
     {
       "id": "backend/infrastructure/kafka/src/cli.ts",
@@ -463,6 +478,46 @@
     }
   ],
   "edges": [
+    {
+      "source": "backend/infrastructure/kafka/src/benchmark.ts",
+      "target": "kafkajs",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/benchmark.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/benchmark.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/benchmark.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/benchmark.ts",
+      "target": "node:os",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/benchmarkCli.ts",
+      "target": "./benchmark.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/benchmarkCli.ts",
+      "target": "node:fs",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/benchmarkCli.ts",
+      "target": "node:path",
+      "relation": "IMPORTS"
+    },
     {
       "source": "backend/infrastructure/kafka/src/cli.ts",
       "target": "./topicManager.js",

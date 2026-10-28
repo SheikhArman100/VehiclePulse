@@ -12,6 +12,7 @@
     "groups:list": "node dist/src/cli.js groups",
     "test:exchange": "node dist/src/testExchange.js",
     "test:e2e": "node dist/src/e2eSlice.js",
+    "benchmark": "node dist/src/benchmarkCli.js",
     "test": "node --test dist/test/**/*.test.js"
   },
   "dependencies": {
