@@ -1,11 +1,21 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-27T13:44:01.030Z",
-    "nodeCount": 38,
-    "edgeCount": 24
+    "generatedAt": "2026-10-28T08:58:59.739Z",
+    "nodeCount": 64,
+    "edgeCount": 82
   },
   "nodes": [
+    {
+      "id": "backend/docker-compose.yml",
+      "label": "docker-compose.yml",
+      "type": "yml"
+    },
+    {
+      "id": "backend/infrastructure/nginx/README.md",
+      "label": "README.md",
+      "type": "md"
+    },
     {
       "id": "backend/package-lock.json",
       "label": "package-lock.json",
@@ -97,6 +107,11 @@
       "type": "json"
     },
     {
+      "id": "backend/packages/shared/src/catchAsync.ts",
+      "label": "catchAsync.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/packages/shared/src/correlation.ts",
       "label": "correlation.ts",
       "type": "ts"
@@ -122,8 +137,23 @@
       "type": "ts"
     },
     {
+      "id": "backend/packages/shared/src/pagination.ts",
+      "label": "pagination.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/sendResponse.ts",
+      "label": "sendResponse.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/packages/shared/src/shutdown.ts",
       "label": "shutdown.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/validateRequest.ts",
+      "label": "validateRequest.ts",
       "type": "ts"
     },
     {
@@ -135,6 +165,106 @@
       "id": "backend/README.md",
       "label": "README.md",
       "type": "md"
+    },
+    {
+      "id": "backend/services/telemetry-service/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/db/database.ts",
+      "label": "database.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/docs/openApiSpec.ts",
+      "label": "openApiSpec.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/device/device.controller.ts",
+      "label": "device.controller.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/device/device.interface.ts",
+      "label": "device.interface.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/device/device.model.ts",
+      "label": "device.model.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/device/device.route.ts",
+      "label": "device.route.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/device/device.service.ts",
+      "label": "device.service.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.constant.ts",
+      "label": "vehicle.constant.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts",
+      "label": "vehicle.controller.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.interface.ts",
+      "label": "vehicle.interface.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.model.ts",
+      "label": "vehicle.model.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "label": "vehicle.route.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts",
+      "label": "vehicle.service.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/routes/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app.ts",
+      "label": "app.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/config/env.ts",
+      "label": "env.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/server.ts",
+      "label": "server.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
+      "label": "vehicle.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
     },
     {
       "id": "backend/tsconfig.base.json",
@@ -274,6 +404,11 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/packages/shared/src/catchAsync.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/packages/shared/src/correlation.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -304,6 +439,11 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/packages/shared/src/sendResponse.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/packages/shared/src/shutdown.ts",
       "target": "http",
       "relation": "IMPORTS"
@@ -311,6 +451,286 @@
     {
       "source": "backend/packages/shared/src/shutdown.ts",
       "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/validateRequest.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/validateRequest.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/db/database.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/db/database.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.controller.ts",
+      "target": "./device.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.controller.ts",
+      "target": "./device.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.controller.ts",
+      "target": "../vehicle/vehicle.constant.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.interface.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.model.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.model.ts",
+      "target": "./device.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.route.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.route.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.route.ts",
+      "target": "./device.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.route.ts",
+      "target": "./device.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.service.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.service.ts",
+      "target": "./device.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/device/device.service.ts",
+      "target": "./device.model.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts",
+      "target": "./vehicle.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts",
+      "target": "./vehicle.constant.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.interface.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.model.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.model.ts",
+      "target": "./vehicle.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "target": "./vehicle.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "target": "./vehicle.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts",
+      "target": "./vehicle.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts",
+      "target": "./vehicle.model.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/routes/index.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/routes/index.ts",
+      "target": "../modules/vehicle/vehicle.route.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/routes/index.ts",
+      "target": "../modules/device/device.route.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app.ts",
+      "target": "cors",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app.ts",
+      "target": "swagger-ui-express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app.ts",
+      "target": "./app/db/database.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app.ts",
+      "target": "./app/routes/index.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app.ts",
+      "target": "./app/docs/openApiSpec.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/config/env.ts",
+      "target": "@vehicle-pulse/config",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "./app.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "./config/env.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "./app/db/database.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
+      "target": "../app/modules/vehicle/vehicle.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
+      "target": "../app/modules/device/device.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
+      "target": "../app/modules/vehicle/vehicle.model.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/vehicle.test.ts",
+      "target": "../app/modules/device/device.model.js",
       "relation": "IMPORTS"
     },
     {

@@ -14,12 +14,38 @@ export function createErrorHandler(logger: Logger): ErrorRequestHandler {
     _next: NextFunction
   ): void => {
     const isAppError = err instanceof AppError;
-    const statusCode = isAppError ? err.statusCode : 500;
-    const message = isAppError ? err.message : "Internal Server Error";
-    const details = isAppError ? err.details : undefined;
+    let statusCode = isAppError ? err.statusCode : 500;
+    let message = isAppError ? err.message : "Internal Server Error";
+    let details = isAppError ? err.details : undefined;
+
+    // Handle Zod Validation Errors
+    if (err.name === "ZodError" && "issues" in err) {
+      statusCode = 400;
+      message = "Validation Error";
+      details = (err as any).issues.map((issue: any) => ({
+        path: issue.path.join("."),
+        message: issue.message,
+      }));
+    }
+
+    // Handle MongoDB / Mongoose CastError
+    if (err.name === "CastError") {
+      statusCode = 400;
+      message = `Invalid ${(err as any).path}: ${(err as any).value}`;
+    }
+
+    // Handle MongoDB Duplicate Key Error (code 11000)
+    if (err.name === "MongoServerError" && (err as any).code === 11000) {
+      statusCode = 409;
+      const keys = Object.keys((err as any).keyValue || {});
+      message = `Duplicate key error: ${keys.join(", ")} already exists`;
+      details = (err as any).keyValue;
+    }
 
     const errorPayload: Record<string, unknown> = {
       success: false,
+      statusCode,
+      message,
       error: {
         message,
         statusCode,
@@ -30,6 +56,7 @@ export function createErrorHandler(logger: Logger): ErrorRequestHandler {
 
     if (details) {
       (errorPayload.error as Record<string, unknown>).details = details;
+      errorPayload.errorMessages = details;
     }
 
     if (process.env.NODE_ENV !== "production") {
@@ -56,7 +83,7 @@ export function createErrorHandler(logger: Logger): ErrorRequestHandler {
           method: req.method,
           statusCode,
         },
-        `[HTTP ${statusCode}] Operational Error: ${err.message}`
+        `[HTTP ${statusCode}] Operational Error: ${message}`
       );
     }
 

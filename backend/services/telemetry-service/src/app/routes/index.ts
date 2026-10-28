@@ -1,5 +1,6 @@
 import express from "express";
 import { VehicleRoutes } from "../modules/vehicle/vehicle.route.js";
+import { DeviceRoutes } from "../modules/device/device.route.js";
 
 const router = express.Router();
 
@@ -7,6 +8,10 @@ const moduleRoutes = [
   {
     path: "/vehicles",
     route: VehicleRoutes,
+  },
+  {
+    path: "/devices",
+    route: DeviceRoutes,
   },
 ];
 

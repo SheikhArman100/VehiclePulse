@@ -1,17 +1,20 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-27T13:44:01.030Z
+Generated on: 2026-10-28T08:58:59.739Z
 
 ## Summary
-- Total Tracked Artifacts: 38
-- Total Dependency Relationships: 24
+- Total Tracked Artifacts: 64
+- Total Dependency Relationships: 82
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
    - `@vehicle-pulse/config`: Zod environment validation
    - `@vehicle-pulse/logger`: Pino structured logging
-   - `@vehicle-pulse/shared`: Error hierarchy, correlation ID middleware, health router, graceful shutdown
-2. **Frontend Application** (`frontend/web/*`)
+   - `@vehicle-pulse/shared`: Error hierarchy, correlation ID middleware, health router, graceful shutdown, pagination & validation helpers
+   - `@vehicle-pulse/event-contracts`: Canonical telemetry, state, alert, and command schemas
+2. **Backend Microservices** (`backend/services/*`)
+   - `telemetry-service`: Ingestion service with MongoDB persistence (Mongoose), vehicle/device CRUD, and OpenAPI 3.1 Swagger UI
+3. **Frontend Application** (`frontend/web/*`)
    - Next.js 15 App Router (`app/layout.tsx`, `app/page.tsx`, `app/globals.css`)
    - Tailwind CSS configuration
 
@@ -31,12 +34,70 @@ Generated on: 2026-10-27T13:44:01.030Z
 - `backend/packages/event-contracts/src/telemetry.ts` -> `zod`
 - `backend/packages/event-contracts/src/telemetry.ts` -> `./envelope.js`
 - `backend/packages/logger/src/index.ts` -> `pino`
+- `backend/packages/shared/src/catchAsync.ts` -> `express`
 - `backend/packages/shared/src/correlation.ts` -> `express`
 - `backend/packages/shared/src/correlation.ts` -> `node:crypto`
 - `backend/packages/shared/src/errorHandler.ts` -> `express`
 - `backend/packages/shared/src/errorHandler.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/errorHandler.ts` -> `./errors.js`
 - `backend/packages/shared/src/health.ts` -> `express`
+- `backend/packages/shared/src/sendResponse.ts` -> `express`
 - `backend/packages/shared/src/shutdown.ts` -> `http`
 - `backend/packages/shared/src/shutdown.ts` -> `@vehicle-pulse/logger`
+- `backend/packages/shared/src/validateRequest.ts` -> `express`
+- `backend/packages/shared/src/validateRequest.ts` -> `zod`
+- `backend/services/telemetry-service/src/app/db/database.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/app/db/database.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `express`
+- `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `./device.service.js`
+- `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `./device.interface.js`
+- `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `../vehicle/vehicle.constant.js`
+- `backend/services/telemetry-service/src/app/modules/device/device.interface.ts` -> `zod`
+- `backend/services/telemetry-service/src/app/modules/device/device.model.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/app/modules/device/device.model.ts` -> `./device.interface.js`
+- `backend/services/telemetry-service/src/app/modules/device/device.route.ts` -> `express`
+- `backend/services/telemetry-service/src/app/modules/device/device.route.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/modules/device/device.route.ts` -> `./device.controller.js`
+- `backend/services/telemetry-service/src/app/modules/device/device.route.ts` -> `./device.interface.js`
+- `backend/services/telemetry-service/src/app/modules/device/device.service.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/app/modules/device/device.service.ts` -> `./device.interface.js`
+- `backend/services/telemetry-service/src/app/modules/device/device.service.ts` -> `./device.model.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `express`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `./vehicle.service.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `./vehicle.constant.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.interface.ts` -> `zod`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.model.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.model.ts` -> `./vehicle.interface.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `express`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./vehicle.controller.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./vehicle.interface.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `./vehicle.interface.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `./vehicle.model.js`
+- `backend/services/telemetry-service/src/app/routes/index.ts` -> `express`
+- `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/vehicle/vehicle.route.js`
+- `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/device/device.route.js`
+- `backend/services/telemetry-service/src/app.ts` -> `express`
+- `backend/services/telemetry-service/src/app.ts` -> `cors`
+- `backend/services/telemetry-service/src/app.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/app.ts` -> `swagger-ui-express`
+- `backend/services/telemetry-service/src/app.ts` -> `./app/db/database.js`
+- `backend/services/telemetry-service/src/app.ts` -> `./app/routes/index.js`
+- `backend/services/telemetry-service/src/app.ts` -> `./app/docs/openApiSpec.js`
+- `backend/services/telemetry-service/src/config/env.ts` -> `@vehicle-pulse/config`
+- `backend/services/telemetry-service/src/server.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/server.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/server.ts` -> `./app.js`
+- `backend/services/telemetry-service/src/server.ts` -> `./config/env.js`
+- `backend/services/telemetry-service/src/server.ts` -> `./app/db/database.js`
+- `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `node:test`
+- `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `node:assert/strict`
+- `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `../app/modules/vehicle/vehicle.service.js`
+- `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `../app/modules/device/device.service.js`
+- `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `../app/modules/vehicle/vehicle.model.js`
+- `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `../app/modules/device/device.model.js`
 - `frontend/web/app/layout.tsx` -> `next`
