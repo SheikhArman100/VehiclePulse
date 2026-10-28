@@ -1,20 +1,15 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-28T13:23:15.629Z",
+    "generatedAt": "2026-10-28T14:11:13.173Z",
     "nodeCount": 94,
-    "edgeCount": 150
+    "edgeCount": 154
   },
   "nodes": [
     {
       "id": "backend/docker-compose.yml",
       "label": "docker-compose.yml",
       "type": "yml"
-    },
-    {
-      "id": "backend/docs/benchmarks/kafka_benchmark_1000_batch50_none.json",
-      "label": "kafka_benchmark_1000_batch50_none.json",
-      "type": "json"
     },
     {
       "id": "backend/infrastructure/kafka/package.json",
@@ -254,6 +249,11 @@
     {
       "id": "backend/services/telemetry-service/src/app/docs/openApiSpec.ts",
       "label": "openApiSpec.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts",
+      "label": "mongoConsumer.ts",
       "type": "ts"
     },
     {
@@ -754,6 +754,21 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts",
+      "target": "../modules/telemetry/telemetry.service.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts",
       "target": "@vehicle-pulse/shared",
       "relation": "IMPORTS"
@@ -1071,6 +1086,11 @@
     {
       "source": "backend/services/telemetry-service/src/server.ts",
       "target": "./app/kafka/telemetryProducer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "./app/kafka/mongoConsumer.js",
       "relation": "IMPORTS"
     },
     {

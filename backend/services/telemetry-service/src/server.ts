@@ -4,6 +4,7 @@ import { createApp } from "./app.js";
 import { env } from "./config/env.js";
 import { connectDatabase, disconnectDatabase } from "./app/db/database.js";
 import { TelemetryKafkaProducer } from "./app/kafka/telemetryProducer.js";
+import { TelemetryMongoConsumer } from "./app/kafka/mongoConsumer.js";
 
 const logger = createLogger({
   serviceName: env.SERVICE_NAME,
@@ -23,7 +24,14 @@ async function main() {
       logger,
     });
 
-    // 3. Start HTTP server
+    // 3. Start decoupled MongoDB Kafka Consumer Worker (Kafka-First Storage)
+    await TelemetryMongoConsumer.startConsumer({
+      brokers,
+      groupId: "telemetry-mongo-storage-group",
+      logger,
+    });
+
+    // 4. Start HTTP server
     const app = createApp({ logger });
     const server = app.listen(env.PORT, () => {
       logger.info(
@@ -32,13 +40,14 @@ async function main() {
       );
     });
 
-    // 4. Register graceful shutdown
+    // 5. Register graceful shutdown
     registerGracefulShutdown({
       server,
       logger,
       serviceName: env.SERVICE_NAME,
       onShutdown: async () => {
         logger.info("Closing MongoDB and Kafka connections on graceful shutdown...");
+        await TelemetryMongoConsumer.stopConsumer(logger);
         await TelemetryKafkaProducer.disconnectProducer(logger);
         await disconnectDatabase(logger);
       },

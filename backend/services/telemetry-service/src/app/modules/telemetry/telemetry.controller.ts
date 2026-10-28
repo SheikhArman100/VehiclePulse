@@ -8,10 +8,15 @@ const recordTelemetry = catchAsync(async (req: Request, res: Response) => {
   if (Array.isArray(req.body)) {
     const batchResult = await TelemetryService.recordTelemetryBatch(req.body, logger);
     sendResponse(res, {
-      statusCode: 201,
+      statusCode: 202,
       success: true,
-      message: `Batch of ${batchResult.storedCount} telemetry points recorded and published`,
-      data: batchResult,
+      message: `Batch of ${batchResult.publishedCount} telemetry events accepted and queued to Kafka`,
+      data: {
+        status: "queued",
+        topic: "vehicle.telemetry.raw",
+        publishedCount: batchResult.publishedCount,
+        errors: batchResult.errors,
+      },
     });
     return;
   }
@@ -19,10 +24,15 @@ const recordTelemetry = catchAsync(async (req: Request, res: Response) => {
   const result = await TelemetryService.recordTelemetry(req.body, logger);
 
   sendResponse(res, {
-    statusCode: 201,
+    statusCode: 202,
     success: true,
-    message: "Telemetry point recorded and published to Kafka successfully",
-    data: result,
+    message: "Telemetry event accepted and queued to Kafka",
+    data: {
+      status: "queued",
+      topic: result.topic,
+      partition: result.partition,
+      offset: result.offset,
+    },
   });
 });
 

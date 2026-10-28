@@ -40,9 +40,9 @@ describe("Phase 8 & 11 — Telemetry Storage & Kafka Producer", () => {
     await mongoose.disconnect();
   });
 
-  it("should record a single telemetry data point in time-series and publish to Kafka", async () => {
+  it("should accept telemetry in Kafka-first mode and return publish metadata", async () => {
     const now = new Date();
-    const recorded = await TelemetryService.recordTelemetry({
+    const result = await TelemetryService.recordTelemetry({
       timestamp: now,
       metadata: {
         vehicleId: "veh_ts_01",
@@ -65,20 +65,79 @@ describe("Phase 8 & 11 — Telemetry Storage & Kafka Producer", () => {
       accelerationG: 0.1,
     }, testLogger);
 
-    assert.equal(recorded.storageRecord.metadata.vehicleId, "veh_ts_01");
-    assert.equal(recorded.storageRecord.speed, 65.5);
-    assert.equal(recorded.storageRecord.location.coordinates[0], -122.4194);
-    assert.equal(recorded.storageRecord.location.coordinates[1], 37.7749);
-    assert.equal(recorded.kafkaPublish.published, true);
-    assert.equal(recorded.kafkaPublish.topic, "vehicle.telemetry.raw");
+    assert.equal(result.published, true);
+    assert.equal(result.topic, "vehicle.telemetry.raw");
   });
 
-  it("should ingest a batch of telemetry records", async () => {
+  it("should bulk insert events consumed from Kafka into MongoDB time-series", async () => {
+    const baseTime = Date.now();
+    const events: any[] = [
+      {
+        eventId: "a1b2c3d4-e5f6-4a1b-8c2d-3e4f5a6b7c8e",
+        eventType: "telemetry.raw",
+        version: "1.0.0",
+        vehicleId: "veh_ts_01",
+        deviceId: "dev_ts_01",
+        timestamp: new Date(baseTime - 3000).toISOString(),
+        data: {
+          location: { latitude: 37.775, longitude: -122.4195, heading: 182 },
+          speed: 68.0,
+          rpm: 2500,
+          fuelLevelPercent: 87.9,
+          engineTemperatureCelsius: 92,
+          batteryVoltage: 13.8,
+          odometerKm: 14500.6,
+          engineStatus: "ON",
+        },
+      },
+      {
+        eventId: "a1b2c3d4-e5f6-4a1b-8c2d-3e4f5a6b7c8f",
+        eventType: "telemetry.raw",
+        version: "1.0.0",
+        vehicleId: "veh_ts_01",
+        deviceId: "dev_ts_01",
+        timestamp: new Date(baseTime - 1000).toISOString(),
+        data: {
+          location: { latitude: 37.7751, longitude: -122.4196, heading: 185 },
+          speed: 72.0,
+          rpm: 2700,
+          fuelLevelPercent: 87.8,
+          engineTemperatureCelsius: 92.5,
+          batteryVoltage: 13.9,
+          odometerKm: 14500.7,
+          engineStatus: "ON",
+        },
+      },
+      {
+        eventId: "a1b2c3d4-e5f6-4a1b-8c2d-3e4f5a6b7c90",
+        eventType: "telemetry.raw",
+        version: "1.0.0",
+        vehicleId: "veh_ts_01",
+        deviceId: "dev_ts_01",
+        timestamp: new Date(baseTime).toISOString(),
+        data: {
+          location: { latitude: 37.7749, longitude: -122.4194, heading: 180 },
+          speed: 65.5,
+          rpm: 2400,
+          fuelLevelPercent: 88,
+          engineTemperatureCelsius: 91,
+          batteryVoltage: 13.8,
+          odometerKm: 14500.5,
+          engineStatus: "ON",
+        },
+      },
+    ];
+
+    const insertedCount = await TelemetryService.bulkInsertFromKafkaEvents(events);
+    assert.equal(insertedCount, 3);
+  });
+
+  it("should ingest a batch of telemetry records in Kafka-first mode", async () => {
     const baseTime = Date.now();
     const batch = [
       {
         timestamp: new Date(baseTime - 3000),
-        metadata: { vehicleId: "veh_ts_01", deviceId: "dev_ts_01" },
+        metadata: { vehicleId: "veh_ts_02", deviceId: "dev_ts_02" },
         location: { type: "Point" as const, coordinates: [-122.4195, 37.775] as [number, number] },
         heading: 182,
         speed: 68.0,
@@ -89,24 +148,10 @@ describe("Phase 8 & 11 — Telemetry Storage & Kafka Producer", () => {
         odometerKm: 14500.6,
         engineStatus: "ON" as const,
       },
-      {
-        timestamp: new Date(baseTime - 1000),
-        metadata: { vehicleId: "veh_ts_01", deviceId: "dev_ts_01" },
-        location: { type: "Point" as const, coordinates: [-122.4196, 37.7751] as [number, number] },
-        heading: 185,
-        speed: 72.0,
-        rpm: 2700,
-        fuelLevelPercent: 87.8,
-        engineTemperatureCelsius: 92.5,
-        batteryVoltage: 13.9,
-        odometerKm: 14500.7,
-        engineStatus: "ON" as const,
-      },
     ];
 
     const batchResult = await TelemetryService.recordTelemetryBatch(batch, testLogger);
-    assert.equal(batchResult.storedCount, 2);
-    assert.equal(batchResult.kafkaPublishedCount, 2);
+    assert.equal(batchResult.publishedCount, 1);
   });
 
   it("should query vehicle history with pagination and time range", async () => {

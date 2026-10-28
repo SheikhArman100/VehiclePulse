@@ -84,49 +84,48 @@ function toStorageRecord(event: TelemetryRawEvent): ITelemetryRecord {
 }
 
 /**
- * Ingest a single telemetry event: persists to MongoDB Time-Series and publishes to Kafka.
+ * Ingest a single telemetry event into Kafka (Kafka-First Ingestion).
+ * Validates payload, publishes to Kafka topic `vehicle.telemetry.raw`,
+ * and returns Kafka publish metadata without waiting for database writes.
  */
 const recordTelemetry = async (
   payload: any,
   logger: any
-): Promise<{ storageRecord: ITelemetryRecord; kafkaPublish: PublishResult }> => {
+): Promise<PublishResult> => {
   const envelope = toCanonicalEnvelope(payload);
-  const storageRecord = toStorageRecord(envelope);
 
-  // 1. Persist to MongoDB Time-Series
-  const created = await Telemetry.create(storageRecord);
-  const savedDoc = created.toObject ? created.toObject() : created;
-
-  // 2. Publish to Kafka topic vehicle.telemetry.raw
+  // Publish to Kafka topic vehicle.telemetry.raw (keyed by vehicleId)
   const kafkaPublish = await TelemetryKafkaProducer.publishTelemetryEvent(envelope, logger);
 
-  return {
-    storageRecord: savedDoc,
-    kafkaPublish,
-  };
+  if (!kafkaPublish.published) {
+    throw new Error(kafkaPublish.error || "Failed to publish telemetry event to Kafka");
+  }
+
+  return kafkaPublish;
 };
 
 /**
- * Ingest a batch of telemetry events into MongoDB and publish to Kafka.
+ * Ingest a batch of telemetry events into Kafka (Kafka-First Ingestion).
  */
 const recordTelemetryBatch = async (
   records: any[],
   logger: any
-): Promise<{ storedCount: number; kafkaPublishedCount: number; errors: string[] }> => {
+): Promise<{ publishedCount: number; errors: string[] }> => {
   const envelopes = records.map(toCanonicalEnvelope);
-  const storageRecords = envelopes.map(toStorageRecord);
+  return TelemetryKafkaProducer.publishTelemetryBatch(envelopes, logger);
+};
 
-  // 1. Bulk insert to MongoDB
-  const mongoResult = await Telemetry.insertMany(storageRecords, { ordered: false });
-
-  // 2. Publish batch to Kafka
-  const kafkaResult = await TelemetryKafkaProducer.publishTelemetryBatch(envelopes, logger);
-
-  return {
-    storedCount: mongoResult.length,
-    kafkaPublishedCount: kafkaResult.publishedCount,
-    errors: kafkaResult.errors,
-  };
+/**
+ * Bulk inserts events consumed asynchronously from Kafka into MongoDB Time-Series collection.
+ * Invoked by the decoupled MongoDB consumer worker.
+ */
+const bulkInsertFromKafkaEvents = async (
+  events: TelemetryRawEvent[]
+): Promise<number> => {
+  if (events.length === 0) return 0;
+  const storageRecords = events.map(toStorageRecord);
+  const result = await Telemetry.insertMany(storageRecords, { ordered: false });
+  return result.length;
 };
 
 /**
@@ -265,6 +264,7 @@ const getVehicleHourlyStats = async (
 export const TelemetryService = {
   recordTelemetry,
   recordTelemetryBatch,
+  bulkInsertFromKafkaEvents,
   getVehicleHistory,
   getLatestVehicleTelemetry,
   findNearbyTelemetry,
