@@ -1,15 +1,60 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-28T10:17:32.910Z",
-    "nodeCount": 77,
-    "edgeCount": 110
+    "generatedAt": "2026-10-28T10:44:03.228Z",
+    "nodeCount": 88,
+    "edgeCount": 124
   },
   "nodes": [
     {
       "id": "backend/docker-compose.yml",
       "label": "docker-compose.yml",
       "type": "yml"
+    },
+    {
+      "id": "backend/infrastructure/kafka/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/cli.ts",
+      "label": "cli.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/testExchange.ts",
+      "label": "testExchange.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/topicManager.ts",
+      "label": "topicManager.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/test/kafka.test.d.ts",
+      "label": "kafka.test.d.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/test/kafka.test.js",
+      "label": "kafka.test.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/infrastructure/kafka/test/kafka.test.ts",
+      "label": "kafka.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
     },
     {
       "id": "backend/infrastructure/nginx/README.md",
@@ -82,6 +127,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/packages/event-contracts/src/topics.ts",
+      "label": "topics.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/packages/event-contracts/tsconfig.json",
       "label": "tsconfig.json",
       "type": "json"
@@ -134,6 +184,11 @@
     {
       "id": "backend/packages/shared/src/index.ts",
       "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/kafka.ts",
+      "label": "kafka.ts",
       "type": "ts"
     },
     {
@@ -394,6 +449,71 @@
   ],
   "edges": [
     {
+      "source": "backend/infrastructure/kafka/src/cli.ts",
+      "target": "./topicManager.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/testExchange.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/testExchange.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/testExchange.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/testExchange.ts",
+      "target": "./topicManager.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/topicManager.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/topicManager.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/topicManager.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/kafka.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/kafka.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/kafka.test.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/kafka.test.ts",
+      "target": "../src/topicManager.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/kafka.test.ts",
+      "target": "../src/testExchange.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/packages/config/src/index.ts",
       "target": "dotenv",
       "relation": "IMPORTS"
@@ -501,6 +621,11 @@
     {
       "source": "backend/packages/shared/src/health.ts",
       "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/kafka.ts",
+      "target": "kafkajs",
       "relation": "IMPORTS"
     },
     {

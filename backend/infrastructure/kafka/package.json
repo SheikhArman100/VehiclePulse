@@ -1,0 +1,27 @@
+{
+  "name": "@vehicle-pulse/kafka-admin",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Administrative tooling, topic provisioning, and inspection CLI for VehiclePulse Kafka cluster",
+  "main": "dist/src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "topics:create": "node dist/src/cli.js create",
+    "topics:list": "node dist/src/cli.js list",
+    "topics:describe": "node dist/src/cli.js list",
+    "groups:list": "node dist/src/cli.js groups",
+    "test:exchange": "node dist/src/testExchange.js",
+    "test": "node --test dist/test/**/*.test.js"
+  },
+  "dependencies": {
+    "@vehicle-pulse/event-contracts": "*",
+    "@vehicle-pulse/shared": "*",
+    "@vehicle-pulse/logger": "*",
+    "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -7,3 +7,4 @@ export * from "./sendResponse.js";
 export * from "./catchAsync.js";
 export * from "./validateRequest.js";
 export * from "./pagination.js";
+export * from "./kafka.js";

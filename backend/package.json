@@ -11,7 +11,8 @@
     "services/*",
     "packages/*",
     "simulator/*",
-    "workers/*"
+    "workers/*",
+    "infrastructure/*"
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present || exit 0",

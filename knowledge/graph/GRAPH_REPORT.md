@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-28T10:17:32.910Z
+Generated on: 2026-10-28T10:44:03.228Z
 
 ## Summary
-- Total Tracked Artifacts: 77
-- Total Dependency Relationships: 110
+- Total Tracked Artifacts: 88
+- Total Dependency Relationships: 124
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -19,6 +19,19 @@ Generated on: 2026-10-28T10:17:32.910Z
    - Tailwind CSS configuration
 
 ## Key Dependency Edges
+- `backend/infrastructure/kafka/src/cli.ts` -> `./topicManager.js`
+- `backend/infrastructure/kafka/src/testExchange.ts` -> `node:crypto`
+- `backend/infrastructure/kafka/src/testExchange.ts` -> `@vehicle-pulse/shared`
+- `backend/infrastructure/kafka/src/testExchange.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/infrastructure/kafka/src/testExchange.ts` -> `./topicManager.js`
+- `backend/infrastructure/kafka/src/topicManager.ts` -> `@vehicle-pulse/shared`
+- `backend/infrastructure/kafka/src/topicManager.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/infrastructure/kafka/src/topicManager.ts` -> `@vehicle-pulse/logger`
+- `backend/infrastructure/kafka/test/kafka.test.ts` -> `node:test`
+- `backend/infrastructure/kafka/test/kafka.test.ts` -> `node:assert/strict`
+- `backend/infrastructure/kafka/test/kafka.test.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/infrastructure/kafka/test/kafka.test.ts` -> `../src/topicManager.js`
+- `backend/infrastructure/kafka/test/kafka.test.ts` -> `../src/testExchange.js`
 - `backend/packages/config/src/index.ts` -> `dotenv`
 - `backend/packages/config/src/index.ts` -> `zod`
 - `backend/packages/event-contracts/src/alert.ts` -> `zod`
@@ -41,6 +54,7 @@ Generated on: 2026-10-28T10:17:32.910Z
 - `backend/packages/shared/src/errorHandler.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/errorHandler.ts` -> `./errors.js`
 - `backend/packages/shared/src/health.ts` -> `express`
+- `backend/packages/shared/src/kafka.ts` -> `kafkajs`
 - `backend/packages/shared/src/sendResponse.ts` -> `express`
 - `backend/packages/shared/src/shutdown.ts` -> `http`
 - `backend/packages/shared/src/shutdown.ts` -> `@vehicle-pulse/logger`
