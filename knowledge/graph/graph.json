@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-28T08:58:59.739Z",
-    "nodeCount": 64,
-    "edgeCount": 82
+    "generatedAt": "2026-10-28T09:06:47.356Z",
+    "nodeCount": 70,
+    "edgeCount": 100
   },
   "nodes": [
     {
@@ -207,6 +207,31 @@
       "type": "ts"
     },
     {
+      "id": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.controller.ts",
+      "label": "telemetry.controller.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.interface.ts",
+      "label": "telemetry.interface.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.model.ts",
+      "label": "telemetry.model.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts",
+      "label": "telemetry.route.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts",
+      "label": "telemetry.service.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.constant.ts",
       "label": "vehicle.constant.ts",
       "type": "ts"
@@ -254,6 +279,11 @@
     {
       "id": "backend/services/telemetry-service/src/server.ts",
       "label": "server.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
+      "label": "telemetry.test.ts",
       "type": "ts"
     },
     {
@@ -549,6 +579,66 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.controller.ts",
+      "target": "./telemetry.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.interface.ts",
+      "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.model.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.model.ts",
+      "target": "./telemetry.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts",
+      "target": "./telemetry.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts",
+      "target": "./telemetry.interface.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts",
+      "target": "./telemetry.model.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -634,6 +724,11 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/routes/index.ts",
+      "target": "../modules/telemetry/telemetry.route.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -696,6 +791,31 @@
     {
       "source": "backend/services/telemetry-service/src/server.ts",
       "target": "./app/db/database.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
+      "target": "../app/modules/telemetry/telemetry.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
+      "target": "../app/modules/telemetry/telemetry.model.js",
       "relation": "IMPORTS"
     },
     {

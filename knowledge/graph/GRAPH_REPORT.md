@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-28T08:58:59.739Z
+Generated on: 2026-10-28T09:06:47.356Z
 
 ## Summary
-- Total Tracked Artifacts: 64
-- Total Dependency Relationships: 82
+- Total Tracked Artifacts: 70
+- Total Dependency Relationships: 100
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -63,6 +63,18 @@ Generated on: 2026-10-28T08:58:59.739Z
 - `backend/services/telemetry-service/src/app/modules/device/device.service.ts` -> `mongoose`
 - `backend/services/telemetry-service/src/app/modules/device/device.service.ts` -> `./device.interface.js`
 - `backend/services/telemetry-service/src/app/modules/device/device.service.ts` -> `./device.model.js`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.controller.ts` -> `express`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.controller.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.controller.ts` -> `./telemetry.service.js`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.interface.ts` -> `zod`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.model.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.model.ts` -> `./telemetry.interface.js`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts` -> `express`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts` -> `./telemetry.controller.js`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts` -> `./telemetry.interface.js`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `./telemetry.model.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `express`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `./vehicle.service.js`
@@ -80,6 +92,7 @@ Generated on: 2026-10-28T08:58:59.739Z
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `express`
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/vehicle/vehicle.route.js`
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/device/device.route.js`
+- `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/telemetry/telemetry.route.js`
 - `backend/services/telemetry-service/src/app.ts` -> `express`
 - `backend/services/telemetry-service/src/app.ts` -> `cors`
 - `backend/services/telemetry-service/src/app.ts` -> `@vehicle-pulse/logger`
@@ -93,6 +106,11 @@ Generated on: 2026-10-28T08:58:59.739Z
 - `backend/services/telemetry-service/src/server.ts` -> `./app.js`
 - `backend/services/telemetry-service/src/server.ts` -> `./config/env.js`
 - `backend/services/telemetry-service/src/server.ts` -> `./app/db/database.js`
+- `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `node:test`
+- `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `node:assert/strict`
+- `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `../app/modules/telemetry/telemetry.service.js`
+- `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `../app/modules/telemetry/telemetry.model.js`
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `node:assert/strict`
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `mongoose`

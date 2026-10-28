@@ -1,6 +1,7 @@
 import express from "express";
 import { VehicleRoutes } from "../modules/vehicle/vehicle.route.js";
 import { DeviceRoutes } from "../modules/device/device.route.js";
+import { TelemetryRoutes } from "../modules/telemetry/telemetry.route.js";
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ const moduleRoutes = [
   {
     path: "/devices",
     route: DeviceRoutes,
+  },
+  {
+    path: "/telemetry",
+    route: TelemetryRoutes,
   },
 ];
 
