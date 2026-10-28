@@ -19,6 +19,37 @@ services:
       - vehiclepulse-network
 
   # -------------------------------------------------------------
+  # 1b. Telemetry Service (Node.js Express Microservice)
+  # -------------------------------------------------------------
+  telemetry-service:
+    build:
+      context: .
+      dockerfile: services/telemetry-service/Dockerfile
+    container_name: vehiclepulse-telemetry-service
+    restart: unless-stopped
+    ports:
+      - "4001:4001"
+    environment:
+      PORT: 4001
+      NODE_ENV: development
+      SERVICE_NAME: telemetry-service
+      LOG_LEVEL: info
+      MONGODB_URI: mongodb://mongodb:27017/vehiclepulse_telemetry
+      KAFKA_BROKERS: kafka:9092
+    depends_on:
+      mongodb:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:4001/health/live || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - vehiclepulse-network
+
+  # -------------------------------------------------------------
   # 2. MongoDB (Telemetry Service - Time-series & Device Data)
   # -------------------------------------------------------------
   mongodb:

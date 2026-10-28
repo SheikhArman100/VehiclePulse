@@ -5,6 +5,7 @@ export class AppError extends Error {
 
   constructor(message: string, statusCode = 500, details?: unknown, isOperational = true) {
     super(message);
+    this.name = this.constructor.name;
     this.statusCode = statusCode;
     this.isOperational = isOperational;
     this.details = details;
@@ -16,6 +17,7 @@ export class AppError extends Error {
 export class NotFoundError extends AppError {
   constructor(message = "Resource not found") {
     super(message, 404);
+    this.name = "NotFoundError";
   }
 }
 
