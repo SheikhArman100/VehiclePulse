@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-28T11:36:44.811Z",
-    "nodeCount": 90,
-    "edgeCount": 138
+    "generatedAt": "2026-10-28T11:55:33.251Z",
+    "nodeCount": 91,
+    "edgeCount": 142
   },
   "nodes": [
     {
@@ -19,6 +19,11 @@
     {
       "id": "backend/infrastructure/kafka/src/cli.ts",
       "label": "cli.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/e2eSlice.ts",
+      "label": "e2eSlice.ts",
       "type": "ts"
     },
     {
@@ -461,6 +466,26 @@
     {
       "source": "backend/infrastructure/kafka/src/cli.ts",
       "target": "./topicManager.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/e2eSlice.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/e2eSlice.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/e2eSlice.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/e2eSlice.ts",
+      "target": "@vehicle-pulse/telemetry-generator/dist/vehicleModel.js",
       "relation": "IMPORTS"
     },
     {

@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-28T11:36:44.811Z
+Generated on: 2026-10-28T11:55:33.251Z
 
 ## Summary
-- Total Tracked Artifacts: 90
-- Total Dependency Relationships: 138
+- Total Tracked Artifacts: 91
+- Total Dependency Relationships: 142
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -20,6 +20,10 @@ Generated on: 2026-10-28T11:36:44.811Z
 
 ## Key Dependency Edges
 - `backend/infrastructure/kafka/src/cli.ts` -> `./topicManager.js`
+- `backend/infrastructure/kafka/src/e2eSlice.ts` -> `@vehicle-pulse/shared`
+- `backend/infrastructure/kafka/src/e2eSlice.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/infrastructure/kafka/src/e2eSlice.ts` -> `@vehicle-pulse/logger`
+- `backend/infrastructure/kafka/src/e2eSlice.ts` -> `@vehicle-pulse/telemetry-generator/dist/vehicleModel.js`
 - `backend/infrastructure/kafka/src/testExchange.ts` -> `node:crypto`
 - `backend/infrastructure/kafka/src/testExchange.ts` -> `@vehicle-pulse/shared`
 - `backend/infrastructure/kafka/src/testExchange.ts` -> `@vehicle-pulse/event-contracts`

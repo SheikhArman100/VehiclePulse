@@ -11,12 +11,14 @@
     "topics:describe": "node dist/src/cli.js list",
     "groups:list": "node dist/src/cli.js groups",
     "test:exchange": "node dist/src/testExchange.js",
+    "test:e2e": "node dist/src/e2eSlice.js",
     "test": "node --test dist/test/**/*.test.js"
   },
   "dependencies": {
     "@vehicle-pulse/event-contracts": "*",
     "@vehicle-pulse/shared": "*",
     "@vehicle-pulse/logger": "*",
+    "@vehicle-pulse/telemetry-generator": "*",
     "kafkajs": "^2.2.4"
   },
   "devDependencies": {

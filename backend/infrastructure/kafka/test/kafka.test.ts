@@ -48,4 +48,20 @@ describe("Kafka Cluster & Topic Strategy Suite (Phase 10)", () => {
     assert.ok(result.partitionUsed >= 0 && result.partitionUsed < 3);
     assert.equal(result.vehicleId, "veh_test_phase10_verifier");
   });
+
+  it("should successfully execute Phase 12 full end-to-end backend slice", async () => {
+    const { runEndToEndSliceVerification } = await import("../src/e2eSlice.js");
+    const result = await runEndToEndSliceVerification({
+      vehicleCount: 2,
+      eventsPerVehicle: 3,
+    });
+
+    assert.equal(result.success, true);
+    assert.equal(result.eventsSent, 6);
+    assert.equal(result.eventsReceived, 6);
+    assert.equal(result.distinctVehicles.length, 2);
+    assert.ok(result.partitionsHit.length >= 1);
+    assert.ok(result.sampleEvent);
+    assert.equal(result.sampleEvent.eventType, "telemetry.raw");
+  });
 });
