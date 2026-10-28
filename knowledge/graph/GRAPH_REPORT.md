@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-28T10:44:03.228Z
+Generated on: 2026-10-28T11:36:44.811Z
 
 ## Summary
-- Total Tracked Artifacts: 88
-- Total Dependency Relationships: 124
+- Total Tracked Artifacts: 90
+- Total Dependency Relationships: 138
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -62,6 +62,8 @@ Generated on: 2026-10-28T10:44:03.228Z
 - `backend/packages/shared/src/validateRequest.ts` -> `zod`
 - `backend/services/telemetry-service/src/app/db/database.ts` -> `mongoose`
 - `backend/services/telemetry-service/src/app/db/database.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `express`
 - `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `./device.service.js`
@@ -88,7 +90,10 @@ Generated on: 2026-10-28T10:44:03.228Z
 - `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts` -> `./telemetry.controller.js`
 - `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.route.ts` -> `./telemetry.interface.js`
 - `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `node:crypto`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `./telemetry.model.js`
+- `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `../../kafka/telemetryProducer.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `express`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `./vehicle.service.js`
@@ -120,11 +125,20 @@ Generated on: 2026-10-28T10:44:03.228Z
 - `backend/services/telemetry-service/src/server.ts` -> `./app.js`
 - `backend/services/telemetry-service/src/server.ts` -> `./config/env.js`
 - `backend/services/telemetry-service/src/server.ts` -> `./app/db/database.js`
+- `backend/services/telemetry-service/src/server.ts` -> `./app/kafka/telemetryProducer.js`
+- `backend/services/telemetry-service/src/tests/producer.test.ts` -> `node:test`
+- `backend/services/telemetry-service/src/tests/producer.test.ts` -> `node:assert/strict`
+- `backend/services/telemetry-service/src/tests/producer.test.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/tests/producer.test.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/tests/producer.test.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/services/telemetry-service/src/tests/producer.test.ts` -> `../app/kafka/telemetryProducer.js`
 - `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `node:assert/strict`
 - `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `../app/modules/telemetry/telemetry.service.js`
 - `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `../app/modules/telemetry/telemetry.model.js`
+- `backend/services/telemetry-service/src/tests/telemetry.test.ts` -> `../app/kafka/telemetryProducer.js`
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `node:assert/strict`
 - `backend/services/telemetry-service/src/tests/vehicle.test.ts` -> `mongoose`

@@ -1,13 +1,16 @@
 import { describe, it, before, after } from "node:test";
 import assert from "node:assert/strict";
 import mongoose from "mongoose";
+import { createLogger } from "@vehicle-pulse/logger";
 import { TelemetryService } from "../app/modules/telemetry/telemetry.service.js";
 import { Telemetry } from "../app/modules/telemetry/telemetry.model.js";
+import { TelemetryKafkaProducer } from "../app/kafka/telemetryProducer.js";
 
 const MONGO_TEST_URI =
   process.env.MONGODB_URI || "mongodb://localhost:27017/vehiclepulse_test";
+const testLogger = createLogger({ serviceName: "test-telemetry", level: "silent" });
 
-describe("Phase 8 — MongoDB Time-Series Telemetry Storage & Queries", () => {
+describe("Phase 8 & 11 — Telemetry Storage & Kafka Producer", () => {
   before(async () => {
     await mongoose.connect(MONGO_TEST_URI);
     try {
@@ -18,6 +21,13 @@ describe("Phase 8 — MongoDB Time-Series Telemetry Storage & Queries", () => {
     // Create collection with time-series options and build indexes
     await Telemetry.createCollection();
     await Telemetry.createIndexes();
+
+    // Initialize Kafka producer
+    await TelemetryKafkaProducer.initProducer({
+      brokers: ["localhost:9092"],
+      clientId: "telemetry-test-producer",
+      logger: testLogger,
+    });
   });
 
   after(async () => {
@@ -26,10 +36,11 @@ describe("Phase 8 — MongoDB Time-Series Telemetry Storage & Queries", () => {
     } catch {
       // Ignore
     }
+    await TelemetryKafkaProducer.disconnectProducer(testLogger);
     await mongoose.disconnect();
   });
 
-  it("should record a single telemetry data point in time-series collection", async () => {
+  it("should record a single telemetry data point in time-series and publish to Kafka", async () => {
     const now = new Date();
     const recorded = await TelemetryService.recordTelemetry({
       timestamp: now,
@@ -52,12 +63,14 @@ describe("Phase 8 — MongoDB Time-Series Telemetry Storage & Queries", () => {
       odometerKm: 14500.5,
       engineStatus: "ON",
       accelerationG: 0.1,
-    });
+    }, testLogger);
 
-    assert.equal(recorded.metadata.vehicleId, "veh_ts_01");
-    assert.equal(recorded.speed, 65.5);
-    assert.equal(recorded.location.coordinates[0], -122.4194);
-    assert.equal(recorded.location.coordinates[1], 37.7749);
+    assert.equal(recorded.storageRecord.metadata.vehicleId, "veh_ts_01");
+    assert.equal(recorded.storageRecord.speed, 65.5);
+    assert.equal(recorded.storageRecord.location.coordinates[0], -122.4194);
+    assert.equal(recorded.storageRecord.location.coordinates[1], 37.7749);
+    assert.equal(recorded.kafkaPublish.published, true);
+    assert.equal(recorded.kafkaPublish.topic, "vehicle.telemetry.raw");
   });
 
   it("should ingest a batch of telemetry records", async () => {
@@ -91,8 +104,9 @@ describe("Phase 8 — MongoDB Time-Series Telemetry Storage & Queries", () => {
       },
     ];
 
-    const insertedCount = await TelemetryService.recordTelemetryBatch(batch);
-    assert.equal(insertedCount, 2);
+    const batchResult = await TelemetryService.recordTelemetryBatch(batch, testLogger);
+    assert.equal(batchResult.storedCount, 2);
+    assert.equal(batchResult.kafkaPublishedCount, 2);
   });
 
   it("should query vehicle history with pagination and time range", async () => {

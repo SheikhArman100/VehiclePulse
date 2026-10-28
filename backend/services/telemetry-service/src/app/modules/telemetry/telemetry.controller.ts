@@ -3,12 +3,25 @@ import { catchAsync, sendResponse } from "@vehicle-pulse/shared";
 import { TelemetryService } from "./telemetry.service.js";
 
 const recordTelemetry = catchAsync(async (req: Request, res: Response) => {
-  const result = await TelemetryService.recordTelemetry(req.body);
+  const logger = req.app.locals.logger || console;
+
+  if (Array.isArray(req.body)) {
+    const batchResult = await TelemetryService.recordTelemetryBatch(req.body, logger);
+    sendResponse(res, {
+      statusCode: 201,
+      success: true,
+      message: `Batch of ${batchResult.storedCount} telemetry points recorded and published`,
+      data: batchResult,
+    });
+    return;
+  }
+
+  const result = await TelemetryService.recordTelemetry(req.body, logger);
 
   sendResponse(res, {
     statusCode: 201,
     success: true,
-    message: "Telemetry point recorded successfully",
+    message: "Telemetry point recorded and published to Kafka successfully",
     data: result,
   });
 });

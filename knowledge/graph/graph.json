@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-28T10:44:03.228Z",
-    "nodeCount": 88,
-    "edgeCount": 124
+    "generatedAt": "2026-10-28T11:36:44.811Z",
+    "nodeCount": 90,
+    "edgeCount": 138
   },
   "nodes": [
     {
@@ -237,6 +237,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts",
+      "label": "telemetryProducer.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/telemetry-service/src/app/modules/device/device.controller.ts",
       "label": "device.controller.ts",
       "type": "ts"
@@ -334,6 +339,11 @@
     {
       "id": "backend/services/telemetry-service/src/server.ts",
       "label": "server.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/tests/producer.test.ts",
+      "label": "producer.test.ts",
       "type": "ts"
     },
     {
@@ -664,6 +674,16 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/modules/device/device.controller.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -795,7 +815,22 @@
     },
     {
       "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts",
       "target": "./telemetry.model.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts",
+      "target": "../../kafka/telemetryProducer.js",
       "relation": "IMPORTS"
     },
     {
@@ -954,6 +989,41 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "./app/kafka/telemetryProducer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
+      "target": "../app/kafka/telemetryProducer.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
       "target": "node:test",
       "relation": "IMPORTS"
@@ -970,12 +1040,22 @@
     },
     {
       "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
       "target": "../app/modules/telemetry/telemetry.service.js",
       "relation": "IMPORTS"
     },
     {
       "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
       "target": "../app/modules/telemetry/telemetry.model.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/telemetry.test.ts",
+      "target": "../app/kafka/telemetryProducer.js",
       "relation": "IMPORTS"
     },
     {

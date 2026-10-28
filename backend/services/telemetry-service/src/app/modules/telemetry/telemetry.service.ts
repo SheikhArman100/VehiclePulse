@@ -1,29 +1,132 @@
 import type { PipelineStage } from "mongoose";
+import { randomUUID } from "node:crypto";
+import type { TelemetryRawEvent } from "@vehicle-pulse/event-contracts";
 import type {
   ITelemetryHistoryQuery,
   ITelemetryNearbyQuery,
   ITelemetryRecord,
 } from "./telemetry.interface.js";
 import { Telemetry } from "./telemetry.model.js";
+import { TelemetryKafkaProducer, type PublishResult } from "../../kafka/telemetryProducer.js";
 
 /**
- * Ingest a single raw telemetry data point into MongoDB time-series collection.
+ * Transforms an incoming payload (either canonical TelemetryRawEvent or direct record)
+ * into a canonical TelemetryRawEvent envelope for Kafka.
+ */
+function toCanonicalEnvelope(payload: any): TelemetryRawEvent {
+  // If already a canonical event envelope
+  if (payload.eventType === "telemetry.raw" && payload.eventId && payload.data) {
+    return payload as TelemetryRawEvent;
+  }
+
+  // If passed directly as MongoDB format or flat body
+  const vehicleId = payload.metadata?.vehicleId || payload.vehicleId;
+  const deviceId = payload.metadata?.deviceId || payload.deviceId;
+  const timestamp = payload.timestamp instanceof Date
+    ? payload.timestamp.toISOString()
+    : (payload.timestamp || new Date().toISOString());
+
+  const location = payload.location?.coordinates
+    ? {
+        longitude: payload.location.coordinates[0],
+        latitude: payload.location.coordinates[1],
+        heading: payload.heading ?? 0,
+        altitude: payload.altitude,
+      }
+    : (payload.location || { latitude: 0, longitude: 0, heading: 0 });
+
+  return {
+    eventId: payload.eventId || randomUUID(),
+    eventType: "telemetry.raw",
+    version: "1.0.0",
+    vehicleId,
+    deviceId,
+    timestamp,
+    data: {
+      location,
+      speed: payload.speed ?? 0,
+      rpm: payload.rpm ?? 0,
+      fuelLevelPercent: payload.fuelLevelPercent ?? 100,
+      engineTemperatureCelsius: payload.engineTemperatureCelsius ?? 85,
+      batteryVoltage: payload.batteryVoltage ?? 13.8,
+      odometerKm: payload.odometerKm ?? 0,
+      engineStatus: payload.engineStatus ?? "ON",
+      accelerationG: payload.accelerationG ?? 0,
+    },
+  };
+}
+
+/**
+ * Converts a canonical event into the MongoDB TimeSeries storage document.
+ */
+function toStorageRecord(event: TelemetryRawEvent): ITelemetryRecord {
+  return {
+    timestamp: new Date(event.timestamp),
+    metadata: {
+      vehicleId: event.vehicleId,
+      deviceId: event.deviceId,
+    },
+    location: {
+      type: "Point",
+      coordinates: [event.data.location.longitude, event.data.location.latitude],
+    },
+    heading: event.data.location.heading,
+    altitude: event.data.location.altitude,
+    speed: event.data.speed,
+    rpm: event.data.rpm,
+    fuelLevelPercent: event.data.fuelLevelPercent,
+    engineTemperatureCelsius: event.data.engineTemperatureCelsius,
+    batteryVoltage: event.data.batteryVoltage,
+    odometerKm: event.data.odometerKm,
+    engineStatus: event.data.engineStatus,
+    accelerationG: event.data.accelerationG,
+  };
+}
+
+/**
+ * Ingest a single telemetry event: persists to MongoDB Time-Series and publishes to Kafka.
  */
 const recordTelemetry = async (
-  payload: ITelemetryRecord
-): Promise<ITelemetryRecord> => {
-  const result = await Telemetry.create(payload);
-  return result.toObject ? result.toObject() : result;
+  payload: any,
+  logger: any
+): Promise<{ storageRecord: ITelemetryRecord; kafkaPublish: PublishResult }> => {
+  const envelope = toCanonicalEnvelope(payload);
+  const storageRecord = toStorageRecord(envelope);
+
+  // 1. Persist to MongoDB Time-Series
+  const created = await Telemetry.create(storageRecord);
+  const savedDoc = created.toObject ? created.toObject() : created;
+
+  // 2. Publish to Kafka topic vehicle.telemetry.raw
+  const kafkaPublish = await TelemetryKafkaProducer.publishTelemetryEvent(envelope, logger);
+
+  return {
+    storageRecord: savedDoc,
+    kafkaPublish,
+  };
 };
 
 /**
- * Ingest a batch of telemetry records in one operation (high-throughput writes).
+ * Ingest a batch of telemetry events into MongoDB and publish to Kafka.
  */
 const recordTelemetryBatch = async (
-  records: ITelemetryRecord[]
-): Promise<number> => {
-  const result = await Telemetry.insertMany(records, { ordered: false });
-  return result.length;
+  records: any[],
+  logger: any
+): Promise<{ storedCount: number; kafkaPublishedCount: number; errors: string[] }> => {
+  const envelopes = records.map(toCanonicalEnvelope);
+  const storageRecords = envelopes.map(toStorageRecord);
+
+  // 1. Bulk insert to MongoDB
+  const mongoResult = await Telemetry.insertMany(storageRecords, { ordered: false });
+
+  // 2. Publish batch to Kafka
+  const kafkaResult = await TelemetryKafkaProducer.publishTelemetryBatch(envelopes, logger);
+
+  return {
+    storedCount: mongoResult.length,
+    kafkaPublishedCount: kafkaResult.publishedCount,
+    errors: kafkaResult.errors,
+  };
 };
 
 /**
