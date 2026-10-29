@@ -2,6 +2,7 @@ import express from "express";
 import { validateRequest } from "@vehicle-pulse/shared";
 import { VehicleController } from "./vehicle.controller.js";
 import { VehicleValidations } from "./vehicle.interface.js";
+import { DispatchCommandValidation, dispatchVehicleCommand } from "./command.controller.js";
 
 const router = express.Router();
 
@@ -21,5 +22,12 @@ router.patch(
 );
 
 router.delete("/:id", VehicleController.deleteVehicle);
+
+// Asynchronous Vehicle Command Dispatch via RabbitMQ
+router.post(
+  "/:id/commands",
+  validateRequest(DispatchCommandValidation),
+  dispatchVehicleCommand
+);
 
 export const VehicleRoutes = router;

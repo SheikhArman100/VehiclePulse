@@ -36,10 +36,14 @@ services:
       LOG_LEVEL: info
       MONGODB_URI: mongodb://mongodb:27017/vehiclepulse_telemetry
       KAFKA_BROKERS: kafka:29092
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-guest}:${RABBITMQ_PASSWORD:-guest}@rabbitmq:5672
+      RUNNING_IN_DOCKER: "true"
     depends_on:
       mongodb:
         condition: service_healthy
       kafka:
+        condition: service_healthy
+      rabbitmq:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:4001/health/live || exit 1"]
@@ -114,6 +118,29 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+    networks:
+      - vehiclepulse-network
+
+  # -------------------------------------------------------------
+  # 1e. Vehicle Command Worker (RabbitMQ Asynchronous Jobs & DLQ)
+  # -------------------------------------------------------------
+  command-worker:
+    build:
+      context: .
+      dockerfile: workers/command-worker/Dockerfile
+    container_name: vehiclepulse-command-worker
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      SERVICE_NAME: command-worker
+      LOG_LEVEL: info
+      RABBITMQ_URL: amqp://${RABBITMQ_USER:-guest}:${RABBITMQ_PASSWORD:-guest}@rabbitmq:5672
+      RUNNING_IN_DOCKER: "true"
+      PREFETCH: 10
+      MAX_RETRIES: 3
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
     networks:
       - vehiclepulse-network
 

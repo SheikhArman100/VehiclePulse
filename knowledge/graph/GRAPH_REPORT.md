@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-29T11:43:11.130Z
+Generated on: 2026-10-29T12:08:26.422Z
 
 ## Summary
-- Total Tracked Artifacts: 179
-- Total Dependency Relationships: 397
+- Total Tracked Artifacts: 187
+- Total Dependency Relationships: 419
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -67,6 +67,8 @@ Generated on: 2026-10-29T11:43:11.130Z
 - `backend/packages/shared/src/errorHandler.ts` -> `./errors.js`
 - `backend/packages/shared/src/health.ts` -> `express`
 - `backend/packages/shared/src/kafka.ts` -> `kafkajs`
+- `backend/packages/shared/src/rabbitmq.ts` -> `amqplib`
+- `backend/packages/shared/src/rabbitmq.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/sendResponse.ts` -> `express`
 - `backend/packages/shared/src/shutdown.ts` -> `http`
 - `backend/packages/shared/src/shutdown.ts` -> `@vehicle-pulse/logger`
@@ -352,6 +354,11 @@ Generated on: 2026-10-29T11:43:11.130Z
 - `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `./telemetry.model.js`
 - `backend/services/telemetry-service/src/app/modules/telemetry/telemetry.service.ts` -> `../../kafka/telemetryProducer.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `express`
+- `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `node:crypto`
+- `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `zod`
+- `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `../../../config/env.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `express`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts` -> `./vehicle.service.js`
@@ -363,6 +370,7 @@ Generated on: 2026-10-29T11:43:11.130Z
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./vehicle.controller.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./vehicle.interface.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./command.controller.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `mongoose`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `./vehicle.interface.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `./vehicle.model.js`
@@ -415,4 +423,18 @@ Generated on: 2026-10-29T11:43:11.130Z
 - `backend/simulator/telemetry-generator/src/vehicleModel.ts` -> `node:crypto`
 - `backend/simulator/telemetry-generator/src/vehicleModel.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/simulator/telemetry-generator/src/vehicleModel.ts` -> `./utils/random.js`
+- `backend/workers/command-worker/src/config/env.ts` -> `node:path`
+- `backend/workers/command-worker/src/config/env.ts` -> `dotenv`
+- `backend/workers/command-worker/src/config/env.ts` -> `@vehicle-pulse/config`
+- `backend/workers/command-worker/src/server.ts` -> `@vehicle-pulse/logger`
+- `backend/workers/command-worker/src/server.ts` -> `./config/env.js`
+- `backend/workers/command-worker/src/server.ts` -> `./services/commandProcessor.js`
+- `backend/workers/command-worker/src/services/commandProcessor.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/workers/command-worker/src/services/commandProcessor.ts` -> `@vehicle-pulse/logger`
+- `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `node:test`
+- `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `node:assert/strict`
+- `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `node:crypto`
+- `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `@vehicle-pulse/logger`
+- `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `../config/env.js`
 - `frontend/web/app/layout.tsx` -> `next`

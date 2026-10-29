@@ -1,0 +1,27 @@
+{
+  "name": "@vehicle-pulse/command-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VehiclePulse - Asynchronous RabbitMQ Vehicle Command Worker & DLQ Processor",
+  "type": "module",
+  "main": "dist/server.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
+    "test": "node --test dist/**/*.test.js"
+  },
+  "dependencies": {
+    "@vehicle-pulse/config": "*",
+    "@vehicle-pulse/event-contracts": "*",
+    "@vehicle-pulse/logger": "*",
+    "@vehicle-pulse/shared": "*",
+    "dotenv": "^16.4.7",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

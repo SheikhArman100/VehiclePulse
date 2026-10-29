@@ -8,3 +8,4 @@ export * from "./catchAsync.js";
 export * from "./validateRequest.js";
 export * from "./pagination.js";
 export * from "./kafka.js";
+export * from "./rabbitmq.js";

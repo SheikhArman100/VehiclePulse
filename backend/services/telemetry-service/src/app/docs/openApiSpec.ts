@@ -228,6 +228,60 @@ export const openApiSpec = {
         },
       },
     },
+    "/v1/vehicles/{id}/commands": {
+      post: {
+        tags: ["Vehicles"],
+        summary: "Dispatch asynchronous vehicle command via RabbitMQ",
+        description: "Dispatches commands such as LOCK_DOORS, UNLOCK_DOORS, START_ENGINE, STOP_ENGINE, HONK_HORN, FLASH_LIGHTS, or SET_SPEED_LIMIT to the vehicle queue.",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            description: "Target vehicle ID",
+            schema: { type: "string" },
+          },
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            "application/json": {
+              schema: {
+                type: "object",
+                required: ["commandType"],
+                properties: {
+                  commandType: {
+                    type: "string",
+                    enum: [
+                      "LOCK_DOORS",
+                      "UNLOCK_DOORS",
+                      "START_ENGINE",
+                      "STOP_ENGINE",
+                      "FLASH_LIGHTS",
+                      "HONK_HORN",
+                      "SET_SPEED_LIMIT",
+                    ],
+                  },
+                  parameters: {
+                    type: "object",
+                    additionalProperties: true,
+                  },
+                  timeoutSeconds: {
+                    type: "integer",
+                    default: 30,
+                  },
+                },
+              },
+            },
+          },
+        },
+        responses: {
+          "202": {
+            description: "Command accepted and dispatched asynchronously to RabbitMQ exchange",
+          },
+        },
+      },
+    },
     "/v1/devices": {
       post: {
         tags: ["Devices"],
