@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../../generated/client.js";
 import { PrismaPg } from "@prisma/adapter-pg";
 import pg from "pg";
 import type { Logger } from "@vehicle-pulse/logger";

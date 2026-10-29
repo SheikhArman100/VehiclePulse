@@ -54,3 +54,5 @@ Thumbs.db
 
 # Generated Prisma Engines & Artifacts (keep schemas only)
 prisma/generated/
+**/generated/
+src/generated/

@@ -10,7 +10,8 @@ import {
 import type { Logger } from "@vehicle-pulse/logger";
 import { getPrismaClient } from "./app/db/prisma.js";
 import { AnalyticsKafkaConsumer } from "./app/kafka/analyticsConsumer.js";
-import { analyticsRouter } from "./app/routes/analytics.routes.js";
+import { ApplicationRouters } from "./app/routes/index.js";
+
 
 
 export interface CreateAppOptions {
@@ -49,11 +50,12 @@ export function createApp(options: CreateAppOptions): Application {
   app.use(healthRouter);
   app.use("/api/analytics", healthRouter);
 
-  // 3. Analytics API endpoints
-  app.use("/api/v1", analyticsRouter);
-  app.use("/api/analytics/v1", analyticsRouter);
+  // 3. Analytics Module Routes
+  app.use("/api/v1", ApplicationRouters);
+  app.use("/api/analytics/v1", ApplicationRouters);
 
   // 4. Global 404 and error handlers
+
   app.use(notFoundHandler);
   app.use(createErrorHandler(options.logger));
 

@@ -1,4 +1,4 @@
-import type { PrismaClient } from "@prisma/client";
+import type { PrismaClient } from "../../generated/client.js";
 import type { TelemetryRawEvent } from "@vehicle-pulse/event-contracts";
 
 /**

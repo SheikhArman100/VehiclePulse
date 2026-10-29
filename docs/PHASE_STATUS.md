@@ -29,7 +29,8 @@
 
 | **Phase 15** | Analytics Schema & Aggregation Consumer | **DONE** | Kafka consumer computing hourly/daily fleet rollups, trip tracking & analytics APIs | Idempotent PostgreSQL aggregations (HourlyVehicleStat, DailyVehicleStat, VehicleTrip), duplicate replay-safe, summary, hourly, daily, and trips HTTP endpoints | Documented in docs/architecture/ANALYTICS_SCHEMA_AND_AGGREGATION_CONSUMER.md; test suite passed |
 
-| **Phase 16** | PostgreSQL Query Engineering | **NOT_STARTED** | EXPLAIN ANALYZE query optimization, CTEs, and window functions for analytics | EXPLAIN ANALYZE, indexing, CTEs/window functions | Depends on Phase 15 |
+| **Phase 16** | PostgreSQL Query Engineering | **DONE** | EXPLAIN ANALYZE query optimization, CTEs, window functions, BRIN index & Materialized Views | Measured 97.4x query speedup (4.189ms -> 0.043ms) via partial covering index-only scan, 99.7% I/O reduction, BRIN append-only index, CTE moving averages & Materialized View | Documented in docs/benchmarks/POSTGRESQL_QUERY_ENGINEERING_REPORT.md; verified live via Nginx |
+
 | **Phase 17** | Alert Service Foundation & MySQL | **NOT_STARTED** | Setup Express + TypeScript + Prisma + MySQL microservice for alerts | Express + TS + Prisma + MySQL, alert models | Depends on Phase 2 |
 | **Phase 18** | Alert Rules Engine | **NOT_STARTED** | Real-time threshold evaluation for speed, engine temp, and harsh braking | Speed, temp, voltage, braking rules & deduplication | Depends on Phase 17 |
 | **Phase 19** | Alert Kafka Consumer Reliability | **NOT_STARTED** | Resilient consumer group with dead-letter queue (DLQ) & poison-pill safety | Dedicated consumer, poison-message policy, retry logic | Depends on Phase 18 |
