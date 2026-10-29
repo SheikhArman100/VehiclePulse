@@ -69,6 +69,7 @@ services:
       RUNNING_IN_DOCKER: "true"
       KAFKA_BROKERS: kafka:29092
       KAFKA_GROUP_ID: analytics-consumer-group
+    command: sh -c "npx prisma migrate deploy && node dist/server.js"
     depends_on:
       postgres:
         condition: service_healthy
@@ -102,6 +103,7 @@ services:
       RUNNING_IN_DOCKER: "true"
       KAFKA_BROKERS: kafka:29092
       KAFKA_GROUP_ID: alert-service-group
+    command: sh -c "npx prisma migrate deploy && node dist/server.js"
     depends_on:
       mysql:
         condition: service_healthy

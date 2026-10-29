@@ -66,7 +66,15 @@ const startConsumer = async (options: AnalyticsConsumerOptions): Promise<void> =
         if (!message.value) continue;
 
         try {
-          const raw = JSON.parse(message.value.toString());
+          let raw: unknown;
+          try {
+            raw = JSON.parse(message.value.toString());
+          } catch (jsonErr) {
+            logger.warn({ key: message.key?.toString(), offset: message.offset, jsonErr }, "Analytics consumer skipping non-JSON poison message");
+            resolveOffset(message.offset);
+            continue;
+          }
+
           const parseResult = TelemetryRawEventSchema.safeParse(raw);
 
           if (!parseResult.success) {

@@ -8,7 +8,7 @@ import { createApp } from "../app.js";
 import { getPrismaClient, connectPostgres, disconnectPostgres } from "../app/db/prisma.js";
 import { AnalyticsKafkaConsumer } from "../app/kafka/analyticsConsumer.js";
 
-const testLogger = createLogger({ serviceName: "test-analytics-p15", level: "silent" });
+const testLogger = createLogger({ serviceName: "test-analytics-p15", level: "debug" });
 const brokers = ["localhost:9092"];
 const testGroupId = `test-analytics-p15-group-${Date.now()}`;
 
@@ -23,6 +23,8 @@ describe("Phase 15 — Analytics Schema & Aggregation Consumer Suite", () => {
       logger: testLogger,
       fromBeginning: true,
     });
+    // Allow consumer group assignment before producing events
+    await new Promise((r) => setTimeout(r, 2500));
   });
 
 
