@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-29T10:39:59.250Z",
-    "nodeCount": 170,
-    "edgeCount": 361
+    "generatedAt": "2026-10-29T10:42:46.930Z",
+    "nodeCount": 171,
+    "edgeCount": 363
   },
   "nodes": [
     {
@@ -389,6 +389,11 @@
     {
       "id": "backend/services/analytics-service/src/app/db/prisma.ts",
       "label": "prisma.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/docs/openApiSpec.ts",
+      "label": "openApiSpec.ts",
       "type": "ts"
     },
     {
@@ -1665,6 +1670,11 @@
     },
     {
       "source": "backend/services/analytics-service/src/app.ts",
+      "target": "swagger-ui-express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app.ts",
       "target": "./app/db/prisma.js",
       "relation": "IMPORTS"
     },
@@ -1676,6 +1686,11 @@
     {
       "source": "backend/services/analytics-service/src/app.ts",
       "target": "./app/routes/index.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app.ts",
+      "target": "./app/docs/openApiSpec.js",
       "relation": "IMPORTS"
     },
     {

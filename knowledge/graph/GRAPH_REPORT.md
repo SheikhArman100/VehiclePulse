@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-29T10:39:59.250Z
+Generated on: 2026-10-29T10:42:46.930Z
 
 ## Summary
-- Total Tracked Artifacts: 170
-- Total Dependency Relationships: 361
+- Total Tracked Artifacts: 171
+- Total Dependency Relationships: 363
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -180,9 +180,11 @@ Generated on: 2026-10-29T10:39:59.250Z
 - `backend/services/analytics-service/src/app.ts` -> `express`
 - `backend/services/analytics-service/src/app.ts` -> `cors`
 - `backend/services/analytics-service/src/app.ts` -> `@vehicle-pulse/logger`
+- `backend/services/analytics-service/src/app.ts` -> `swagger-ui-express`
 - `backend/services/analytics-service/src/app.ts` -> `./app/db/prisma.js`
 - `backend/services/analytics-service/src/app.ts` -> `./app/kafka/analyticsConsumer.js`
 - `backend/services/analytics-service/src/app.ts` -> `./app/routes/index.js`
+- `backend/services/analytics-service/src/app.ts` -> `./app/docs/openApiSpec.js`
 - `backend/services/analytics-service/src/config/env.ts` -> `node:path`
 - `backend/services/analytics-service/src/config/env.ts` -> `dotenv`
 - `backend/services/analytics-service/src/config/env.ts` -> `@vehicle-pulse/config`
