@@ -50,6 +50,39 @@ services:
       - vehiclepulse-network
 
   # -------------------------------------------------------------
+  # 1c. Analytics Service (PostgreSQL & Kafka Consumer Worker)
+  # -------------------------------------------------------------
+  analytics-service:
+    build:
+      context: .
+      dockerfile: services/analytics-service/Dockerfile
+    container_name: vehiclepulse-analytics-service
+    restart: unless-stopped
+    ports:
+      - "4002:4002"
+    environment:
+      PORT: 4002
+      NODE_ENV: development
+      SERVICE_NAME: analytics-service
+      LOG_LEVEL: info
+      DATABASE_URL: postgresql://${POSTGRES_USER:-vp_analytics_user}:${POSTGRES_PASSWORD:-vp_analytics_password}@postgres:5432/${POSTGRES_DB:-vehiclepulse_analytics}?schema=public
+      KAFKA_BROKERS: kafka:29092
+      KAFKA_GROUP_ID: analytics-consumer-group
+    depends_on:
+      postgres:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:4002/health/live || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - vehiclepulse-network
+
+
+  # -------------------------------------------------------------
   # 2. MongoDB (Telemetry Service - Time-series & Device Data)
   # -------------------------------------------------------------
   mongodb:

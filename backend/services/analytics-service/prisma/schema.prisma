@@ -1,0 +1,41 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+// -------------------------------------------------------------
+// Baseline Models for Analytics Service (Phase 14 & 15)
+// -------------------------------------------------------------
+
+model ProcessedEvent {
+  eventId     String   @id @db.VarChar(64)
+  eventType   String   @db.VarChar(64)
+  vehicleId   String   @db.VarChar(64)
+  processedAt DateTime @default(now())
+
+  @@index([vehicleId, processedAt])
+  @@map("processed_events")
+}
+
+model HourlyVehicleStat {
+  id               String   @id @default(uuid())
+  vehicleId        String   @db.VarChar(64)
+  bucketStart      DateTime
+  bucketEnd        DateTime
+  distanceKm       Float    @default(0.0)
+  avgSpeedKmh      Float    @default(0.0)
+  maxSpeedKmh      Float    @default(0.0)
+  fuelConsumedL    Float    @default(0.0)
+  idleTimeSeconds  Int      @default(0)
+  eventCount       Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([vehicleId, bucketStart])
+  @@index([bucketStart])
+  @@map("hourly_vehicle_stats")
+}
