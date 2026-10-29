@@ -10,7 +10,7 @@ dotenv.config({ path: path.resolve(process.cwd(), "../../.env") });
 export default defineConfig({
   schema: "./prisma/schema.prisma",
   datasource: {
-    url: env("DATABASE_URL"),
+    url: process.env.POSTGRES_URL || "",
   },
 });
 

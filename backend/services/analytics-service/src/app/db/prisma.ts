@@ -10,7 +10,7 @@ let pgPoolInstance: pg.Pool | null = null;
 export const getPrismaClient = (): PrismaClient => {
   if (!prismaInstance) {
     pgPoolInstance = new pg.Pool({
-      connectionString: env.DATABASE_URL,
+      connectionString: env.POSTGRES_URL,
     });
     const adapter = new PrismaPg(pgPoolInstance);
 

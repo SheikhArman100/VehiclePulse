@@ -65,7 +65,8 @@ services:
       NODE_ENV: development
       SERVICE_NAME: analytics-service
       LOG_LEVEL: info
-      DATABASE_URL: postgresql://${POSTGRES_USER:-vp_analytics_user}:${POSTGRES_PASSWORD:-vp_analytics_password}@postgres:5432/${POSTGRES_DB:-vehiclepulse_analytics}?schema=public
+      POSTGRES_URL: postgresql://${POSTGRES_USER:-vp_analytics_user}:${POSTGRES_PASSWORD:-vp_analytics_password}@postgres:5432/${POSTGRES_DB:-vehiclepulse_analytics}?schema=public
+      RUNNING_IN_DOCKER: "true"
       KAFKA_BROKERS: kafka:29092
       KAFKA_GROUP_ID: analytics-consumer-group
     depends_on:
