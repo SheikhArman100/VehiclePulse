@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-28T14:11:13.173Z",
-    "nodeCount": 94,
-    "edgeCount": 154
+    "generatedAt": "2026-10-29T10:39:59.250Z",
+    "nodeCount": 170,
+    "edgeCount": 361
   },
   "nodes": [
     {
@@ -235,6 +235,386 @@
       "id": "backend/README.md",
       "label": "README.md",
       "type": "md"
+    },
+    {
+      "id": "backend/services/alert-service/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/services/alert-service/prisma.config.ts",
+      "label": "prisma.config.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/db/prisma.ts",
+      "label": "prisma.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/docs/openApiSpec.ts",
+      "label": "openApiSpec.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/modules/alert/alert.controller.ts",
+      "label": "alert.controller.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/modules/alert/alert.route.ts",
+      "label": "alert.route.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/modules/alert/alert.service.ts",
+      "label": "alert.service.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/modules/rule/rule.controller.ts",
+      "label": "rule.controller.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/modules/rule/rule.route.ts",
+      "label": "rule.route.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/modules/rule/rule.service.ts",
+      "label": "rule.service.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/routes/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app.ts",
+      "label": "app.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/config/env.ts",
+      "label": "env.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/browser.ts",
+      "label": "browser.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/client.ts",
+      "label": "client.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/commonInputTypes.ts",
+      "label": "commonInputTypes.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/enums.ts",
+      "label": "enums.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/internal/class.ts",
+      "label": "class.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/internal/prismaNamespace.ts",
+      "label": "prismaNamespace.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/internal/prismaNamespaceBrowser.ts",
+      "label": "prismaNamespaceBrowser.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/models/Alert.ts",
+      "label": "Alert.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/models/AlertEvent.ts",
+      "label": "AlertEvent.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/models/AlertRule.ts",
+      "label": "AlertRule.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/models/Incident.ts",
+      "label": "Incident.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/generated/models.ts",
+      "label": "models.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/server.ts",
+      "label": "server.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/tests/alert.test.ts",
+      "label": "alert.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/services/analytics-service/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/services/analytics-service/prisma.config.ts",
+      "label": "prisma.config.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/db/prisma.ts",
+      "label": "prisma.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/kafka/analyticsConsumer.ts",
+      "label": "analyticsConsumer.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/modules/metrics/metrics.controller.ts",
+      "label": "metrics.controller.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/modules/metrics/metrics.route.ts",
+      "label": "metrics.route.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/modules/metrics/metrics.service.ts",
+      "label": "metrics.service.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/modules/trip/trip.controller.ts",
+      "label": "trip.controller.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/modules/trip/trip.route.ts",
+      "label": "trip.route.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/modules/trip/trip.service.ts",
+      "label": "trip.service.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/routes/index.ts",
+      "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app/services/aggregation.service.ts",
+      "label": "aggregation.service.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/app.ts",
+      "label": "app.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/config/env.ts",
+      "label": "env.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/browser.ts",
+      "label": "browser.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/client.d.ts",
+      "label": "client.d.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/client.js",
+      "label": "client.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/client.ts",
+      "label": "client.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/commonInputTypes.ts",
+      "label": "commonInputTypes.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/default.d.ts",
+      "label": "default.d.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/default.js",
+      "label": "default.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/edge.d.ts",
+      "label": "edge.d.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/edge.js",
+      "label": "edge.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/enums.ts",
+      "label": "enums.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/index-browser.js",
+      "label": "index-browser.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/index.d.ts",
+      "label": "index.d.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/index.js",
+      "label": "index.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/internal/class.ts",
+      "label": "class.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/internal/prismaNamespace.ts",
+      "label": "prismaNamespace.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/internal/prismaNamespaceBrowser.ts",
+      "label": "prismaNamespaceBrowser.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/models/DailyVehicleStat.ts",
+      "label": "DailyVehicleStat.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/models/HourlyVehicleStat.ts",
+      "label": "HourlyVehicleStat.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/models/ProcessedEvent.ts",
+      "label": "ProcessedEvent.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/models/VehicleTrip.ts",
+      "label": "VehicleTrip.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/models.ts",
+      "label": "models.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/package.json",
+      "label": "package.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/query_compiler_fast_bg.js",
+      "label": "query_compiler_fast_bg.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/query_compiler_fast_bg.wasm-base64.js",
+      "label": "query_compiler_fast_bg.wasm-base64.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "label": "client.d.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/runtime/client.js",
+      "label": "client.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "label": "index-browser.d.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/runtime/index-browser.js",
+      "label": "index-browser.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/runtime/wasm-compiler-edge.js",
+      "label": "wasm-compiler-edge.js",
+      "type": "js"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/wasm-edge-light-loader.mjs",
+      "label": "wasm-edge-light-loader.mjs",
+      "type": "mjs"
+    },
+    {
+      "id": "backend/services/analytics-service/src/generated/wasm-worker-loader.mjs",
+      "label": "wasm-worker-loader.mjs",
+      "type": "mjs"
+    },
+    {
+      "id": "backend/services/analytics-service/src/server.ts",
+      "label": "server.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "label": "analytics.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/analytics-service/tsconfig.json",
+      "label": "tsconfig.json",
+      "type": "json"
     },
     {
       "id": "backend/services/telemetry-service/package.json",
@@ -741,6 +1121,1041 @@
     {
       "source": "backend/packages/shared/src/validateRequest.ts",
       "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/prisma.config.ts",
+      "target": "node:path",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/prisma.config.ts",
+      "target": "dotenv",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/prisma.config.ts",
+      "target": "@prisma/config",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/db/prisma.ts",
+      "target": "../../generated/client.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/db/prisma.ts",
+      "target": "@prisma/adapter-mariadb",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/db/prisma.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/db/prisma.ts",
+      "target": "../../config/env.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/alert/alert.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/alert/alert.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/alert/alert.controller.ts",
+      "target": "./alert.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/alert/alert.route.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/alert/alert.route.ts",
+      "target": "./alert.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/alert/alert.service.ts",
+      "target": "../../db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/alert/alert.service.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/rule/rule.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/rule/rule.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/rule/rule.controller.ts",
+      "target": "./rule.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/rule/rule.route.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/rule/rule.route.ts",
+      "target": "./rule.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/rule/rule.service.ts",
+      "target": "../../db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/modules/rule/rule.service.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/routes/index.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/routes/index.ts",
+      "target": "../modules/alert/alert.route.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/routes/index.ts",
+      "target": "../modules/rule/rule.route.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app.ts",
+      "target": "cors",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app.ts",
+      "target": "swagger-ui-express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app.ts",
+      "target": "./app/db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app.ts",
+      "target": "./app/routes/index.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app.ts",
+      "target": "./app/docs/openApiSpec.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/config/env.ts",
+      "target": "node:path",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/config/env.ts",
+      "target": "dotenv",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/config/env.ts",
+      "target": "@vehicle-pulse/config",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/browser.ts",
+      "target": "./internal/prismaNamespaceBrowser.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/client.ts",
+      "target": "node:process",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/client.ts",
+      "target": "node:path",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/client.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/client.ts",
+      "target": "./enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/client.ts",
+      "target": "./internal/class.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/client.ts",
+      "target": "./internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/commonInputTypes.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/commonInputTypes.ts",
+      "target": "./enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/commonInputTypes.ts",
+      "target": "./internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/internal/class.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/internal/class.ts",
+      "target": "./prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/internal/prismaNamespace.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/internal/prismaNamespace.ts",
+      "target": "../models.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/internal/prismaNamespace.ts",
+      "target": "./class.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/internal/prismaNamespace.ts",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/internal/prismaNamespace.ts",
+      "target": "./generated/prisma/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/internal/prismaNamespaceBrowser.ts",
+      "target": "@prisma/client/runtime/index-browser",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/Alert.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/Alert.ts",
+      "target": "../enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/Alert.ts",
+      "target": "../internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/AlertEvent.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/AlertEvent.ts",
+      "target": "../enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/AlertEvent.ts",
+      "target": "../internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/AlertRule.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/AlertRule.ts",
+      "target": "../enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/AlertRule.ts",
+      "target": "../internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/Incident.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/Incident.ts",
+      "target": "../enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/generated/models/Incident.ts",
+      "target": "../internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/server.ts",
+      "target": "node:http",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/server.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/server.ts",
+      "target": "./config/env.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/server.ts",
+      "target": "./app.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/server.ts",
+      "target": "./app/db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/alert.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/alert.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/alert.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/alert.test.ts",
+      "target": "../app/db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/alert.test.ts",
+      "target": "../app/modules/alert/alert.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/alert.test.ts",
+      "target": "../app/modules/rule/rule.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/prisma.config.ts",
+      "target": "node:path",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/prisma.config.ts",
+      "target": "dotenv",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/prisma.config.ts",
+      "target": "@prisma/config",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/db/prisma.ts",
+      "target": "../../generated/client.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/db/prisma.ts",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/db/prisma.ts",
+      "target": "pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/db/prisma.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/db/prisma.ts",
+      "target": "../../config/env.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/kafka/analyticsConsumer.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/kafka/analyticsConsumer.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/kafka/analyticsConsumer.ts",
+      "target": "../db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/kafka/analyticsConsumer.ts",
+      "target": "../services/aggregation.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/metrics/metrics.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/metrics/metrics.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/metrics/metrics.controller.ts",
+      "target": "./metrics.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/metrics/metrics.route.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/metrics/metrics.route.ts",
+      "target": "./metrics.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/metrics/metrics.route.ts",
+      "target": "../trip/trip.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/metrics/metrics.service.ts",
+      "target": "../../db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/trip/trip.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/trip/trip.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/trip/trip.controller.ts",
+      "target": "./trip.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/trip/trip.route.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/trip/trip.route.ts",
+      "target": "./trip.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/modules/trip/trip.service.ts",
+      "target": "../../db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/routes/index.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/routes/index.ts",
+      "target": "../modules/metrics/metrics.route.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/routes/index.ts",
+      "target": "../modules/trip/trip.route.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/services/aggregation.service.ts",
+      "target": "../../generated/client.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app/services/aggregation.service.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app.ts",
+      "target": "cors",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app.ts",
+      "target": "./app/db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app.ts",
+      "target": "./app/kafka/analyticsConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/app.ts",
+      "target": "./app/routes/index.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/config/env.ts",
+      "target": "node:path",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/config/env.ts",
+      "target": "dotenv",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/config/env.ts",
+      "target": "@vehicle-pulse/config",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/browser.ts",
+      "target": "./internal/prismaNamespaceBrowser.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/client.ts",
+      "target": "node:process",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/client.ts",
+      "target": "node:path",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/client.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/client.ts",
+      "target": "./enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/client.ts",
+      "target": "./internal/class.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/client.ts",
+      "target": "./internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/commonInputTypes.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/commonInputTypes.ts",
+      "target": "./enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/commonInputTypes.ts",
+      "target": "./internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/index.d.ts",
+      "target": "./runtime/client.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/index.d.ts",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/index.d.ts",
+      "target": "./generated/prisma/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/internal/class.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/internal/class.ts",
+      "target": "./prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/internal/prismaNamespace.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/internal/prismaNamespace.ts",
+      "target": "../models.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/internal/prismaNamespace.ts",
+      "target": "./class.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/internal/prismaNamespace.ts",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/internal/prismaNamespace.ts",
+      "target": "./generated/prisma/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/internal/prismaNamespaceBrowser.ts",
+      "target": "@prisma/client/runtime/index-browser",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/DailyVehicleStat.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/DailyVehicleStat.ts",
+      "target": "../enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/DailyVehicleStat.ts",
+      "target": "../internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/HourlyVehicleStat.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/HourlyVehicleStat.ts",
+      "target": "../enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/HourlyVehicleStat.ts",
+      "target": "../internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/ProcessedEvent.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/ProcessedEvent.ts",
+      "target": "../enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/ProcessedEvent.ts",
+      "target": "../internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/VehicleTrip.ts",
+      "target": "@prisma/client/runtime/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/VehicleTrip.ts",
+      "target": "../enums.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/models/VehicleTrip.ts",
+      "target": "../internal/prismaNamespace.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/debug",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.d.ts",
+      "target": "./generated/prisma/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.js",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.js",
+      "target": "./generated/prisma/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.js",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/client.js",
+      "target": "./generated/prisma/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/index-browser.d.ts",
+      "target": "@prisma/client-runtime-utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/wasm-compiler-edge.js",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/wasm-compiler-edge.js",
+      "target": "./generated/prisma/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/wasm-compiler-edge.js",
+      "target": "@prisma/adapter-pg",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/generated/runtime/wasm-compiler-edge.js",
+      "target": "./generated/prisma/client",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/server.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/server.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/server.ts",
+      "target": "./app.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/server.ts",
+      "target": "./config/env.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/server.ts",
+      "target": "./app/db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/server.ts",
+      "target": "./app/kafka/analyticsConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "../app.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "../app/db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/analytics-service/src/tests/analytics.test.ts",
+      "target": "../app/kafka/analyticsConsumer.js",
       "relation": "IMPORTS"
     },
     {

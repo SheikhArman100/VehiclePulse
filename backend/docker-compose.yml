@@ -82,6 +82,40 @@ services:
     networks:
       - vehiclepulse-network
 
+  # -------------------------------------------------------------
+  # 1d. Alert Service (MySQL & Incident Management)
+  # -------------------------------------------------------------
+  alert-service:
+    build:
+      context: .
+      dockerfile: services/alert-service/Dockerfile
+    container_name: vehiclepulse-alert-service
+    restart: unless-stopped
+    ports:
+      - "4003:4003"
+    environment:
+      PORT: 4003
+      NODE_ENV: development
+      SERVICE_NAME: alert-service
+      LOG_LEVEL: info
+      MYSQL_URL: mysql://${MYSQL_USER:-vp_alerts_user}:${MYSQL_PASSWORD:-vp_alerts_password}@mysql:3306/${MYSQL_DATABASE:-vehiclepulse_alerts}
+      RUNNING_IN_DOCKER: "true"
+      KAFKA_BROKERS: kafka:29092
+      KAFKA_GROUP_ID: alert-service-group
+    depends_on:
+      mysql:
+        condition: service_healthy
+      kafka:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:4003/health/live || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - vehiclepulse-network
+
+
 
   # -------------------------------------------------------------
   # 2. MongoDB (Telemetry Service - Time-series & Device Data)

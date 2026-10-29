@@ -31,7 +31,7 @@
 
 | **Phase 16** | PostgreSQL Query Engineering | **DONE** | EXPLAIN ANALYZE query optimization, CTEs, window functions, BRIN index & Materialized Views | Measured 97.4x query speedup (4.189ms -> 0.043ms) via partial covering index-only scan, 99.7% I/O reduction, BRIN append-only index, CTE moving averages & Materialized View | Documented in docs/benchmarks/POSTGRESQL_QUERY_ENGINEERING_REPORT.md; verified live via Nginx |
 
-| **Phase 17** | Alert Service Foundation & MySQL | **NOT_STARTED** | Setup Express + TypeScript + Prisma + MySQL microservice for alerts | Express + TS + Prisma + MySQL, alert models | Depends on Phase 2 |
+| **Phase 17** | Alert Service Foundation & MySQL | **DONE** | Setup Express + TypeScript + Prisma 7 + MySQL microservice for alerts | Express + TS + Prisma 7 + MySQL, alert_rules, alerts, alert_events, incidents, optimistic locking (versioning), lifecycle transitions (OPEN -> ACKNOWLEDGED -> RESOLVED), Docker container healthy | Documented in docs/architecture/ALERT_SERVICE_FOUNDATION.md; 5/5 tests pass |
 | **Phase 18** | Alert Rules Engine | **NOT_STARTED** | Real-time threshold evaluation for speed, engine temp, and harsh braking | Speed, temp, voltage, braking rules & deduplication | Depends on Phase 17 |
 | **Phase 19** | Alert Kafka Consumer Reliability | **NOT_STARTED** | Resilient consumer group with dead-letter queue (DLQ) & poison-pill safety | Dedicated consumer, poison-message policy, retry logic | Depends on Phase 18 |
 | **Phase 20** | RabbitMQ Jobs & Commands | **NOT_STARTED** | Asynchronous task queues for vehicle command dispatch and PDF export jobs | Exchanges, DLQ, retries, worker, command execution | Depends on Phase 4 |

@@ -1,0 +1,113 @@
+datasource db {
+  provider = "mysql"
+}
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated"
+}
+
+// -------------------------------------------------------------
+// Phase 17 Models: Alert Rules, Alerts, Events & Incidents
+// -------------------------------------------------------------
+
+enum AlertSeverity {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+enum AlertStatus {
+  OPEN
+  ACKNOWLEDGED
+  RESOLVED
+}
+
+enum IncidentStatus {
+  ACTIVE
+  MITIGATED
+  RESOLVED
+}
+
+model AlertRule {
+  id             String        @id @default(uuid()) @db.VarChar(64)
+  name           String        @db.VarChar(128)
+  description    String?       @db.VarChar(255)
+  conditionType  String        @db.VarChar(64) // SPEED_LIMIT, ENGINE_TEMP, BATTERY_VOLTAGE, HARSH_BRAKING, GEOFENCE
+  thresholdValue Float
+  severity       AlertSeverity @default(MEDIUM)
+  enabled        Boolean       @default(true)
+  cooldownSecs   Int           @default(300)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  alerts         Alert[]
+
+  @@map("alert_rules")
+}
+
+model Alert {
+  id             String        @id @default(uuid()) @db.VarChar(64)
+  ruleId         String?       @db.VarChar(64)
+  vehicleId      String        @db.VarChar(64)
+  incidentId     String?       @db.VarChar(64)
+  severity       AlertSeverity @default(MEDIUM)
+  status         AlertStatus   @default(OPEN)
+  triggerValue   Float
+  thresholdValue Float
+  message        String        @db.VarChar(255)
+  acknowledgedAt DateTime?
+  acknowledgedBy String?       @db.VarChar(64)
+  resolvedAt     DateTime?
+  resolvedBy     String?       @db.VarChar(64)
+  resolutionNote String?       @db.VarChar(255)
+  version        Int           @default(1) // Optimistic locking
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  rule           AlertRule?    @relation(fields: [ruleId], references: [id], onDelete: SetNull)
+  incident       Incident?     @relation(fields: [incidentId], references: [id], onDelete: SetNull)
+  events         AlertEvent[]
+
+  @@index([vehicleId, status])
+  @@index([status, severity])
+  @@index([createdAt])
+  @@map("alerts")
+}
+
+model AlertEvent {
+  id          String   @id @default(uuid()) @db.VarChar(64)
+  alertId     String   @db.VarChar(64)
+  vehicleId   String   @db.VarChar(64)
+  eventType   String   @db.VarChar(64)
+  value       Float
+  latitude    Float?
+  longitude   Float?
+  metadata    Json?
+  triggeredAt DateTime @default(now())
+
+  alert       Alert    @relation(fields: [alertId], references: [id], onDelete: Cascade)
+
+  @@index([alertId])
+  @@index([vehicleId, triggeredAt])
+  @@map("alert_events")
+}
+
+model Incident {
+  id          String         @id @default(uuid()) @db.VarChar(64)
+  title       String         @db.VarChar(128)
+  description String?        @db.Text
+  severity    AlertSeverity  @default(HIGH)
+  status      IncidentStatus @default(ACTIVE)
+  assignedTo  String?        @db.VarChar(64)
+  openedAt    DateTime       @default(now())
+  resolvedAt  DateTime?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  alerts      Alert[]
+
+  @@index([status, severity])
+  @@map("incidents")
+}
