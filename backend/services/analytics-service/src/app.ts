@@ -5,11 +5,13 @@ import {
   createErrorHandler,
   createHealthRouter,
   notFoundHandler,
-  sendResponse,
 } from "@vehicle-pulse/shared";
+
 import type { Logger } from "@vehicle-pulse/logger";
 import { getPrismaClient } from "./app/db/prisma.js";
 import { AnalyticsKafkaConsumer } from "./app/kafka/analyticsConsumer.js";
+import { analyticsRouter } from "./app/routes/analytics.routes.js";
+
 
 export interface CreateAppOptions {
   logger: Logger;
@@ -47,23 +49,14 @@ export function createApp(options: CreateAppOptions): Application {
   app.use(healthRouter);
   app.use("/api/analytics", healthRouter);
 
-  // 3. Simple query endpoint to verify PostgreSQL connectivity & processed events
-  app.get("/api/analytics/v1/health", async (_req, res) => {
-    const eventCount = await prisma.processedEvent.count();
-    sendResponse(res, {
-      statusCode: 200,
-      success: true,
-      message: "Analytics Service is operational",
-      data: {
-        database: "PostgreSQL",
-        processedEventsInPostgres: eventCount,
-      },
-    });
-  });
+  // 3. Analytics API endpoints
+  app.use("/api/v1", analyticsRouter);
+  app.use("/api/analytics/v1", analyticsRouter);
 
   // 4. Global 404 and error handlers
   app.use(notFoundHandler);
   app.use(createErrorHandler(options.logger));
+
 
   return app;
 }

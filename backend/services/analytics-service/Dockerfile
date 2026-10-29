@@ -13,7 +13,10 @@ RUN npm run build --workspace=@vehicle-pulse/logger
 RUN npm run build --workspace=@vehicle-pulse/config
 RUN npm run build --workspace=@vehicle-pulse/event-contracts
 RUN npm run build --workspace=@vehicle-pulse/shared
+ARG DATABASE_URL="postgresql://placeholder:placeholder@localhost:5432/placeholder"
+ENV DATABASE_URL=${DATABASE_URL}
 RUN npm run build --workspace=@vehicle-pulse/analytics-service
+
 
 # Production runner image
 FROM node:22-alpine AS runner

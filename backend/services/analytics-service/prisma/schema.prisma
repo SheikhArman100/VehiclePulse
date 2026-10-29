@@ -37,5 +37,50 @@ model HourlyVehicleStat {
 
   @@unique([vehicleId, bucketStart])
   @@index([bucketStart])
+  @@index([vehicleId])
   @@map("hourly_vehicle_stats")
 }
+
+model DailyVehicleStat {
+  id               String   @id @default(uuid())
+  vehicleId        String   @db.VarChar(64)
+  date             DateTime @db.Date
+  totalDistanceKm  Float    @default(0.0)
+  avgSpeedKmh      Float    @default(0.0)
+  maxSpeedKmh      Float    @default(0.0)
+  fuelConsumedL    Float    @default(0.0)
+  idleTimeSeconds  Int      @default(0)
+  totalTrips       Int      @default(0)
+  eventCount       Int      @default(0)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@unique([vehicleId, date])
+  @@index([date])
+  @@index([vehicleId])
+  @@map("daily_vehicle_stats")
+}
+
+model VehicleTrip {
+  id              String    @id @default(uuid())
+  vehicleId       String    @db.VarChar(64)
+  startTime       DateTime
+  endTime         DateTime?
+  startLatitude   Float
+  startLongitude  Float
+  endLatitude     Float?
+  endLongitude    Float?
+  distanceKm      Float     @default(0.0)
+  avgSpeedKmh     Float     @default(0.0)
+  maxSpeedKmh     Float     @default(0.0)
+  fuelConsumedL   Float     @default(0.0)
+  idleTimeSeconds Int       @default(0)
+  status          String    @default("ACTIVE") @db.VarChar(16) // ACTIVE, COMPLETED
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([vehicleId, startTime])
+  @@index([status])
+  @@map("vehicle_trips")
+}
+

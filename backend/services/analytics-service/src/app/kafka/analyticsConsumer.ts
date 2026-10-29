@@ -6,12 +6,16 @@ import {
 } from "@vehicle-pulse/event-contracts";
 import type { Logger } from "@vehicle-pulse/logger";
 import { getPrismaClient } from "../db/prisma.js";
+import { processTelemetryEventAggregations } from "../services/aggregation.service.js";
+
 
 export interface AnalyticsConsumerOptions {
   brokers: string[];
   groupId: string;
   logger: Logger;
+  fromBeginning?: boolean;
 }
+
 
 let consumerInstance: Consumer | null = null;
 let isRunning = false;
@@ -30,7 +34,7 @@ const startConsumer = async (options: AnalyticsConsumerOptions): Promise<void> =
     return;
   }
 
-  const { brokers, groupId, logger } = options;
+  const { brokers, groupId, logger, fromBeginning = false } = options;
 
   const kafka = createKafkaClient({
     clientId: "analytics-worker",
@@ -45,8 +49,9 @@ const startConsumer = async (options: AnalyticsConsumerOptions): Promise<void> =
   await consumerInstance.connect();
   await consumerInstance.subscribe({
     topic: KAFKA_TOPICS.TELEMETRY_RAW,
-    fromBeginning: false,
+    fromBeginning,
   });
+
 
   isRunning = true;
   logger.info({ groupId, topic: KAFKA_TOPICS.TELEMETRY_RAW }, "Analytics Kafka consumer joined group and started listening");
@@ -72,20 +77,12 @@ const startConsumer = async (options: AnalyticsConsumerOptions): Promise<void> =
 
           const event: TelemetryRawEvent = parseResult.data;
 
-          // Record processed event idempotency in PostgreSQL
-          await prisma.processedEvent.upsert({
-            where: { eventId: event.eventId },
-            update: {},
-            create: {
-              eventId: event.eventId,
-              eventType: event.eventType,
-              vehicleId: event.vehicleId,
-              processedAt: new Date(event.timestamp),
-            },
-          });
+          // Perform durable aggregation & idempotency tracking in PostgreSQL
+          await processTelemetryEventAggregations(prisma, event);
 
           resolveOffset(message.offset);
         } catch (err) {
+
           logger.error({ err }, "Error processing event in Analytics consumer");
           throw err; // Stop and retry batch without premature offset commit
         }
