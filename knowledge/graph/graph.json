@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-29T10:42:46.930Z",
-    "nodeCount": 171,
-    "edgeCount": 363
+    "generatedAt": "2026-10-29T11:14:58.538Z",
+    "nodeCount": 179,
+    "edgeCount": 397
   },
   "nodes": [
     {
@@ -257,6 +257,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/services/alert-service/src/app/kafka/alertConsumer.ts",
+      "label": "alertConsumer.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/alert-service/src/app/modules/alert/alert.controller.ts",
       "label": "alert.controller.ts",
       "type": "ts"
@@ -289,6 +294,26 @@
     {
       "id": "backend/services/alert-service/src/app/routes/index.ts",
       "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/rules/defaultRules.ts",
+      "label": "defaultRules.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/rules/rulesEngine.ts",
+      "label": "rulesEngine.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/rules/ruleTypes.ts",
+      "label": "ruleTypes.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/app/services/alertEvaluator.service.ts",
+      "label": "alertEvaluator.service.ts",
       "type": "ts"
     },
     {
@@ -369,6 +394,21 @@
     {
       "id": "backend/services/alert-service/src/tests/alert.test.ts",
       "label": "alert.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/tests/deduplication.test.ts",
+      "label": "deduplication.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "label": "kafkaConsumer.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/alert-service/src/tests/rulesEngine.test.ts",
+      "label": "rulesEngine.test.ts",
       "type": "ts"
     },
     {
@@ -1164,6 +1204,26 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/alert-service/src/app/kafka/alertConsumer.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/kafka/alertConsumer.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/kafka/alertConsumer.ts",
+      "target": "../db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/kafka/alertConsumer.ts",
+      "target": "../services/alertEvaluator.service.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/alert-service/src/app/modules/alert/alert.controller.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -1246,6 +1306,51 @@
     {
       "source": "backend/services/alert-service/src/app/routes/index.ts",
       "target": "../modules/rule/rule.route.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/rules/defaultRules.ts",
+      "target": "./ruleTypes.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/rules/rulesEngine.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/rules/rulesEngine.ts",
+      "target": "./ruleTypes.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/services/alertEvaluator.service.ts",
+      "target": "../../generated/client.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/services/alertEvaluator.service.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/services/alertEvaluator.service.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/services/alertEvaluator.service.ts",
+      "target": "../rules/rulesEngine.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/services/alertEvaluator.service.ts",
+      "target": "../rules/defaultRules.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/app/services/alertEvaluator.service.ts",
+      "target": "../rules/ruleTypes.js",
       "relation": "IMPORTS"
     },
     {
@@ -1474,6 +1579,11 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/alert-service/src/server.ts",
+      "target": "./app/kafka/alertConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/alert-service/src/tests/alert.test.ts",
       "target": "node:test",
       "relation": "IMPORTS"
@@ -1501,6 +1611,106 @@
     {
       "source": "backend/services/alert-service/src/tests/alert.test.ts",
       "target": "../app/modules/rule/rule.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/deduplication.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/deduplication.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/deduplication.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/deduplication.test.ts",
+      "target": "../app/db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/deduplication.test.ts",
+      "target": "../app/services/alertEvaluator.service.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/deduplication.test.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "../app/db/prisma.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "../app/kafka/alertConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/kafkaConsumer.test.ts",
+      "target": "../config/env.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/rulesEngine.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/rulesEngine.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/rulesEngine.test.ts",
+      "target": "../app/rules/rulesEngine.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/rulesEngine.test.ts",
+      "target": "../app/rules/defaultRules.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/alert-service/src/tests/rulesEngine.test.ts",
+      "target": "@vehicle-pulse/event-contracts",
       "relation": "IMPORTS"
     },
     {

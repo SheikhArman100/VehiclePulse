@@ -63,10 +63,23 @@ const resolveAlert = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getConsumerMetrics = catchAsync(async (_req: Request, res: Response) => {
+  const { getAlertConsumerMetrics } = await import("../../kafka/alertConsumer.js");
+  const metrics = getAlertConsumerMetrics();
+
+  sendResponse(res, {
+    statusCode: 200,
+    success: true,
+    message: "Alert consumer metrics retrieved successfully",
+    data: metrics,
+  });
+});
+
 export const AlertController = {
   listAlerts,
   getAlertById,
   createAlert,
   acknowledgeAlert,
   resolveAlert,
+  getConsumerMetrics,
 };

@@ -88,6 +88,32 @@ export const alertOpenApiSpec = {
         },
       },
     },
+    "/v1/alerts/consumer/metrics": {
+      get: {
+        tags: ["Alerts"],
+        summary: "Retrieve Kafka alert consumer reliability metrics and poison message counts",
+        responses: {
+          "200": {
+            description: "Alert consumer metrics",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    messagesProcessed: { type: "integer" },
+                    alertsCreatedOrAppended: { type: "integer" },
+                    poisonMessagesSkipped: { type: "integer" },
+                    processingErrors: { type: "integer" },
+                    lastHeartbeatTime: { type: "integer" },
+                    isRunning: { type: "boolean" },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
     "/v1/alerts/{id}": {
       get: {
         tags: ["Alerts"],

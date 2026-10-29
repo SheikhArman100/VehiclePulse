@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-10-29T10:42:46.930Z
+Generated on: 2026-10-29T11:14:58.538Z
 
 ## Summary
-- Total Tracked Artifacts: 171
-- Total Dependency Relationships: 363
+- Total Tracked Artifacts: 179
+- Total Dependency Relationships: 397
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -79,6 +79,10 @@ Generated on: 2026-10-29T10:42:46.930Z
 - `backend/services/alert-service/src/app/db/prisma.ts` -> `@prisma/adapter-mariadb`
 - `backend/services/alert-service/src/app/db/prisma.ts` -> `@vehicle-pulse/logger`
 - `backend/services/alert-service/src/app/db/prisma.ts` -> `../../config/env.js`
+- `backend/services/alert-service/src/app/kafka/alertConsumer.ts` -> `@vehicle-pulse/shared`
+- `backend/services/alert-service/src/app/kafka/alertConsumer.ts` -> `@vehicle-pulse/logger`
+- `backend/services/alert-service/src/app/kafka/alertConsumer.ts` -> `../db/prisma.js`
+- `backend/services/alert-service/src/app/kafka/alertConsumer.ts` -> `../services/alertEvaluator.service.js`
 - `backend/services/alert-service/src/app/modules/alert/alert.controller.ts` -> `express`
 - `backend/services/alert-service/src/app/modules/alert/alert.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/alert-service/src/app/modules/alert/alert.controller.ts` -> `./alert.service.js`
@@ -96,6 +100,15 @@ Generated on: 2026-10-29T10:42:46.930Z
 - `backend/services/alert-service/src/app/routes/index.ts` -> `express`
 - `backend/services/alert-service/src/app/routes/index.ts` -> `../modules/alert/alert.route.js`
 - `backend/services/alert-service/src/app/routes/index.ts` -> `../modules/rule/rule.route.js`
+- `backend/services/alert-service/src/app/rules/defaultRules.ts` -> `./ruleTypes.js`
+- `backend/services/alert-service/src/app/rules/rulesEngine.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/services/alert-service/src/app/rules/rulesEngine.ts` -> `./ruleTypes.js`
+- `backend/services/alert-service/src/app/services/alertEvaluator.service.ts` -> `../../generated/client.js`
+- `backend/services/alert-service/src/app/services/alertEvaluator.service.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/services/alert-service/src/app/services/alertEvaluator.service.ts` -> `@vehicle-pulse/logger`
+- `backend/services/alert-service/src/app/services/alertEvaluator.service.ts` -> `../rules/rulesEngine.js`
+- `backend/services/alert-service/src/app/services/alertEvaluator.service.ts` -> `../rules/defaultRules.js`
+- `backend/services/alert-service/src/app/services/alertEvaluator.service.ts` -> `../rules/ruleTypes.js`
 - `backend/services/alert-service/src/app.ts` -> `express`
 - `backend/services/alert-service/src/app.ts` -> `cors`
 - `backend/services/alert-service/src/app.ts` -> `@vehicle-pulse/logger`
@@ -141,12 +154,33 @@ Generated on: 2026-10-29T10:42:46.930Z
 - `backend/services/alert-service/src/server.ts` -> `./config/env.js`
 - `backend/services/alert-service/src/server.ts` -> `./app.js`
 - `backend/services/alert-service/src/server.ts` -> `./app/db/prisma.js`
+- `backend/services/alert-service/src/server.ts` -> `./app/kafka/alertConsumer.js`
 - `backend/services/alert-service/src/tests/alert.test.ts` -> `node:test`
 - `backend/services/alert-service/src/tests/alert.test.ts` -> `node:assert/strict`
 - `backend/services/alert-service/src/tests/alert.test.ts` -> `@vehicle-pulse/logger`
 - `backend/services/alert-service/src/tests/alert.test.ts` -> `../app/db/prisma.js`
 - `backend/services/alert-service/src/tests/alert.test.ts` -> `../app/modules/alert/alert.service.js`
 - `backend/services/alert-service/src/tests/alert.test.ts` -> `../app/modules/rule/rule.service.js`
+- `backend/services/alert-service/src/tests/deduplication.test.ts` -> `node:test`
+- `backend/services/alert-service/src/tests/deduplication.test.ts` -> `node:assert/strict`
+- `backend/services/alert-service/src/tests/deduplication.test.ts` -> `@vehicle-pulse/logger`
+- `backend/services/alert-service/src/tests/deduplication.test.ts` -> `../app/db/prisma.js`
+- `backend/services/alert-service/src/tests/deduplication.test.ts` -> `../app/services/alertEvaluator.service.js`
+- `backend/services/alert-service/src/tests/deduplication.test.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `node:test`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `node:assert/strict`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `node:crypto`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `@vehicle-pulse/shared`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `@vehicle-pulse/logger`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `../app/db/prisma.js`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `../app/kafka/alertConsumer.js`
+- `backend/services/alert-service/src/tests/kafkaConsumer.test.ts` -> `../config/env.js`
+- `backend/services/alert-service/src/tests/rulesEngine.test.ts` -> `node:test`
+- `backend/services/alert-service/src/tests/rulesEngine.test.ts` -> `node:assert/strict`
+- `backend/services/alert-service/src/tests/rulesEngine.test.ts` -> `../app/rules/rulesEngine.js`
+- `backend/services/alert-service/src/tests/rulesEngine.test.ts` -> `../app/rules/defaultRules.js`
+- `backend/services/alert-service/src/tests/rulesEngine.test.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/services/analytics-service/prisma.config.ts` -> `node:path`
 - `backend/services/analytics-service/prisma.config.ts` -> `dotenv`
 - `backend/services/analytics-service/prisma.config.ts` -> `@prisma/config`
