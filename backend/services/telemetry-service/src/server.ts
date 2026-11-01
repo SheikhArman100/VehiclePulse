@@ -5,6 +5,7 @@ import { env } from "./config/env.js";
 import { connectDatabase, disconnectDatabase } from "./app/db/database.js";
 import { TelemetryKafkaProducer } from "./app/kafka/telemetryProducer.js";
 import { TelemetryMongoConsumer } from "./app/kafka/mongoConsumer.js";
+import { TelemetryRedisStateConsumer } from "./app/kafka/redisStateConsumer.js";
 
 const logger = createLogger({
   serviceName: env.SERVICE_NAME,
@@ -31,7 +32,21 @@ async function main() {
       logger,
     });
 
-    // 4. Start HTTP server
+    // 4. Start Redis Real-Time State Consumer Worker (Phase 21)
+    const rawRedisUrl = env.REDIS_URL || "redis://localhost:6379";
+    const resolvedRedisUrl =
+      rawRedisUrl.includes("@redis:") && !process.env.RUNNING_IN_DOCKER
+        ? rawRedisUrl.replace("@redis:", "@localhost:")
+        : rawRedisUrl;
+
+    await TelemetryRedisStateConsumer.startConsumer({
+      brokers,
+      groupId: "telemetry-redis-state-group",
+      redisUrl: resolvedRedisUrl,
+      logger,
+    });
+
+    // 5. Start HTTP server
     const app = createApp({ logger });
     const server = app.listen(env.PORT, () => {
       logger.info(
@@ -40,13 +55,14 @@ async function main() {
       );
     });
 
-    // 5. Register graceful shutdown
+    // 6. Register graceful shutdown
     registerGracefulShutdown({
       server,
       logger,
       serviceName: env.SERVICE_NAME,
       onShutdown: async () => {
-        logger.info("Closing MongoDB and Kafka connections on graceful shutdown...");
+        logger.info("Closing MongoDB, Redis, and Kafka connections on graceful shutdown...");
+        await TelemetryRedisStateConsumer.stopConsumer(logger);
         await TelemetryMongoConsumer.stopConsumer(logger);
         await TelemetryKafkaProducer.disconnectProducer(logger);
         await disconnectDatabase(logger);

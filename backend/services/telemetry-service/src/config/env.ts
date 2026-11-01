@@ -8,6 +8,7 @@ export const telemetryEnvSchema = baseEnvSchema.extend({
     .default("mongodb://localhost:27017/vehiclepulse_telemetry"),
   KAFKA_BROKERS: z.string().default("localhost:9092"),
   RABBITMQ_URL: z.string().default("amqp://guest:guest@localhost:5672"),
+  REDIS_URL: z.string().default("redis://localhost:6379"),
 });
 
 export type TelemetryEnv = z.infer<typeof telemetryEnvSchema>;

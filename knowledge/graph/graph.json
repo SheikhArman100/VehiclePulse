@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-10-29T12:08:26.422Z",
-    "nodeCount": 187,
-    "edgeCount": 419
+    "generatedAt": "2026-11-01T11:32:12.817Z",
+    "nodeCount": 192,
+    "edgeCount": 437
   },
   "nodes": [
     {
@@ -217,6 +217,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/packages/shared/src/redis.ts",
+      "label": "redis.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/packages/shared/src/sendResponse.ts",
       "label": "sendResponse.ts",
       "type": "ts"
@@ -229,6 +234,11 @@
     {
       "id": "backend/packages/shared/src/validateRequest.ts",
       "label": "validateRequest.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/vehicleState.ts",
+      "label": "vehicleState.ts",
       "type": "ts"
     },
     {
@@ -687,6 +697,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts",
+      "label": "redisStateConsumer.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts",
       "label": "telemetryProducer.ts",
       "type": "ts"
@@ -747,6 +762,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts",
+      "label": "state.controller.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.constant.ts",
       "label": "vehicle.constant.ts",
       "type": "ts"
@@ -799,6 +819,11 @@
     {
       "id": "backend/services/telemetry-service/src/tests/producer.test.ts",
       "label": "producer.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/tests/redisState.test.ts",
+      "label": "redisState.test.ts",
       "type": "ts"
     },
     {
@@ -1194,6 +1219,16 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/packages/shared/src/redis.ts",
+      "target": "ioredis",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/redis.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/packages/shared/src/sendResponse.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -1216,6 +1251,21 @@
     {
       "source": "backend/packages/shared/src/validateRequest.ts",
       "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/vehicleState.ts",
+      "target": "ioredis",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/vehicleState.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/vehicleState.ts",
+      "target": "@vehicle-pulse/logger",
       "relation": "IMPORTS"
     },
     {
@@ -2459,6 +2509,16 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts",
       "target": "@vehicle-pulse/shared",
       "relation": "IMPORTS"
@@ -2644,6 +2704,21 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts",
+      "target": "../../kafka/redisStateConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.controller.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -2701,6 +2776,11 @@
     {
       "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
       "target": "./command.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "target": "./state.controller.js",
       "relation": "IMPORTS"
     },
     {
@@ -2814,6 +2894,11 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "./app/kafka/redisStateConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
       "target": "node:test",
       "relation": "IMPORTS"
@@ -2841,6 +2926,36 @@
     {
       "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
       "target": "../app/kafka/telemetryProducer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisState.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisState.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisState.test.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisState.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisState.test.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisState.test.ts",
+      "target": "@vehicle-pulse/event-contracts",
       "relation": "IMPORTS"
     },
     {

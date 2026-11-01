@@ -37,6 +37,7 @@ services:
       MONGODB_URI: mongodb://mongodb:27017/vehiclepulse_telemetry
       KAFKA_BROKERS: kafka:29092
       RABBITMQ_URL: amqp://${RABBITMQ_USER:-guest}:${RABBITMQ_PASSWORD:-guest}@rabbitmq:5672
+      REDIS_URL: redis://redis:6379
       RUNNING_IN_DOCKER: "true"
     depends_on:
       mongodb:
@@ -44,6 +45,8 @@ services:
       kafka:
         condition: service_healthy
       rabbitmq:
+        condition: service_healthy
+      redis:
         condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:4001/health/live || exit 1"]

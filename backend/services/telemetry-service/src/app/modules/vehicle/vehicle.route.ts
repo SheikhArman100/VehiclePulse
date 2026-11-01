@@ -3,6 +3,7 @@ import { validateRequest } from "@vehicle-pulse/shared";
 import { VehicleController } from "./vehicle.controller.js";
 import { VehicleValidations } from "./vehicle.interface.js";
 import { DispatchCommandValidation, dispatchVehicleCommand } from "./command.controller.js";
+import { getVehicleRealtimeState } from "./state.controller.js";
 
 const router = express.Router();
 
@@ -22,6 +23,9 @@ router.patch(
 );
 
 router.delete("/:id", VehicleController.deleteVehicle);
+
+// Real-Time Vehicle State from Redis (Phase 21)
+router.get("/:id/state", getVehicleRealtimeState);
 
 // Asynchronous Vehicle Command Dispatch via RabbitMQ
 router.post(

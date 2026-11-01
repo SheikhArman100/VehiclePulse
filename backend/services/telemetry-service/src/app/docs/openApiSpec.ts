@@ -228,6 +228,52 @@ export const openApiSpec = {
         },
       },
     },
+    "/v1/vehicles/{id}/state": {
+      get: {
+        tags: ["Vehicles"],
+        summary: "Get real-time vehicle state from Redis cache",
+        description: "Returns sub-millisecond cached state including dynamic ONLINE/OFFLINE calculation, coordinates, speed, and fuel level.",
+        parameters: [
+          {
+            name: "id",
+            in: "path",
+            required: true,
+            description: "Target vehicle ID",
+            schema: { type: "string" },
+          },
+        ],
+        responses: {
+          "200": {
+            description: "Real-time vehicle state",
+            content: {
+              "application/json": {
+                schema: {
+                  type: "object",
+                  properties: {
+                    success: { type: "boolean" },
+                    statusCode: { type: "integer" },
+                    message: { type: "string" },
+                    data: {
+                      type: "object",
+                      properties: {
+                        vehicleId: { type: "string" },
+                        status: { type: "string", enum: ["ONLINE", "OFFLINE", "WARNING", "CRITICAL"] },
+                        isOnline: { type: "boolean" },
+                        lastSeen: { type: "string", format: "date-time" },
+                        lastUpdatedTimestamp: { type: "integer" },
+                        latestTelemetry: { type: "object" },
+                      },
+                    },
+                  },
+                },
+              },
+            },
+          },
+          "404": { description: "No real-time state found for vehicle" },
+          "503": { description: "Redis state service unavailable" },
+        },
+      },
+    },
     "/v1/vehicles/{id}/commands": {
       post: {
         tags: ["Vehicles"],
