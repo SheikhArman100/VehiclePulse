@@ -1,3 +1,4 @@
+import type { Redis } from "ioredis";
 import { createLogger } from "@vehicle-pulse/logger";
 import { registerGracefulShutdown } from "@vehicle-pulse/shared";
 import { createApp } from "./app.js";
@@ -6,6 +7,7 @@ import { connectDatabase, disconnectDatabase } from "./app/db/database.js";
 import { TelemetryKafkaProducer } from "./app/kafka/telemetryProducer.js";
 import { TelemetryMongoConsumer } from "./app/kafka/mongoConsumer.js";
 import { TelemetryRedisStateConsumer } from "./app/kafka/redisStateConsumer.js";
+import { WebSocketBroadcaster } from "./app/websocket/wsBroadcaster.js";
 
 const logger = createLogger({
   serviceName: env.SERVICE_NAME,
@@ -55,13 +57,37 @@ async function main() {
       );
     });
 
-    // 6. Register graceful shutdown
+    // 6. Initialize WebSocket Broadcaster & dedicated Redis Pub/Sub Subscriber (Phase 24)
+    const stateService = TelemetryRedisStateConsumer.getStateService();
+    const redisWrapper = TelemetryRedisStateConsumer.getRedisWrapper();
+    let wsBroadcaster: WebSocketBroadcaster | null = null;
+    let redisSubClient: Redis | null = null;
+
+    if (stateService && redisWrapper) {
+      // Create duplicate dedicated Redis client for Pub/Sub subscription
+      redisSubClient = redisWrapper.getClient().duplicate();
+      wsBroadcaster = new WebSocketBroadcaster({
+        server,
+        redisSub: redisSubClient,
+        stateService,
+        logger,
+        path: "/ws",
+      });
+    }
+
+    // 7. Register graceful shutdown
     registerGracefulShutdown({
       server,
       logger,
       serviceName: env.SERVICE_NAME,
       onShutdown: async () => {
-        logger.info("Closing MongoDB, Redis, and Kafka connections on graceful shutdown...");
+        logger.info("Closing WebSocket, MongoDB, Redis, and Kafka connections on graceful shutdown...");
+        if (wsBroadcaster) {
+          await wsBroadcaster.close();
+        }
+        if (redisSubClient) {
+          redisSubClient.disconnect();
+        }
         await TelemetryRedisStateConsumer.stopConsumer(logger);
         await TelemetryMongoConsumer.stopConsumer(logger);
         await TelemetryKafkaProducer.disconnectProducer(logger);

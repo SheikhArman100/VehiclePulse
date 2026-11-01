@@ -118,7 +118,12 @@ const startConsumer = async (options: RedisStateConsumerOptions): Promise<void> 
 
           // 1. Atomically update Redis state with out-of-order protection
           if (stateServiceInstance) {
-            await stateServiceInstance.updateFromTelemetry(event);
+            const updatedState = await stateServiceInstance.updateFromTelemetry(event);
+            // If the state was accepted (not discarded by out-of-order Lua guard), broadcast via Pub/Sub
+            if (updatedState && redisWrapperInstance) {
+              const redisClient = redisWrapperInstance.getClient();
+              await redisClient.publish("vehicle:events:state-updates", JSON.stringify(updatedState));
+            }
           }
 
           // 2. Update Geospatial Index (GEOADD fleet:locations:geo lon lat vehicleId)
@@ -129,6 +134,7 @@ const startConsumer = async (options: RedisStateConsumerOptions): Promise<void> 
               event.data.location.latitude
             );
           }
+
 
           resolveOffset(message.offset);
         } catch (err) {

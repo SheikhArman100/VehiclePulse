@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-01T14:56:15.817Z",
-    "nodeCount": 199,
-    "edgeCount": 461
+    "generatedAt": "2026-11-01T15:17:21.752Z",
+    "nodeCount": 201,
+    "edgeCount": 475
   },
   "nodes": [
     {
@@ -827,6 +827,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts",
+      "label": "wsBroadcaster.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/telemetry-service/src/app.ts",
       "label": "app.ts",
       "type": "ts"
@@ -854,6 +859,11 @@
     {
       "id": "backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts",
       "label": "redisLockRateLimit.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts",
+      "label": "redisPubSubWs.test.ts",
       "type": "ts"
     },
     {
@@ -2939,6 +2949,31 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts",
+      "target": "ws",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts",
+      "target": "node:http",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts",
+      "target": "ioredis",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -2980,6 +3015,11 @@
     },
     {
       "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "ioredis",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
       "target": "@vehicle-pulse/logger",
       "relation": "IMPORTS"
     },
@@ -3016,6 +3056,11 @@
     {
       "source": "backend/services/telemetry-service/src/server.ts",
       "target": "./app/kafka/redisStateConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "./app/websocket/wsBroadcaster.js",
       "relation": "IMPORTS"
     },
     {
@@ -3081,6 +3126,41 @@
     {
       "source": "backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts",
       "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts",
+      "target": "node:assert",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts",
+      "target": "node:http",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts",
+      "target": "ws",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts",
+      "target": "../app/websocket/wsBroadcaster.js",
       "relation": "IMPORTS"
     },
     {

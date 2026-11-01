@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-01T14:56:15.817Z
+Generated on: 2026-11-01T15:17:21.752Z
 
 ## Summary
-- Total Tracked Artifacts: 199
-- Total Dependency Relationships: 461
+- Total Tracked Artifacts: 201
+- Total Dependency Relationships: 475
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -406,6 +406,11 @@ Generated on: 2026-11-01T14:56:15.817Z
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/vehicle/vehicle.route.js`
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/device/device.route.js`
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/telemetry/telemetry.route.js`
+- `backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts` -> `ws`
+- `backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts` -> `node:http`
+- `backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts` -> `ioredis`
+- `backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/app/websocket/wsBroadcaster.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app.ts` -> `express`
 - `backend/services/telemetry-service/src/app.ts` -> `cors`
 - `backend/services/telemetry-service/src/app.ts` -> `@vehicle-pulse/logger`
@@ -414,6 +419,7 @@ Generated on: 2026-11-01T14:56:15.817Z
 - `backend/services/telemetry-service/src/app.ts` -> `./app/routes/index.js`
 - `backend/services/telemetry-service/src/app.ts` -> `./app/docs/openApiSpec.js`
 - `backend/services/telemetry-service/src/config/env.ts` -> `@vehicle-pulse/config`
+- `backend/services/telemetry-service/src/server.ts` -> `ioredis`
 - `backend/services/telemetry-service/src/server.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/server.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/server.ts` -> `./app.js`
@@ -422,6 +428,7 @@ Generated on: 2026-11-01T14:56:15.817Z
 - `backend/services/telemetry-service/src/server.ts` -> `./app/kafka/telemetryProducer.js`
 - `backend/services/telemetry-service/src/server.ts` -> `./app/kafka/mongoConsumer.js`
 - `backend/services/telemetry-service/src/server.ts` -> `./app/kafka/redisStateConsumer.js`
+- `backend/services/telemetry-service/src/server.ts` -> `./app/websocket/wsBroadcaster.js`
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `node:assert/strict`
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `@vehicle-pulse/logger`
@@ -435,6 +442,13 @@ Generated on: 2026-11-01T14:56:15.817Z
 - `backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts` -> `node:assert`
 - `backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts` -> `node:test`
+- `backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts` -> `node:assert`
+- `backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts` -> `node:http`
+- `backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts` -> `ws`
+- `backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/tests/redisPubSubWs.test.ts` -> `../app/websocket/wsBroadcaster.js`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:assert/strict`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:crypto`
