@@ -228,6 +228,63 @@ export const openApiSpec = {
         },
       },
     },
+    "/v1/vehicles/nearby": {
+      get: {
+        tags: ["Vehicles"],
+        summary: "Find nearby vehicles via Redis GEO",
+        description: "Searches the real-time Redis geospatial index using GEOSEARCH (BYRADIUS) and enriches with vehicle live state.",
+        parameters: [
+          {
+            name: "lat",
+            in: "query",
+            required: true,
+            description: "Center latitude (-90 to 90)",
+            schema: { type: "number" },
+          },
+          {
+            name: "lng",
+            in: "query",
+            required: true,
+            description: "Center longitude (-180 to 180)",
+            schema: { type: "number" },
+          },
+          {
+            name: "radiusKm",
+            in: "query",
+            required: false,
+            description: "Search radius in kilometers (default: 10)",
+            schema: { type: "number", default: 10 },
+          },
+          {
+            name: "limit",
+            in: "query",
+            required: false,
+            description: "Maximum number of vehicles to return (default: 20)",
+            schema: { type: "integer", default: 20 },
+          },
+        ],
+        responses: {
+          "200": {
+            description: "List of nearby vehicles sorted by distance",
+          },
+          "400": {
+            description: "Invalid or missing query parameters",
+          },
+        },
+      },
+    },
+    "/v1/vehicles/cache/metrics": {
+      get: {
+        tags: ["Vehicles"],
+        summary: "Get cache hit/miss ratio and metrics",
+        description: "Returns real-time cache statistics for monitoring Cache-Aside efficiency.",
+        responses: {
+          "200": {
+            description: "Cache metrics summary",
+          },
+        },
+      },
+    },
     "/v1/vehicles/{id}/state": {
       get: {
         tags: ["Vehicles"],

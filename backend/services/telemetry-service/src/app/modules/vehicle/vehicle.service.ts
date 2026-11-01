@@ -71,7 +71,24 @@ const getAllVehicles = async (
   };
 };
 
+import { getCacheService, getGeoService } from "../../kafka/redisStateConsumer.js";
+
 const getSingleVehicle = async (vehicleId: string): Promise<IVehicle> => {
+  const cacheService = getCacheService();
+  if (cacheService) {
+    return cacheService.getOrSet(
+      `vehicle:${vehicleId}`,
+      async () => {
+        const result = await Vehicle.findOne({ vehicleId });
+        if (!result) {
+          throw new NotFoundError(`Vehicle with id '${vehicleId}' not found`);
+        }
+        return result.toJSON();
+      },
+      300 // 5-minute TTL
+    );
+  }
+
   const result = await Vehicle.findOne({ vehicleId });
   if (!result) {
     throw new NotFoundError(`Vehicle with id '${vehicleId}' not found`);
@@ -93,6 +110,12 @@ const updateVehicle = async (
     runValidators: true,
   });
 
+  // Invalidate cache-aside entry on update
+  const cacheService = getCacheService();
+  if (cacheService) {
+    await cacheService.invalidate(`vehicle:${vehicleId}`);
+  }
+
   return result!.toJSON();
 };
 
@@ -101,6 +124,19 @@ const deleteVehicle = async (vehicleId: string): Promise<IVehicle> => {
   if (!result) {
     throw new NotFoundError(`Vehicle with id '${vehicleId}' not found`);
   }
+
+  // Invalidate cache-aside entry on delete
+  const cacheService = getCacheService();
+  if (cacheService) {
+    await cacheService.invalidate(`vehicle:${vehicleId}`);
+  }
+
+  // Also remove from geospatial index
+  const geoService = getGeoService();
+  if (geoService) {
+    await geoService.removeLocation(vehicleId);
+  }
+
   return result.toJSON();
 };
 
@@ -111,3 +147,4 @@ export const VehicleService = {
   updateVehicle,
   deleteVehicle,
 };
+

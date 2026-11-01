@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-01T11:32:12.817Z",
-    "nodeCount": 192,
-    "edgeCount": 437
+    "generatedAt": "2026-11-01T14:43:41.934Z",
+    "nodeCount": 196,
+    "edgeCount": 449
   },
   "nodes": [
     {
@@ -172,6 +172,11 @@
       "type": "json"
     },
     {
+      "id": "backend/packages/shared/src/cacheService.ts",
+      "label": "cacheService.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/packages/shared/src/catchAsync.ts",
       "label": "catchAsync.ts",
       "type": "ts"
@@ -234,6 +239,11 @@
     {
       "id": "backend/packages/shared/src/validateRequest.ts",
       "label": "validateRequest.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/vehicleGeo.ts",
+      "label": "vehicleGeo.ts",
       "type": "ts"
     },
     {
@@ -762,6 +772,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts",
+      "label": "geo.controller.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts",
       "label": "state.controller.ts",
       "type": "ts"
@@ -819,6 +834,11 @@
     {
       "id": "backend/services/telemetry-service/src/tests/producer.test.ts",
       "label": "producer.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/tests/redisGeoCache.test.ts",
+      "label": "redisGeoCache.test.ts",
       "type": "ts"
     },
     {
@@ -1169,6 +1189,16 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/packages/shared/src/cacheService.ts",
+      "target": "ioredis",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/cacheService.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/packages/shared/src/catchAsync.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -1251,6 +1281,16 @@
     {
       "source": "backend/packages/shared/src/validateRequest.ts",
       "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/vehicleGeo.ts",
+      "target": "ioredis",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/vehicleGeo.ts",
+      "target": "@vehicle-pulse/logger",
       "relation": "IMPORTS"
     },
     {
@@ -2510,11 +2550,6 @@
     },
     {
       "source": "backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts",
-      "target": "@vehicle-pulse/shared",
-      "relation": "IMPORTS"
-    },
-    {
-      "source": "backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts",
       "target": "@vehicle-pulse/logger",
       "relation": "IMPORTS"
     },
@@ -2704,6 +2739,21 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts",
+      "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts",
+      "target": "../../kafka/redisStateConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -2784,6 +2834,11 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "target": "./geo.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts",
       "target": "mongoose",
       "relation": "IMPORTS"
@@ -2796,6 +2851,11 @@
     {
       "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts",
       "target": "./vehicle.model.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts",
+      "target": "../../kafka/redisStateConsumer.js",
       "relation": "IMPORTS"
     },
     {
@@ -2926,6 +2986,26 @@
     {
       "source": "backend/services/telemetry-service/src/tests/producer.test.ts",
       "target": "../app/kafka/telemetryProducer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisGeoCache.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisGeoCache.test.ts",
+      "target": "node:assert",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisGeoCache.test.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisGeoCache.test.ts",
+      "target": "@vehicle-pulse/shared",
       "relation": "IMPORTS"
     },
     {

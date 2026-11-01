@@ -11,3 +11,5 @@ export * from "./kafka.js";
 export * from "./rabbitmq.js";
 export * from "./redis.js";
 export * from "./vehicleState.js";
+export * from "./vehicleGeo.js";
+export * from "./cacheService.js";

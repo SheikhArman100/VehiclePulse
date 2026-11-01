@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-01T11:32:12.817Z
+Generated on: 2026-11-01T14:43:41.934Z
 
 ## Summary
-- Total Tracked Artifacts: 192
-- Total Dependency Relationships: 437
+- Total Tracked Artifacts: 196
+- Total Dependency Relationships: 449
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -59,6 +59,8 @@ Generated on: 2026-11-01T11:32:12.817Z
 - `backend/packages/event-contracts/src/telemetry.ts` -> `zod`
 - `backend/packages/event-contracts/src/telemetry.ts` -> `./envelope.js`
 - `backend/packages/logger/src/index.ts` -> `pino`
+- `backend/packages/shared/src/cacheService.ts` -> `ioredis`
+- `backend/packages/shared/src/cacheService.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/catchAsync.ts` -> `express`
 - `backend/packages/shared/src/correlation.ts` -> `express`
 - `backend/packages/shared/src/correlation.ts` -> `node:crypto`
@@ -76,6 +78,8 @@ Generated on: 2026-11-01T11:32:12.817Z
 - `backend/packages/shared/src/shutdown.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/validateRequest.ts` -> `express`
 - `backend/packages/shared/src/validateRequest.ts` -> `zod`
+- `backend/packages/shared/src/vehicleGeo.ts` -> `ioredis`
+- `backend/packages/shared/src/vehicleGeo.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/vehicleState.ts` -> `ioredis`
 - `backend/packages/shared/src/vehicleState.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/packages/shared/src/vehicleState.ts` -> `@vehicle-pulse/logger`
@@ -327,7 +331,6 @@ Generated on: 2026-11-01T11:32:12.817Z
 - `backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts` -> `../modules/telemetry/telemetry.service.js`
-- `backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts` -> `@vehicle-pulse/logger`
@@ -366,6 +369,9 @@ Generated on: 2026-11-01T11:32:12.817Z
 - `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `zod`
 - `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `../../../config/env.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts` -> `express`
+- `backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts` -> `../../kafka/redisStateConsumer.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts` -> `express`
 - `backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/state.controller.ts` -> `../../kafka/redisStateConsumer.js`
@@ -382,9 +388,11 @@ Generated on: 2026-11-01T11:32:12.817Z
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./vehicle.interface.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./command.controller.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./state.controller.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./geo.controller.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `mongoose`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `./vehicle.interface.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `./vehicle.model.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `../../kafka/redisStateConsumer.js`
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `express`
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/vehicle/vehicle.route.js`
 - `backend/services/telemetry-service/src/app/routes/index.ts` -> `../modules/device/device.route.js`
@@ -411,6 +419,10 @@ Generated on: 2026-11-01T11:32:12.817Z
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `../app/kafka/telemetryProducer.js`
+- `backend/services/telemetry-service/src/tests/redisGeoCache.test.ts` -> `node:test`
+- `backend/services/telemetry-service/src/tests/redisGeoCache.test.ts` -> `node:assert`
+- `backend/services/telemetry-service/src/tests/redisGeoCache.test.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/tests/redisGeoCache.test.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:assert/strict`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:crypto`

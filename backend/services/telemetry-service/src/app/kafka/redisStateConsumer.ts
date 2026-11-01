@@ -1,4 +1,11 @@
-import { createKafkaClient, type Consumer, RedisClientWrapper, VehicleStateService } from "@vehicle-pulse/shared";
+import {
+  createKafkaClient,
+  type Consumer,
+  RedisClientWrapper,
+  VehicleStateService,
+  VehicleGeoService,
+  CacheService,
+} from "@vehicle-pulse/shared";
 import {
   KAFKA_TOPICS,
   TelemetryRawEventSchema,
@@ -17,9 +24,13 @@ export interface RedisStateConsumerOptions {
 let consumerInstance: Consumer | null = null;
 let redisWrapperInstance: RedisClientWrapper | null = null;
 let stateServiceInstance: VehicleStateService | null = null;
+let geoServiceInstance: VehicleGeoService | null = null;
+let cacheServiceInstance: CacheService | null = null;
 let isRunning = false;
 
 export const getStateService = (): VehicleStateService | null => stateServiceInstance;
+export const getGeoService = (): VehicleGeoService | null => geoServiceInstance;
+export const getCacheService = (): CacheService | null => cacheServiceInstance;
 export const getRedisWrapper = (): RedisClientWrapper | null => redisWrapperInstance;
 
 /**
@@ -50,6 +61,11 @@ const startConsumer = async (options: RedisStateConsumerOptions): Promise<void> 
     ttlSeconds: 86400, // 24 hours
     offlineThresholdSeconds: 60, // 60s without telemetry marks vehicle OFFLINE
   });
+  geoServiceInstance = new VehicleGeoService(redisClient, logger);
+  cacheServiceInstance = new CacheService(redisClient, logger, {
+    ttlSeconds: 300, // 5 minutes cache TTL
+    prefix: "vp:cache:",
+  });
 
   // 2. Initialize Kafka Consumer
   const kafka = createKafkaClient({
@@ -69,7 +85,7 @@ const startConsumer = async (options: RedisStateConsumerOptions): Promise<void> 
   });
 
   isRunning = true;
-  logger.info({ groupId, topic: KAFKA_TOPICS.TELEMETRY_RAW }, "Redis State Kafka consumer joined group and started listening");
+  logger.info({ groupId, topic: KAFKA_TOPICS.TELEMETRY_RAW }, "Redis State & GEO Kafka consumer joined group and started listening");
 
   await consumerInstance.run({
     autoCommit: false,
@@ -93,14 +109,23 @@ const startConsumer = async (options: RedisStateConsumerOptions): Promise<void> 
 
           const event: TelemetryRawEvent = parseResult.data;
 
-          // Atomically update Redis state with out-of-order protection
+          // 1. Atomically update Redis state with out-of-order protection
           if (stateServiceInstance) {
             await stateServiceInstance.updateFromTelemetry(event);
           }
 
+          // 2. Update Geospatial Index (GEOADD fleet:locations:geo lon lat vehicleId)
+          if (geoServiceInstance && event.data?.location) {
+            await geoServiceInstance.updateLocation(
+              event.vehicleId,
+              event.data.location.longitude,
+              event.data.location.latitude
+            );
+          }
+
           resolveOffset(message.offset);
         } catch (err) {
-          logger.error({ err, offset: message.offset }, "Error updating Redis vehicle state from Kafka batch");
+          logger.error({ err, offset: message.offset }, "Error updating Redis vehicle state/GEO from Kafka batch");
           throw err; // Halts batch to prevent premature offset commit
         }
       }
@@ -124,6 +149,8 @@ const stopConsumer = async (logger: Logger): Promise<void> => {
     await redisWrapperInstance.disconnect();
     redisWrapperInstance = null;
     stateServiceInstance = null;
+    geoServiceInstance = null;
+    cacheServiceInstance = null;
   }
 
   logger.info("Redis State Kafka consumer worker stopped cleanly");

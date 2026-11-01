@@ -4,6 +4,7 @@ import { VehicleController } from "./vehicle.controller.js";
 import { VehicleValidations } from "./vehicle.interface.js";
 import { DispatchCommandValidation, dispatchVehicleCommand } from "./command.controller.js";
 import { getVehicleRealtimeState } from "./state.controller.js";
+import { findNearbyVehicles, getCacheMetrics } from "./geo.controller.js";
 
 const router = express.Router();
 
@@ -12,6 +13,10 @@ router.post(
   validateRequest(VehicleValidations.createVehicleZodSchema),
   VehicleController.createVehicle
 );
+
+// Redis GEO Nearby Search & Cache Metrics (Phase 22)
+router.get("/nearby", findNearbyVehicles);
+router.get("/cache/metrics", getCacheMetrics);
 
 router.get("/", VehicleController.getAllVehicles);
 router.get("/:id", VehicleController.getSingleVehicle);
