@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-01T14:43:41.934Z",
-    "nodeCount": 196,
-    "edgeCount": 449
+    "generatedAt": "2026-11-01T14:56:15.817Z",
+    "nodeCount": 199,
+    "edgeCount": 461
   },
   "nodes": [
     {
@@ -187,6 +187,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/packages/shared/src/distributedLock.ts",
+      "label": "distributedLock.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/packages/shared/src/errorHandler.ts",
       "label": "errorHandler.ts",
       "type": "ts"
@@ -219,6 +224,11 @@
     {
       "id": "backend/packages/shared/src/rabbitmq.ts",
       "label": "rabbitmq.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/rateLimiter.ts",
+      "label": "rateLimiter.ts",
       "type": "ts"
     },
     {
@@ -842,6 +852,11 @@
       "type": "ts"
     },
     {
+      "id": "backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts",
+      "label": "redisLockRateLimit.test.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/telemetry-service/src/tests/redisState.test.ts",
       "label": "redisState.test.ts",
       "type": "ts"
@@ -1214,6 +1229,21 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/packages/shared/src/distributedLock.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/distributedLock.ts",
+      "target": "ioredis",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/distributedLock.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/packages/shared/src/errorHandler.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -1246,6 +1276,21 @@
     {
       "source": "backend/packages/shared/src/rabbitmq.ts",
       "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/rateLimiter.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/rateLimiter.ts",
+      "target": "ioredis",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/rateLimiter.ts",
+      "target": "./errors.js",
       "relation": "IMPORTS"
     },
     {
@@ -2739,6 +2784,11 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts",
+      "target": "../../kafka/redisStateConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts",
       "target": "express",
       "relation": "IMPORTS"
@@ -2836,6 +2886,16 @@
     {
       "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
       "target": "./geo.controller.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "target": "../../kafka/redisStateConsumer.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts",
+      "target": "@vehicle-pulse/shared",
       "relation": "IMPORTS"
     },
     {
@@ -3006,6 +3066,21 @@
     {
       "source": "backend/services/telemetry-service/src/tests/redisGeoCache.test.ts",
       "target": "@vehicle-pulse/shared",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts",
+      "target": "node:assert",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts",
+      "target": "@vehicle-pulse/logger",
       "relation": "IMPORTS"
     },
     {

@@ -13,3 +13,5 @@ export * from "./redis.js";
 export * from "./vehicleState.js";
 export * from "./vehicleGeo.js";
 export * from "./cacheService.js";
+export * from "./rateLimiter.js";
+export * from "./distributedLock.js";

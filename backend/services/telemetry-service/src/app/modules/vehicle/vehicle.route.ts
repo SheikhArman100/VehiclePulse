@@ -32,11 +32,30 @@ router.delete("/:id", VehicleController.deleteVehicle);
 // Real-Time Vehicle State from Redis (Phase 21)
 router.get("/:id/state", getVehicleRealtimeState);
 
-// Asynchronous Vehicle Command Dispatch via RabbitMQ
+import { getRedisWrapper } from "../../kafka/redisStateConsumer.js";
+import { createRateLimiterMiddleware } from "@vehicle-pulse/shared";
+
+// Sliding window rate limiter for vehicle commands: max 5 commands per 10 seconds per client
+const commandRateLimiter = (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  const redisWrapper = getRedisWrapper();
+  if (!redisWrapper) {
+    return next();
+  }
+  const middleware = createRateLimiterMiddleware(redisWrapper.getClient(), {
+    windowMs: 10000, // 10 seconds
+    max: 5, // 5 requests
+    prefix: "vp:rl:commands:",
+  });
+  return middleware(req, res, next);
+};
+
+// Asynchronous Vehicle Command Dispatch via RabbitMQ with Rate Limiting & Distributed Lock
 router.post(
   "/:id/commands",
+  commandRateLimiter,
   validateRequest(DispatchCommandValidation),
   dispatchVehicleCommand
 );
 
 export const VehicleRoutes = router;
+

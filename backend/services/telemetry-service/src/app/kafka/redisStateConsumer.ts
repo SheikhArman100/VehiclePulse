@@ -5,6 +5,7 @@ import {
   VehicleStateService,
   VehicleGeoService,
   CacheService,
+  DistributedLock,
 } from "@vehicle-pulse/shared";
 import {
   KAFKA_TOPICS,
@@ -26,11 +27,13 @@ let redisWrapperInstance: RedisClientWrapper | null = null;
 let stateServiceInstance: VehicleStateService | null = null;
 let geoServiceInstance: VehicleGeoService | null = null;
 let cacheServiceInstance: CacheService | null = null;
+let lockServiceInstance: DistributedLock | null = null;
 let isRunning = false;
 
 export const getStateService = (): VehicleStateService | null => stateServiceInstance;
 export const getGeoService = (): VehicleGeoService | null => geoServiceInstance;
 export const getCacheService = (): CacheService | null => cacheServiceInstance;
+export const getLockService = (): DistributedLock | null => lockServiceInstance;
 export const getRedisWrapper = (): RedisClientWrapper | null => redisWrapperInstance;
 
 /**
@@ -65,6 +68,10 @@ const startConsumer = async (options: RedisStateConsumerOptions): Promise<void> 
   cacheServiceInstance = new CacheService(redisClient, logger, {
     ttlSeconds: 300, // 5 minutes cache TTL
     prefix: "vp:cache:",
+  });
+  lockServiceInstance = new DistributedLock(redisClient, logger, {
+    ttlMs: 5000, // 5 seconds default lock TTL
+    prefix: "vp:lock:",
   });
 
   // 2. Initialize Kafka Consumer
@@ -151,6 +158,7 @@ const stopConsumer = async (logger: Logger): Promise<void> => {
     stateServiceInstance = null;
     geoServiceInstance = null;
     cacheServiceInstance = null;
+    lockServiceInstance = null;
   }
 
   logger.info("Redis State Kafka consumer worker stopped cleanly");

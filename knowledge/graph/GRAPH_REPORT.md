@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-01T14:43:41.934Z
+Generated on: 2026-11-01T14:56:15.817Z
 
 ## Summary
-- Total Tracked Artifacts: 196
-- Total Dependency Relationships: 449
+- Total Tracked Artifacts: 199
+- Total Dependency Relationships: 461
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -64,6 +64,9 @@ Generated on: 2026-11-01T14:43:41.934Z
 - `backend/packages/shared/src/catchAsync.ts` -> `express`
 - `backend/packages/shared/src/correlation.ts` -> `express`
 - `backend/packages/shared/src/correlation.ts` -> `node:crypto`
+- `backend/packages/shared/src/distributedLock.ts` -> `node:crypto`
+- `backend/packages/shared/src/distributedLock.ts` -> `ioredis`
+- `backend/packages/shared/src/distributedLock.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/errorHandler.ts` -> `express`
 - `backend/packages/shared/src/errorHandler.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/errorHandler.ts` -> `./errors.js`
@@ -71,6 +74,9 @@ Generated on: 2026-11-01T14:43:41.934Z
 - `backend/packages/shared/src/kafka.ts` -> `kafkajs`
 - `backend/packages/shared/src/rabbitmq.ts` -> `amqplib`
 - `backend/packages/shared/src/rabbitmq.ts` -> `@vehicle-pulse/logger`
+- `backend/packages/shared/src/rateLimiter.ts` -> `express`
+- `backend/packages/shared/src/rateLimiter.ts` -> `ioredis`
+- `backend/packages/shared/src/rateLimiter.ts` -> `./errors.js`
 - `backend/packages/shared/src/redis.ts` -> `ioredis`
 - `backend/packages/shared/src/redis.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/sendResponse.ts` -> `express`
@@ -369,6 +375,7 @@ Generated on: 2026-11-01T14:43:41.934Z
 - `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `zod`
 - `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `../../../config/env.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/command.controller.ts` -> `../../kafka/redisStateConsumer.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts` -> `express`
 - `backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/geo.controller.ts` -> `../../kafka/redisStateConsumer.js`
@@ -389,6 +396,8 @@ Generated on: 2026-11-01T14:43:41.934Z
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./command.controller.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./state.controller.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `./geo.controller.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `../../kafka/redisStateConsumer.js`
+- `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.route.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `mongoose`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `./vehicle.interface.js`
 - `backend/services/telemetry-service/src/app/modules/vehicle/vehicle.service.ts` -> `./vehicle.model.js`
@@ -423,6 +432,9 @@ Generated on: 2026-11-01T14:43:41.934Z
 - `backend/services/telemetry-service/src/tests/redisGeoCache.test.ts` -> `node:assert`
 - `backend/services/telemetry-service/src/tests/redisGeoCache.test.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/tests/redisGeoCache.test.ts` -> `@vehicle-pulse/shared`
+- `backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts` -> `node:test`
+- `backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts` -> `node:assert`
+- `backend/services/telemetry-service/src/tests/redisLockRateLimit.test.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:assert/strict`
 - `backend/services/telemetry-service/src/tests/redisState.test.ts` -> `node:crypto`
