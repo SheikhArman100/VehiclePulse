@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-03T08:11:27.406Z",
-    "nodeCount": 222,
-    "edgeCount": 580
+    "generatedAt": "2026-11-03T08:34:19.521Z",
+    "nodeCount": 225,
+    "edgeCount": 592
   },
   "nodes": [
     {
@@ -29,6 +29,16 @@
     {
       "id": "backend/infrastructure/kafka/src/cli.ts",
       "label": "cli.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/consumerReplay.ts",
+      "label": "consumerReplay.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/src/consumerScaling.ts",
+      "label": "consumerScaling.ts",
       "type": "ts"
     },
     {
@@ -64,6 +74,11 @@
     {
       "id": "backend/infrastructure/kafka/test/kafka.test.ts",
       "label": "kafka.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/infrastructure/kafka/test/scalingAndReplay.test.ts",
+      "label": "scalingAndReplay.test.ts",
       "type": "ts"
     },
     {
@@ -1164,6 +1179,46 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/infrastructure/kafka/src/cli.ts",
+      "target": "./consumerScaling.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/cli.ts",
+      "target": "./consumerReplay.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/consumerReplay.ts",
+      "target": "kafkajs",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/consumerReplay.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/consumerReplay.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/consumerScaling.ts",
+      "target": "kafkajs",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/consumerScaling.ts",
+      "target": "@vehicle-pulse/event-contracts",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/src/consumerScaling.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/infrastructure/kafka/src/e2eSlice.ts",
       "target": "@vehicle-pulse/shared",
       "relation": "IMPORTS"
@@ -1241,6 +1296,26 @@
     {
       "source": "backend/infrastructure/kafka/test/kafka.test.ts",
       "target": "../src/testExchange.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/scalingAndReplay.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/scalingAndReplay.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/scalingAndReplay.test.ts",
+      "target": "../src/consumerScaling.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/infrastructure/kafka/test/scalingAndReplay.test.ts",
+      "target": "../src/consumerReplay.js",
       "relation": "IMPORTS"
     },
     {

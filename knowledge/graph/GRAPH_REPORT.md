@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-03T08:11:27.406Z
+Generated on: 2026-11-03T08:34:19.521Z
 
 ## Summary
-- Total Tracked Artifacts: 222
-- Total Dependency Relationships: 580
+- Total Tracked Artifacts: 225
+- Total Dependency Relationships: 592
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -28,6 +28,14 @@ Generated on: 2026-11-03T08:11:27.406Z
 - `backend/infrastructure/kafka/src/benchmarkCli.ts` -> `node:fs`
 - `backend/infrastructure/kafka/src/benchmarkCli.ts` -> `node:path`
 - `backend/infrastructure/kafka/src/cli.ts` -> `./topicManager.js`
+- `backend/infrastructure/kafka/src/cli.ts` -> `./consumerScaling.js`
+- `backend/infrastructure/kafka/src/cli.ts` -> `./consumerReplay.js`
+- `backend/infrastructure/kafka/src/consumerReplay.ts` -> `kafkajs`
+- `backend/infrastructure/kafka/src/consumerReplay.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/infrastructure/kafka/src/consumerReplay.ts` -> `@vehicle-pulse/logger`
+- `backend/infrastructure/kafka/src/consumerScaling.ts` -> `kafkajs`
+- `backend/infrastructure/kafka/src/consumerScaling.ts` -> `@vehicle-pulse/event-contracts`
+- `backend/infrastructure/kafka/src/consumerScaling.ts` -> `@vehicle-pulse/logger`
 - `backend/infrastructure/kafka/src/e2eSlice.ts` -> `@vehicle-pulse/shared`
 - `backend/infrastructure/kafka/src/e2eSlice.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/infrastructure/kafka/src/e2eSlice.ts` -> `@vehicle-pulse/logger`
@@ -44,6 +52,10 @@ Generated on: 2026-11-03T08:11:27.406Z
 - `backend/infrastructure/kafka/test/kafka.test.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/infrastructure/kafka/test/kafka.test.ts` -> `../src/topicManager.js`
 - `backend/infrastructure/kafka/test/kafka.test.ts` -> `../src/testExchange.js`
+- `backend/infrastructure/kafka/test/scalingAndReplay.test.ts` -> `node:test`
+- `backend/infrastructure/kafka/test/scalingAndReplay.test.ts` -> `node:assert/strict`
+- `backend/infrastructure/kafka/test/scalingAndReplay.test.ts` -> `../src/consumerScaling.js`
+- `backend/infrastructure/kafka/test/scalingAndReplay.test.ts` -> `../src/consumerReplay.js`
 - `backend/packages/config/src/index.ts` -> `dotenv`
 - `backend/packages/config/src/index.ts` -> `zod`
 - `backend/packages/event-contracts/src/alert.ts` -> `zod`
