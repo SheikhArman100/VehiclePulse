@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-01T15:17:21.752Z",
-    "nodeCount": 201,
-    "edgeCount": 475
+    "generatedAt": "2026-11-03T07:49:51.875Z",
+    "nodeCount": 215,
+    "edgeCount": 521
   },
   "nodes": [
     {
@@ -972,6 +972,66 @@
       "type": "tsx"
     },
     {
+      "id": "frontend/web/components/layout/context.tsx",
+      "label": "context.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/components/layout/header.tsx",
+      "label": "header.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/components/layout/main-layout.tsx",
+      "label": "main-layout.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/components/layout/sidebar.tsx",
+      "label": "sidebar.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/components/ui/badge.tsx",
+      "label": "badge.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/components/ui/button.tsx",
+      "label": "button.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/components/ui/card.tsx",
+      "label": "card.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/components/ui/states.tsx",
+      "label": "states.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/config/navigation.ts",
+      "label": "navigation.ts",
+      "type": "ts"
+    },
+    {
+      "id": "frontend/web/hooks/useWebSocket.ts",
+      "label": "useWebSocket.ts",
+      "type": "ts"
+    },
+    {
+      "id": "frontend/web/lib/api.ts",
+      "label": "api.ts",
+      "type": "ts"
+    },
+    {
+      "id": "frontend/web/lib/utils.ts",
+      "label": "utils.ts",
+      "type": "ts"
+    },
+    {
       "id": "frontend/web/next-env.d.ts",
       "label": "next-env.d.ts",
       "type": "ts"
@@ -997,6 +1057,11 @@
       "type": "js"
     },
     {
+      "id": "frontend/web/provider/root-provider.tsx",
+      "label": "root-provider.tsx",
+      "type": "tsx"
+    },
+    {
       "id": "frontend/web/README.md",
       "label": "README.md",
       "type": "md"
@@ -1010,6 +1075,11 @@
       "id": "frontend/web/tsconfig.json",
       "label": "tsconfig.json",
       "type": "json"
+    },
+    {
+      "id": "frontend/web/types/api.ts",
+      "label": "api.ts",
+      "type": "ts"
     }
   ],
   "edges": [
@@ -3386,6 +3456,236 @@
     {
       "source": "frontend/web/app/layout.tsx",
       "target": "next",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/layout.tsx",
+      "target": "@/provider/root-provider",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/layout.tsx",
+      "target": "@/components/layout/context",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/layout.tsx",
+      "target": "@/components/layout/main-layout",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "next/link",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "@tanstack/react-query",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "@/lib/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "@/components/ui/card",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "@/components/ui/badge",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "@/components/ui/button",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "@/components/ui/states",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/page.tsx",
+      "target": "@/hooks/useWebSocket",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/context.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/header.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/header.tsx",
+      "target": "next/link",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/header.tsx",
+      "target": "./context",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/header.tsx",
+      "target": "@/components/ui/badge",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/main-layout.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/main-layout.tsx",
+      "target": "./header",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/main-layout.tsx",
+      "target": "./sidebar",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/main-layout.tsx",
+      "target": "./context",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/main-layout.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/sidebar.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/sidebar.tsx",
+      "target": "next/link",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/sidebar.tsx",
+      "target": "next/navigation",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/sidebar.tsx",
+      "target": "@/config/navigation",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/sidebar.tsx",
+      "target": "./context",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/sidebar.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/layout/sidebar.tsx",
+      "target": "lucide-react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/badge.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/badge.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/button.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/button.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/card.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/card.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/states.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/states.tsx",
+      "target": "lucide-react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/ui/states.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/hooks/useWebSocket.ts",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/hooks/useWebSocket.ts",
+      "target": "@/types/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/lib/api.ts",
+      "target": "axios",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/lib/utils.ts",
+      "target": "clsx",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/lib/utils.ts",
+      "target": "tailwind-merge",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/provider/root-provider.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/provider/root-provider.tsx",
+      "target": "@tanstack/react-query",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/types/api.ts",
+      "target": "zod",
       "relation": "IMPORTS"
     }
   ]

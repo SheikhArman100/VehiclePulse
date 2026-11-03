@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-01T15:17:21.752Z
+Generated on: 2026-11-03T07:49:51.875Z
 
 ## Summary
-- Total Tracked Artifacts: 201
-- Total Dependency Relationships: 475
+- Total Tracked Artifacts: 215
+- Total Dependency Relationships: 521
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -494,3 +494,49 @@ Generated on: 2026-11-01T15:17:21.752Z
 - `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `../config/env.js`
 - `frontend/web/app/layout.tsx` -> `next`
+- `frontend/web/app/layout.tsx` -> `@/provider/root-provider`
+- `frontend/web/app/layout.tsx` -> `@/components/layout/context`
+- `frontend/web/app/layout.tsx` -> `@/components/layout/main-layout`
+- `frontend/web/app/page.tsx` -> `react`
+- `frontend/web/app/page.tsx` -> `next/link`
+- `frontend/web/app/page.tsx` -> `@tanstack/react-query`
+- `frontend/web/app/page.tsx` -> `@/lib/api`
+- `frontend/web/app/page.tsx` -> `@/components/ui/card`
+- `frontend/web/app/page.tsx` -> `@/components/ui/badge`
+- `frontend/web/app/page.tsx` -> `@/components/ui/button`
+- `frontend/web/app/page.tsx` -> `@/components/ui/states`
+- `frontend/web/app/page.tsx` -> `@/hooks/useWebSocket`
+- `frontend/web/components/layout/context.tsx` -> `react`
+- `frontend/web/components/layout/header.tsx` -> `react`
+- `frontend/web/components/layout/header.tsx` -> `next/link`
+- `frontend/web/components/layout/header.tsx` -> `./context`
+- `frontend/web/components/layout/header.tsx` -> `@/components/ui/badge`
+- `frontend/web/components/layout/main-layout.tsx` -> `react`
+- `frontend/web/components/layout/main-layout.tsx` -> `./header`
+- `frontend/web/components/layout/main-layout.tsx` -> `./sidebar`
+- `frontend/web/components/layout/main-layout.tsx` -> `./context`
+- `frontend/web/components/layout/main-layout.tsx` -> `@/lib/utils`
+- `frontend/web/components/layout/sidebar.tsx` -> `react`
+- `frontend/web/components/layout/sidebar.tsx` -> `next/link`
+- `frontend/web/components/layout/sidebar.tsx` -> `next/navigation`
+- `frontend/web/components/layout/sidebar.tsx` -> `@/config/navigation`
+- `frontend/web/components/layout/sidebar.tsx` -> `./context`
+- `frontend/web/components/layout/sidebar.tsx` -> `@/lib/utils`
+- `frontend/web/components/layout/sidebar.tsx` -> `lucide-react`
+- `frontend/web/components/ui/badge.tsx` -> `react`
+- `frontend/web/components/ui/badge.tsx` -> `@/lib/utils`
+- `frontend/web/components/ui/button.tsx` -> `react`
+- `frontend/web/components/ui/button.tsx` -> `@/lib/utils`
+- `frontend/web/components/ui/card.tsx` -> `react`
+- `frontend/web/components/ui/card.tsx` -> `@/lib/utils`
+- `frontend/web/components/ui/states.tsx` -> `react`
+- `frontend/web/components/ui/states.tsx` -> `lucide-react`
+- `frontend/web/components/ui/states.tsx` -> `@/lib/utils`
+- `frontend/web/hooks/useWebSocket.ts` -> `react`
+- `frontend/web/hooks/useWebSocket.ts` -> `@/types/api`
+- `frontend/web/lib/api.ts` -> `axios`
+- `frontend/web/lib/utils.ts` -> `clsx`
+- `frontend/web/lib/utils.ts` -> `tailwind-merge`
+- `frontend/web/provider/root-provider.tsx` -> `react`
+- `frontend/web/provider/root-provider.tsx` -> `@tanstack/react-query`
+- `frontend/web/types/api.ts` -> `zod`
