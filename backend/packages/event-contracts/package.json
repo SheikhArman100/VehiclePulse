@@ -12,6 +12,7 @@
     "clean": "node -e \"const fs=require('fs'); if(fs.existsSync('dist')) fs.rmSync('dist', {recursive:true, force:true});\""
   },
   "dependencies": {
+    "protobufjs": "^8.8.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {

@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-03T08:56:29.683Z",
-    "nodeCount": 227,
-    "edgeCount": 602
+    "generatedAt": "2026-11-03T10:35:53.615Z",
+    "nodeCount": 231,
+    "edgeCount": 606
   },
   "nodes": [
     {
@@ -117,6 +117,11 @@
       "type": "json"
     },
     {
+      "id": "backend/packages/event-contracts/package-lock.json",
+      "label": "package-lock.json",
+      "type": "json"
+    },
+    {
       "id": "backend/packages/event-contracts/package.json",
       "label": "package.json",
       "type": "json"
@@ -144,6 +149,21 @@
     {
       "id": "backend/packages/event-contracts/src/index.ts",
       "label": "index.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/protobuf.test.ts",
+      "label": "protobuf.test.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/protobuf.ts",
+      "label": "protobuf.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/event-contracts/src/schemaRegistry.ts",
+      "label": "schemaRegistry.ts",
       "type": "ts"
     },
     {
@@ -1371,6 +1391,26 @@
     {
       "source": "backend/packages/event-contracts/src/envelope.ts",
       "target": "zod",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/protobuf.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/protobuf.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/protobuf.test.ts",
+      "target": "./schemaRegistry.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/event-contracts/src/protobuf.ts",
+      "target": "protobufjs",
       "relation": "IMPORTS"
     },
     {

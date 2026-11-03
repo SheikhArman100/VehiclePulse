@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-03T08:56:29.683Z
+Generated on: 2026-11-03T10:35:53.615Z
 
 ## Summary
-- Total Tracked Artifacts: 227
-- Total Dependency Relationships: 602
+- Total Tracked Artifacts: 231
+- Total Dependency Relationships: 606
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -65,6 +65,10 @@ Generated on: 2026-11-03T08:56:29.683Z
 - `backend/packages/event-contracts/src/contracts.test.ts` -> `node:test`
 - `backend/packages/event-contracts/src/contracts.test.ts` -> `node:assert/strict`
 - `backend/packages/event-contracts/src/envelope.ts` -> `zod`
+- `backend/packages/event-contracts/src/protobuf.test.ts` -> `node:test`
+- `backend/packages/event-contracts/src/protobuf.test.ts` -> `node:assert/strict`
+- `backend/packages/event-contracts/src/protobuf.test.ts` -> `./schemaRegistry.js`
+- `backend/packages/event-contracts/src/protobuf.ts` -> `protobufjs`
 - `backend/packages/event-contracts/src/state.ts` -> `zod`
 - `backend/packages/event-contracts/src/state.ts` -> `./envelope.js`
 - `backend/packages/event-contracts/src/state.ts` -> `./telemetry.js`

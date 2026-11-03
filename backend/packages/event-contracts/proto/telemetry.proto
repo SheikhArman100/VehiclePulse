@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package vehiclepulse.telemetry;
+
+// Canonical location representation
+message Location {
+  double latitude = 1;
+  double longitude = 2;
+  double heading = 3;
+  double altitude_meters = 4;
+}
+
+// Version 1 of Raw Telemetry Payload
+message RawTelemetryV1 {
+  string event_id = 1;
+  string vehicle_id = 2;
+  string device_id = 3;
+  string timestamp = 4;
+  Location location = 5;
+  double speed_kmh = 6;
+  double fuel_level_pct = 7;
+  double battery_level_pct = 8;
+  double engine_temp_c = 9;
+  double odometer_km = 10;
+}
+
+// Version 2 of Raw Telemetry Payload (Backward & Forward Compatible evolution)
+// - Added tire_pressure_psi (optional / new field index 11)
+// - Added ambient_temp_c (optional / new field index 12)
+message RawTelemetryV2 {
+  string event_id = 1;
+  string vehicle_id = 2;
+  string device_id = 3;
+  string timestamp = 4;
+  Location location = 5;
+  double speed_kmh = 6;
+  double fuel_level_pct = 7;
+  double battery_level_pct = 8;
+  double engine_temp_c = 9;
+  double odometer_km = 10;
+  double tire_pressure_psi = 11;
+  double ambient_temp_c = 12;
+}
+
+// Incompatible Schema Example (Breaking Change Demonstration)
+// - Violates Protobuf backward compatibility by repurposing field 6 (double -> string)
+// - And renumbering fields
+message IncompatibleRawTelemetry {
+  string event_id = 1;
+  string vehicle_id = 2;
+  string speed_kmh = 6; // TYPE MISMATCH: was double, now string!
+}
+
