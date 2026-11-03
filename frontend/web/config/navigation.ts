@@ -56,11 +56,10 @@ export const SIDEBAR_NAVIGATION: MenuGroup[] = [
         icon: BarChart3,
       },
       {
-        title: "Kafka & Pipeline",
+        title: "Kafka Pipeline",
         path: "/kafka",
         icon: Server,
       },
     ],
   },
 ];
-

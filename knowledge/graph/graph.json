@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-03T07:49:51.875Z",
-    "nodeCount": 215,
-    "edgeCount": 521
+    "generatedAt": "2026-11-03T08:00:09.328Z",
+    "nodeCount": 220,
+    "edgeCount": 560
   },
   "nodes": [
     {
@@ -957,9 +957,24 @@
       "type": "json"
     },
     {
+      "id": "frontend/web/app/alerts/page.tsx",
+      "label": "page.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/app/analytics/page.tsx",
+      "label": "page.tsx",
+      "type": "tsx"
+    },
+    {
       "id": "frontend/web/app/globals.css",
       "label": "globals.css",
       "type": "css"
+    },
+    {
+      "id": "frontend/web/app/kafka/page.tsx",
+      "label": "page.tsx",
+      "type": "tsx"
     },
     {
       "id": "frontend/web/app/layout.tsx",
@@ -968,6 +983,16 @@
     },
     {
       "id": "frontend/web/app/page.tsx",
+      "label": "page.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/app/vehicles/page.tsx",
+      "label": "page.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/app/vehicles/[id]/page.tsx",
       "label": "page.tsx",
       "type": "tsx"
     },
@@ -3454,6 +3479,101 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "next/link",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "@tanstack/react-query",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "@/lib/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "@/components/ui/card",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "@/components/ui/badge",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "@/components/ui/button",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "@/components/ui/states",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/alerts/page.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/analytics/page.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/analytics/page.tsx",
+      "target": "@tanstack/react-query",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/analytics/page.tsx",
+      "target": "@/lib/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/analytics/page.tsx",
+      "target": "@/components/ui/card",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/analytics/page.tsx",
+      "target": "@/components/ui/states",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/analytics/page.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/analytics/page.tsx",
+      "target": "@/components/ui/button",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/kafka/page.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/kafka/page.tsx",
+      "target": "@/components/ui/card",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/kafka/page.tsx",
+      "target": "@/components/ui/badge",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "frontend/web/app/layout.tsx",
       "target": "next",
       "relation": "IMPORTS"
@@ -3516,6 +3636,106 @@
     {
       "source": "frontend/web/app/page.tsx",
       "target": "@/hooks/useWebSocket",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "next/link",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "@tanstack/react-query",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "@/lib/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "@/components/ui/card",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "@/components/ui/badge",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "@/components/ui/button",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "@/components/ui/states",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/page.tsx",
+      "target": "lucide-react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "next/navigation",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "next/link",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "@tanstack/react-query",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "@/lib/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "@/components/ui/card",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "@/components/ui/badge",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "@/components/ui/button",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "@/components/ui/states",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "@/hooks/useWebSocket",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/vehicles/[id]/page.tsx",
+      "target": "@/lib/utils",
       "relation": "IMPORTS"
     },
     {

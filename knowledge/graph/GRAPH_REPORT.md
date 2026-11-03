@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-03T07:49:51.875Z
+Generated on: 2026-11-03T08:00:09.328Z
 
 ## Summary
-- Total Tracked Artifacts: 215
-- Total Dependency Relationships: 521
+- Total Tracked Artifacts: 220
+- Total Dependency Relationships: 560
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -493,6 +493,25 @@ Generated on: 2026-11-03T07:49:51.875Z
 - `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `@vehicle-pulse/logger`
 - `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/workers/command-worker/src/tests/commandWorker.test.ts` -> `../config/env.js`
+- `frontend/web/app/alerts/page.tsx` -> `react`
+- `frontend/web/app/alerts/page.tsx` -> `next/link`
+- `frontend/web/app/alerts/page.tsx` -> `@tanstack/react-query`
+- `frontend/web/app/alerts/page.tsx` -> `@/lib/api`
+- `frontend/web/app/alerts/page.tsx` -> `@/components/ui/card`
+- `frontend/web/app/alerts/page.tsx` -> `@/components/ui/badge`
+- `frontend/web/app/alerts/page.tsx` -> `@/components/ui/button`
+- `frontend/web/app/alerts/page.tsx` -> `@/components/ui/states`
+- `frontend/web/app/alerts/page.tsx` -> `@/lib/utils`
+- `frontend/web/app/analytics/page.tsx` -> `react`
+- `frontend/web/app/analytics/page.tsx` -> `@tanstack/react-query`
+- `frontend/web/app/analytics/page.tsx` -> `@/lib/api`
+- `frontend/web/app/analytics/page.tsx` -> `@/components/ui/card`
+- `frontend/web/app/analytics/page.tsx` -> `@/components/ui/states`
+- `frontend/web/app/analytics/page.tsx` -> `@/lib/utils`
+- `frontend/web/app/analytics/page.tsx` -> `@/components/ui/button`
+- `frontend/web/app/kafka/page.tsx` -> `react`
+- `frontend/web/app/kafka/page.tsx` -> `@/components/ui/card`
+- `frontend/web/app/kafka/page.tsx` -> `@/components/ui/badge`
 - `frontend/web/app/layout.tsx` -> `next`
 - `frontend/web/app/layout.tsx` -> `@/provider/root-provider`
 - `frontend/web/app/layout.tsx` -> `@/components/layout/context`
@@ -506,6 +525,26 @@ Generated on: 2026-11-03T07:49:51.875Z
 - `frontend/web/app/page.tsx` -> `@/components/ui/button`
 - `frontend/web/app/page.tsx` -> `@/components/ui/states`
 - `frontend/web/app/page.tsx` -> `@/hooks/useWebSocket`
+- `frontend/web/app/vehicles/page.tsx` -> `react`
+- `frontend/web/app/vehicles/page.tsx` -> `next/link`
+- `frontend/web/app/vehicles/page.tsx` -> `@tanstack/react-query`
+- `frontend/web/app/vehicles/page.tsx` -> `@/lib/api`
+- `frontend/web/app/vehicles/page.tsx` -> `@/components/ui/card`
+- `frontend/web/app/vehicles/page.tsx` -> `@/components/ui/badge`
+- `frontend/web/app/vehicles/page.tsx` -> `@/components/ui/button`
+- `frontend/web/app/vehicles/page.tsx` -> `@/components/ui/states`
+- `frontend/web/app/vehicles/page.tsx` -> `lucide-react`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `react`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `next/navigation`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `next/link`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `@tanstack/react-query`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `@/lib/api`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `@/components/ui/card`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `@/components/ui/badge`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `@/components/ui/button`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `@/components/ui/states`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `@/hooks/useWebSocket`
+- `frontend/web/app/vehicles/[id]/page.tsx` -> `@/lib/utils`
 - `frontend/web/components/layout/context.tsx` -> `react`
 - `frontend/web/components/layout/header.tsx` -> `react`
 - `frontend/web/components/layout/header.tsx` -> `next/link`
