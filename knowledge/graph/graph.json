@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-03T08:00:09.328Z",
-    "nodeCount": 220,
-    "edgeCount": 560
+    "generatedAt": "2026-11-03T08:11:27.406Z",
+    "nodeCount": 222,
+    "edgeCount": 580
   },
   "nodes": [
     {
@@ -982,6 +982,11 @@
       "type": "tsx"
     },
     {
+      "id": "frontend/web/app/map/page.tsx",
+      "label": "page.tsx",
+      "type": "tsx"
+    },
+    {
       "id": "frontend/web/app/page.tsx",
       "label": "page.tsx",
       "type": "tsx"
@@ -1014,6 +1019,11 @@
     {
       "id": "frontend/web/components/layout/sidebar.tsx",
       "label": "sidebar.tsx",
+      "type": "tsx"
+    },
+    {
+      "id": "frontend/web/components/map/fleet-map.tsx",
+      "label": "fleet-map.tsx",
       "type": "tsx"
     },
     {
@@ -3594,6 +3604,66 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "next/link",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "next/dynamic",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@tanstack/react-query",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@/lib/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@/types/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@/components/ui/card",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@/components/ui/badge",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@/components/ui/button",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@/components/ui/states",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@/hooks/useWebSocket",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/app/map/page.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "frontend/web/app/page.tsx",
       "target": "react",
       "relation": "IMPORTS"
@@ -3820,6 +3890,46 @@
     },
     {
       "source": "frontend/web/components/layout/sidebar.tsx",
+      "target": "lucide-react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/map/fleet-map.tsx",
+      "target": "react",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/map/fleet-map.tsx",
+      "target": "leaflet",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/map/fleet-map.tsx",
+      "target": "next/link",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/map/fleet-map.tsx",
+      "target": "@/types/api",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/map/fleet-map.tsx",
+      "target": "@/components/ui/badge",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/map/fleet-map.tsx",
+      "target": "@/components/ui/button",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/map/fleet-map.tsx",
+      "target": "@/lib/utils",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "frontend/web/components/map/fleet-map.tsx",
       "target": "lucide-react",
       "relation": "IMPORTS"
     },

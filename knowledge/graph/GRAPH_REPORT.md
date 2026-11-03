@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-03T08:00:09.328Z
+Generated on: 2026-11-03T08:11:27.406Z
 
 ## Summary
-- Total Tracked Artifacts: 220
-- Total Dependency Relationships: 560
+- Total Tracked Artifacts: 222
+- Total Dependency Relationships: 580
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -516,6 +516,18 @@ Generated on: 2026-11-03T08:00:09.328Z
 - `frontend/web/app/layout.tsx` -> `@/provider/root-provider`
 - `frontend/web/app/layout.tsx` -> `@/components/layout/context`
 - `frontend/web/app/layout.tsx` -> `@/components/layout/main-layout`
+- `frontend/web/app/map/page.tsx` -> `react`
+- `frontend/web/app/map/page.tsx` -> `next/link`
+- `frontend/web/app/map/page.tsx` -> `next/dynamic`
+- `frontend/web/app/map/page.tsx` -> `@tanstack/react-query`
+- `frontend/web/app/map/page.tsx` -> `@/lib/api`
+- `frontend/web/app/map/page.tsx` -> `@/types/api`
+- `frontend/web/app/map/page.tsx` -> `@/components/ui/card`
+- `frontend/web/app/map/page.tsx` -> `@/components/ui/badge`
+- `frontend/web/app/map/page.tsx` -> `@/components/ui/button`
+- `frontend/web/app/map/page.tsx` -> `@/components/ui/states`
+- `frontend/web/app/map/page.tsx` -> `@/hooks/useWebSocket`
+- `frontend/web/app/map/page.tsx` -> `@/lib/utils`
 - `frontend/web/app/page.tsx` -> `react`
 - `frontend/web/app/page.tsx` -> `next/link`
 - `frontend/web/app/page.tsx` -> `@tanstack/react-query`
@@ -562,6 +574,14 @@ Generated on: 2026-11-03T08:00:09.328Z
 - `frontend/web/components/layout/sidebar.tsx` -> `./context`
 - `frontend/web/components/layout/sidebar.tsx` -> `@/lib/utils`
 - `frontend/web/components/layout/sidebar.tsx` -> `lucide-react`
+- `frontend/web/components/map/fleet-map.tsx` -> `react`
+- `frontend/web/components/map/fleet-map.tsx` -> `leaflet`
+- `frontend/web/components/map/fleet-map.tsx` -> `next/link`
+- `frontend/web/components/map/fleet-map.tsx` -> `@/types/api`
+- `frontend/web/components/map/fleet-map.tsx` -> `@/components/ui/badge`
+- `frontend/web/components/map/fleet-map.tsx` -> `@/components/ui/button`
+- `frontend/web/components/map/fleet-map.tsx` -> `@/lib/utils`
+- `frontend/web/components/map/fleet-map.tsx` -> `lucide-react`
 - `frontend/web/components/ui/badge.tsx` -> `react`
 - `frontend/web/components/ui/badge.tsx` -> `@/lib/utils`
 - `frontend/web/components/ui/button.tsx` -> `react`
