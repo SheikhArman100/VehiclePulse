@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-03T08:34:19.521Z
+Generated on: 2026-11-03T08:56:29.683Z
 
 ## Summary
-- Total Tracked Artifacts: 225
-- Total Dependency Relationships: 592
+- Total Tracked Artifacts: 227
+- Total Dependency Relationships: 602
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -344,6 +344,9 @@ Generated on: 2026-11-03T08:34:19.521Z
 - `backend/services/analytics-service/src/tests/analytics.test.ts` -> `../app.js`
 - `backend/services/analytics-service/src/tests/analytics.test.ts` -> `../app/db/prisma.js`
 - `backend/services/analytics-service/src/tests/analytics.test.ts` -> `../app/kafka/analyticsConsumer.js`
+- `backend/services/telemetry-service/src/app/db/changeStream.ts` -> `mongodb`
+- `backend/services/telemetry-service/src/app/db/changeStream.ts` -> `@vehicle-pulse/logger`
+- `backend/services/telemetry-service/src/app/db/changeStream.ts` -> `../modules/vehicle/vehicle.model.js`
 - `backend/services/telemetry-service/src/app/db/database.ts` -> `mongoose`
 - `backend/services/telemetry-service/src/app/db/database.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts` -> `@vehicle-pulse/shared`
@@ -441,6 +444,13 @@ Generated on: 2026-11-03T08:34:19.521Z
 - `backend/services/telemetry-service/src/server.ts` -> `./app/kafka/mongoConsumer.js`
 - `backend/services/telemetry-service/src/server.ts` -> `./app/kafka/redisStateConsumer.js`
 - `backend/services/telemetry-service/src/server.ts` -> `./app/websocket/wsBroadcaster.js`
+- `backend/services/telemetry-service/src/server.ts` -> `./app/db/changeStream.js`
+- `backend/services/telemetry-service/src/tests/changeStream.test.ts` -> `node:test`
+- `backend/services/telemetry-service/src/tests/changeStream.test.ts` -> `node:assert/strict`
+- `backend/services/telemetry-service/src/tests/changeStream.test.ts` -> `mongoose`
+- `backend/services/telemetry-service/src/tests/changeStream.test.ts` -> `../app/db/changeStream.js`
+- `backend/services/telemetry-service/src/tests/changeStream.test.ts` -> `../app/modules/vehicle/vehicle.model.js`
+- `backend/services/telemetry-service/src/tests/changeStream.test.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `node:test`
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `node:assert/strict`
 - `backend/services/telemetry-service/src/tests/producer.test.ts` -> `@vehicle-pulse/logger`

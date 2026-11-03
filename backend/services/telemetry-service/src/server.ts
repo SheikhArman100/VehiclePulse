@@ -8,6 +8,7 @@ import { TelemetryKafkaProducer } from "./app/kafka/telemetryProducer.js";
 import { TelemetryMongoConsumer } from "./app/kafka/mongoConsumer.js";
 import { TelemetryRedisStateConsumer } from "./app/kafka/redisStateConsumer.js";
 import { WebSocketBroadcaster } from "./app/websocket/wsBroadcaster.js";
+import { MongoChangeStreamManager } from "./app/db/changeStream.js";
 
 const logger = createLogger({
   serviceName: env.SERVICE_NAME,
@@ -57,6 +58,17 @@ async function main() {
       );
     });
 
+    // 5b. Start MongoDB Change Streams for Vehicle inventory events (Phase 29)
+    await MongoChangeStreamManager.startWatching({
+      logger,
+      onVehicleChange: async (change) => {
+        logger.info(
+          { op: change.operationType },
+          "Derived change notification processed from MongoDB Change Stream"
+        );
+      },
+    });
+
     // 6. Initialize WebSocket Broadcaster & dedicated Redis Pub/Sub Subscriber (Phase 24)
     const stateService = TelemetryRedisStateConsumer.getStateService();
     const redisWrapper = TelemetryRedisStateConsumer.getRedisWrapper();
@@ -85,6 +97,7 @@ async function main() {
         if (wsBroadcaster) {
           await wsBroadcaster.close();
         }
+        await MongoChangeStreamManager.stopWatching();
         if (redisSubClient) {
           redisSubClient.disconnect();
         }

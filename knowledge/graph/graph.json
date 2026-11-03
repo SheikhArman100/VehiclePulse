@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-03T08:34:19.521Z",
-    "nodeCount": 225,
-    "edgeCount": 592
+    "generatedAt": "2026-11-03T08:56:29.683Z",
+    "nodeCount": 227,
+    "edgeCount": 602
   },
   "nodes": [
     {
@@ -717,6 +717,11 @@
       "type": "json"
     },
     {
+      "id": "backend/services/telemetry-service/src/app/db/changeStream.ts",
+      "label": "changeStream.ts",
+      "type": "ts"
+    },
+    {
       "id": "backend/services/telemetry-service/src/app/db/database.ts",
       "label": "database.ts",
       "type": "ts"
@@ -859,6 +864,11 @@
     {
       "id": "backend/services/telemetry-service/src/server.ts",
       "label": "server.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/services/telemetry-service/src/tests/changeStream.test.ts",
+      "label": "changeStream.test.ts",
       "type": "ts"
     },
     {
@@ -2759,6 +2769,21 @@
       "relation": "IMPORTS"
     },
     {
+      "source": "backend/services/telemetry-service/src/app/db/changeStream.ts",
+      "target": "mongodb",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/db/changeStream.ts",
+      "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/app/db/changeStream.ts",
+      "target": "../modules/vehicle/vehicle.model.js",
+      "relation": "IMPORTS"
+    },
+    {
       "source": "backend/services/telemetry-service/src/app/db/database.ts",
       "target": "mongoose",
       "relation": "IMPORTS"
@@ -3241,6 +3266,41 @@
     {
       "source": "backend/services/telemetry-service/src/server.ts",
       "target": "./app/websocket/wsBroadcaster.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/server.ts",
+      "target": "./app/db/changeStream.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/changeStream.test.ts",
+      "target": "node:test",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/changeStream.test.ts",
+      "target": "node:assert/strict",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/changeStream.test.ts",
+      "target": "mongoose",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/changeStream.test.ts",
+      "target": "../app/db/changeStream.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/changeStream.test.ts",
+      "target": "../app/modules/vehicle/vehicle.model.js",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/services/telemetry-service/src/tests/changeStream.test.ts",
+      "target": "@vehicle-pulse/logger",
       "relation": "IMPORTS"
     },
     {
