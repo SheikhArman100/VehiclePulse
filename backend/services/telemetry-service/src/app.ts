@@ -8,6 +8,7 @@ import {
   notFoundHandler,
   metricsMiddleware,
   metricsEndpointHandler,
+  openTelemetryMiddleware,
 } from "@vehicle-pulse/shared";
 import swaggerUi from "swagger-ui-express";
 import { isDatabaseHealthy } from "./app/db/database.js";
@@ -26,6 +27,7 @@ export function createApp(options: AppOptions): Application {
   app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ extended: true }));
   app.use(correlationIdMiddleware);
+  app.use(openTelemetryMiddleware("telemetry-service"));
   app.use(metricsMiddleware);
 
   // Prometheus scraping endpoint

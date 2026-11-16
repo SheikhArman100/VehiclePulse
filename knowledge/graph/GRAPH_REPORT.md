@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-03T11:47:52.876Z
+Generated on: 2026-11-16T07:58:10.560Z
 
 ## Summary
-- Total Tracked Artifacts: 233
-- Total Dependency Relationships: 607
+- Total Tracked Artifacts: 239
+- Total Dependency Relationships: 610
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -99,6 +99,9 @@ Generated on: 2026-11-03T11:47:52.876Z
 - `backend/packages/shared/src/sendResponse.ts` -> `express`
 - `backend/packages/shared/src/shutdown.ts` -> `http`
 - `backend/packages/shared/src/shutdown.ts` -> `@vehicle-pulse/logger`
+- `backend/packages/shared/src/tracing.ts` -> `express`
+- `backend/packages/shared/src/tracing.ts` -> `node:crypto`
+- `backend/packages/shared/src/tracing.ts` -> `node:async_hooks`
 - `backend/packages/shared/src/validateRequest.ts` -> `express`
 - `backend/packages/shared/src/validateRequest.ts` -> `zod`
 - `backend/packages/shared/src/vehicleGeo.ts` -> `ioredis`

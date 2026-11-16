@@ -1,14 +1,39 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-03T11:47:52.876Z",
-    "nodeCount": 233,
-    "edgeCount": 607
+    "generatedAt": "2026-11-16T07:58:10.560Z",
+    "nodeCount": 239,
+    "edgeCount": 610
   },
   "nodes": [
     {
       "id": "backend/docker-compose.yml",
       "label": "docker-compose.yml",
+      "type": "yml"
+    },
+    {
+      "id": "backend/infrastructure/grafana/dashboards/datastores-performance.json",
+      "label": "datastores-performance.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/infrastructure/grafana/dashboards/kafka-streaming.json",
+      "label": "kafka-streaming.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/infrastructure/grafana/dashboards/service-health.json",
+      "label": "service-health.json",
+      "type": "json"
+    },
+    {
+      "id": "backend/infrastructure/grafana/provisioning/dashboards/dashboards.yml",
+      "label": "dashboards.yml",
+      "type": "yml"
+    },
+    {
+      "id": "backend/infrastructure/grafana/provisioning/datasources/prometheus.yml",
+      "label": "prometheus.yml",
       "type": "yml"
     },
     {
@@ -289,6 +314,11 @@
     {
       "id": "backend/packages/shared/src/shutdown.ts",
       "label": "shutdown.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/tracing.ts",
+      "label": "tracing.ts",
       "type": "ts"
     },
     {
@@ -1571,6 +1601,21 @@
     {
       "source": "backend/packages/shared/src/shutdown.ts",
       "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/tracing.ts",
+      "target": "express",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/tracing.ts",
+      "target": "node:crypto",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/tracing.ts",
+      "target": "node:async_hooks",
       "relation": "IMPORTS"
     },
     {

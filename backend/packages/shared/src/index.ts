@@ -16,3 +16,4 @@ export * from "./cacheService.js";
 export * from "./rateLimiter.js";
 export * from "./distributedLock.js";
 export * from "./metrics.js";
+export * from "./tracing.js";

@@ -7,6 +7,7 @@ import {
   notFoundHandler,
   metricsMiddleware,
   metricsEndpointHandler,
+  openTelemetryMiddleware,
 } from "@vehicle-pulse/shared";
 
 import type { Logger } from "@vehicle-pulse/logger";
@@ -32,6 +33,7 @@ export function createApp(options: CreateAppOptions): Application {
   app.use(cors());
   app.use(express.json());
   app.use(correlationIdMiddleware);
+  app.use(openTelemetryMiddleware("analytics-service"));
   app.use(metricsMiddleware);
 
   // Prometheus scraping endpoint

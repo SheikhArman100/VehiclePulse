@@ -1,4 +1,4 @@
-import { createKafkaClient, type Producer, metrics } from "@vehicle-pulse/shared";
+import { createKafkaClient, type Producer, metrics, injectTraceContext } from "@vehicle-pulse/shared";
 import {
   KAFKA_TOPICS,
   TelemetryRawEventSchema,
@@ -95,8 +95,15 @@ const publishTelemetryEvent = async (
 
   const validatedEvent: TelemetryRawEvent = parseResult.data;
 
-  // 2. Publish to Kafka with partition key = vehicleId
+  // 2. Publish to Kafka with partition key = vehicleId and W3C traceparent headers
   try {
+    const headers: Record<string, any> = injectTraceContext({
+      "x-event-id": validatedEvent.eventId,
+      "x-event-type": validatedEvent.eventType,
+      "x-version": validatedEvent.version,
+      "x-source": "telemetry-service",
+    });
+
     const recordMetadata = await producerInstance.send({
       topic: KAFKA_TOPICS.TELEMETRY_RAW,
       messages: [
@@ -104,12 +111,7 @@ const publishTelemetryEvent = async (
           key: validatedEvent.vehicleId,
           value: JSON.stringify(validatedEvent),
           timestamp: new Date(validatedEvent.timestamp).getTime().toString(),
-          headers: {
-            "x-event-id": validatedEvent.eventId,
-            "x-event-type": validatedEvent.eventType,
-            "x-version": validatedEvent.version,
-            "x-source": "telemetry-service",
-          },
+          headers,
         },
       ],
     });
