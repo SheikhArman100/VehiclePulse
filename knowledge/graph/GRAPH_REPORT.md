@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-03T10:35:53.615Z
+Generated on: 2026-11-03T11:47:52.876Z
 
 ## Summary
-- Total Tracked Artifacts: 231
-- Total Dependency Relationships: 606
+- Total Tracked Artifacts: 233
+- Total Dependency Relationships: 607
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -88,6 +88,7 @@ Generated on: 2026-11-03T10:35:53.615Z
 - `backend/packages/shared/src/errorHandler.ts` -> `./errors.js`
 - `backend/packages/shared/src/health.ts` -> `express`
 - `backend/packages/shared/src/kafka.ts` -> `kafkajs`
+- `backend/packages/shared/src/metrics.ts` -> `express`
 - `backend/packages/shared/src/rabbitmq.ts` -> `amqplib`
 - `backend/packages/shared/src/rabbitmq.ts` -> `@vehicle-pulse/logger`
 - `backend/packages/shared/src/rateLimiter.ts` -> `express`

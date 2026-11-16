@@ -2,7 +2,7 @@ import { WebSocketServer, WebSocket } from "ws";
 import type { Server as HttpServer } from "node:http";
 import type { Redis } from "ioredis";
 import type { Logger } from "@vehicle-pulse/logger";
-import { VehicleStateService, type StoredVehicleState } from "@vehicle-pulse/shared";
+import { VehicleStateService, type StoredVehicleState, metrics } from "@vehicle-pulse/shared";
 
 export const REDIS_CHANNELS = {
   STATE_UPDATES: "vehicle:events:state-updates",
@@ -61,6 +61,7 @@ export class WebSocketBroadcaster {
         subscriptions: new Set(),
       };
       this.clientMetaMap.set(ws, meta);
+      metrics.websocketConnectionsActiveGauge.set(this.clientMetaMap.size);
 
       // Handle pong responses to heartbeats
       ws.on("pong", () => {
@@ -81,12 +82,14 @@ export class WebSocketBroadcaster {
 
       ws.on("close", (code, reason) => {
         this.clientMetaMap.delete(ws);
+        metrics.websocketConnectionsActiveGauge.set(this.clientMetaMap.size);
         this.logger.info({ clientIp, code, reason: reason.toString() }, "WebSocket client disconnected");
       });
 
       ws.on("error", (err) => {
         this.logger.error({ err, clientIp }, "WebSocket client socket error");
         this.clientMetaMap.delete(ws);
+        metrics.websocketConnectionsActiveGauge.set(this.clientMetaMap.size);
         ws.terminate();
       });
 
@@ -207,6 +210,7 @@ export class WebSocketBroadcaster {
       // Check if client subscribed to all or this specific vehicle
       if (meta.subscriptions.size === 0 || meta.subscriptions.has(state.vehicleId)) {
         ws.send(payload);
+        metrics.websocketMessagesBroadcastTotal.inc();
       }
     }
   }
@@ -220,6 +224,7 @@ export class WebSocketBroadcaster {
         if (!meta.isAlive) {
           this.logger.info("Terminating unresponsive WebSocket client (heartbeat failed)");
           this.clientMetaMap.delete(ws);
+          metrics.websocketConnectionsActiveGauge.set(this.clientMetaMap.size);
           ws.terminate();
           continue;
         }

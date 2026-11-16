@@ -6,6 +6,8 @@ import {
   createErrorHandler,
   createHealthRouter,
   notFoundHandler,
+  metricsMiddleware,
+  metricsEndpointHandler,
 } from "@vehicle-pulse/shared";
 import swaggerUi from "swagger-ui-express";
 import { isDatabaseHealthy } from "./app/db/database.js";
@@ -24,6 +26,11 @@ export function createApp(options: AppOptions): Application {
   app.use(express.json({ limit: "10mb" }));
   app.use(express.urlencoded({ extended: true }));
   app.use(correlationIdMiddleware);
+  app.use(metricsMiddleware);
+
+  // Prometheus scraping endpoint
+  app.get("/metrics", metricsEndpointHandler);
+  app.get("/api/telemetry/metrics", metricsEndpointHandler);
 
   // Health and diagnostic routes with live MongoDB connection check
   const healthRouter = createHealthRouter({

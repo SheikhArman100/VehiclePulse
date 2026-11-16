@@ -5,6 +5,8 @@ import {
   createErrorHandler,
   createHealthRouter,
   notFoundHandler,
+  metricsMiddleware,
+  metricsEndpointHandler,
 } from "@vehicle-pulse/shared";
 
 import type { Logger } from "@vehicle-pulse/logger";
@@ -30,6 +32,11 @@ export function createApp(options: CreateAppOptions): Application {
   app.use(cors());
   app.use(express.json());
   app.use(correlationIdMiddleware);
+  app.use(metricsMiddleware);
+
+  // Prometheus scraping endpoint
+  app.get("/metrics", metricsEndpointHandler);
+  app.get("/api/analytics/metrics", metricsEndpointHandler);
 
   // 2. Health routes (/health/live & /health/ready)
   const healthRouter = createHealthRouter({

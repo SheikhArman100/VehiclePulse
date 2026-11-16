@@ -1,4 +1,4 @@
-import { createKafkaClient, type Consumer } from "@vehicle-pulse/shared";
+import { createKafkaClient, type Consumer, metrics } from "@vehicle-pulse/shared";
 import {
   KAFKA_TOPICS,
   TelemetryRawEventSchema,
@@ -67,10 +67,22 @@ const startConsumer = async (options: MongoConsumerOptions): Promise<void> => {
 
           if (parseResult.success) {
             validEvents.push(parseResult.data);
+            metrics.kafkaMessagesConsumedTotal.inc({
+              topic: KAFKA_TOPICS.TELEMETRY_RAW,
+              consumer_group: groupId,
+            });
           } else {
+            metrics.kafkaConsumerErrorsTotal.inc({
+              topic: KAFKA_TOPICS.TELEMETRY_RAW,
+              consumer_group: groupId,
+            });
             logger.warn({ key: message.key?.toString() }, "Skipping malformed message on MongoDB storage consumer");
           }
         } catch (err) {
+          metrics.kafkaConsumerErrorsTotal.inc({
+            topic: KAFKA_TOPICS.TELEMETRY_RAW,
+            consumer_group: groupId,
+          });
           logger.error({ err }, "Failed to deserialize message on MongoDB storage consumer");
         }
       }

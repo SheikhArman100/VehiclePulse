@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-03T10:35:53.615Z",
-    "nodeCount": 231,
-    "edgeCount": 606
+    "generatedAt": "2026-11-03T11:47:52.876Z",
+    "nodeCount": 233,
+    "edgeCount": 607
   },
   "nodes": [
     {
@@ -90,6 +90,11 @@
       "id": "backend/infrastructure/nginx/README.md",
       "label": "README.md",
       "type": "md"
+    },
+    {
+      "id": "backend/infrastructure/prometheus/prometheus.yml",
+      "label": "prometheus.yml",
+      "type": "yml"
     },
     {
       "id": "backend/package-lock.json",
@@ -249,6 +254,11 @@
     {
       "id": "backend/packages/shared/src/kafka.ts",
       "label": "kafka.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/packages/shared/src/metrics.ts",
+      "label": "metrics.ts",
       "type": "ts"
     },
     {
@@ -1506,6 +1516,11 @@
     {
       "source": "backend/packages/shared/src/kafka.ts",
       "target": "kafkajs",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/packages/shared/src/metrics.ts",
+      "target": "express",
       "relation": "IMPORTS"
     },
     {

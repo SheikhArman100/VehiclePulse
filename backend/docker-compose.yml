@@ -294,6 +294,29 @@ services:
     networks:
       - vehiclepulse-network
 
+  # -------------------------------------------------------------
+  # 8. Prometheus (100% Free Time-Series Monitoring Engine)
+  # -------------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:v2.54.1
+    container_name: vehiclepulse-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--web.console.libraries=/usr/share/prometheus/console_libraries"
+      - "--web.console.templates=/usr/share/prometheus/consoles"
+      - "--web.enable-lifecycle"
+    volumes:
+      - ./infrastructure/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - vehiclepulse-network
+
 # ---------------------------------------------------------------
 # Persistent Data Volumes
 # ---------------------------------------------------------------
@@ -304,6 +327,7 @@ volumes:
   redis_data:
   rabbitmq_data:
   kafka_data:
+  prometheus_data:
 
 # ---------------------------------------------------------------
 # Internal Network

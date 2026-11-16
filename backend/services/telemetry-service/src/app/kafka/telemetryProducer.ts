@@ -1,4 +1,4 @@
-import { createKafkaClient, type Producer } from "@vehicle-pulse/shared";
+import { createKafkaClient, type Producer, metrics } from "@vehicle-pulse/shared";
 import {
   KAFKA_TOPICS,
   TelemetryRawEventSchema,
@@ -115,6 +115,7 @@ const publishTelemetryEvent = async (
     });
 
     const meta = recordMetadata[0];
+    metrics.kafkaMessagesProducedTotal.inc({ topic: KAFKA_TOPICS.TELEMETRY_RAW });
     return {
       published: true,
       topic: meta.topicName,
@@ -122,6 +123,7 @@ const publishTelemetryEvent = async (
       offset: meta.baseOffset,
     };
   } catch (error) {
+    metrics.kafkaProducerErrorsTotal.inc({ topic: KAFKA_TOPICS.TELEMETRY_RAW });
     logger.error({ error, vehicleId: validatedEvent.vehicleId }, "Failed to publish telemetry event to Kafka");
     throw error;
   }
