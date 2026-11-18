@@ -24,6 +24,9 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
+# Install dumb-init for clean graceful shutdown signal handling
+RUN apk add --no-cache dumb-init
+
 # Copy built artifacts and production dependencies
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules/ ./node_modules/
@@ -33,9 +36,13 @@ COPY --from=builder /app/services/analytics-service/dist/ ./services/analytics-s
 COPY --from=builder /app/services/analytics-service/prisma/ ./services/analytics-service/prisma/
 COPY --from=builder /app/services/analytics-service/prisma.config.ts ./services/analytics-service/prisma.config.ts
 
+# Ensure non-root execution for security hardening
+RUN chown -R node:node /app
+USER node
 
 WORKDIR /app/services/analytics-service
 
 EXPOSE 4002
 
+ENTRYPOINT ["dumb-init", "--"]
 CMD ["node", "dist/server.js"]

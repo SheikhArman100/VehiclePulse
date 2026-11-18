@@ -301,6 +301,9 @@ services:
     image: prom/prometheus:v2.54.1
     container_name: vehiclepulse-prometheus
     restart: unless-stopped
+    profiles:
+      - full
+      - observability
     ports:
       - "9090:9090"
     command:
@@ -324,6 +327,9 @@ services:
     image: grafana/grafana:11.2.0
     container_name: vehiclepulse-grafana
     restart: unless-stopped
+    profiles:
+      - full
+      - observability
     ports:
       - "3001:3000"
     environment:

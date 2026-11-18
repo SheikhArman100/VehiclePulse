@@ -21,6 +21,9 @@ FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
+# Install curl/wget for healthchecks and dumb-init for graceful signal propagation
+RUN apk add --no-cache dumb-init
+
 # Copy built artifacts and production dependencies
 COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/node_modules/ ./node_modules/
@@ -28,8 +31,13 @@ COPY --from=builder /app/packages/ ./packages/
 COPY --from=builder /app/services/telemetry-service/package.json ./services/telemetry-service/
 COPY --from=builder /app/services/telemetry-service/dist/ ./services/telemetry-service/dist/
 
+# Ensure non-root execution for security hardening
+RUN chown -R node:node /app
+USER node
+
 WORKDIR /app/services/telemetry-service
 
 EXPOSE 4001
 
+ENTRYPOINT ["dumb-init", "--"]
 CMD ["node", "dist/server.js"]
