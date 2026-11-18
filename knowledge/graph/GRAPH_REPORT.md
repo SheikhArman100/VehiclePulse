@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-18T08:31:11.372Z
+Generated on: 2026-11-18T10:08:59.817Z
 
 ## Summary
-- Total Tracked Artifacts: 242
-- Total Dependency Relationships: 615
+- Total Tracked Artifacts: 245
+- Total Dependency Relationships: 619
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -109,6 +109,10 @@ Generated on: 2026-11-18T08:31:11.372Z
 - `backend/packages/shared/src/vehicleState.ts` -> `ioredis`
 - `backend/packages/shared/src/vehicleState.ts` -> `@vehicle-pulse/event-contracts`
 - `backend/packages/shared/src/vehicleState.ts` -> `@vehicle-pulse/logger`
+- `backend/scripts/benchmarks/e2e-pipeline-benchmark.ts` -> `kafkajs`
+- `backend/scripts/benchmarks/http-benchmark.ts` -> `node:http`
+- `backend/scripts/benchmarks/producer-benchmark.ts` -> `kafkajs`
+- `backend/scripts/benchmarks/producer-benchmark.ts` -> `node:os`
 - `backend/scripts/drills/run-failure-drills.ts` -> `kafkajs`
 - `backend/scripts/drills/run-failure-drills.ts` -> `node:child_process`
 - `backend/scripts/drills/run-failure-drills.ts` -> `ws`
