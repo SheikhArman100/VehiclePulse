@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-18T10:08:59.817Z",
+    "generatedAt": "2026-11-18T10:26:46.493Z",
     "nodeCount": 245,
-    "edgeCount": 619
+    "edgeCount": 618
   },
   "nodes": [
     {
@@ -2986,11 +2986,6 @@
     {
       "source": "backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts",
       "target": "@vehicle-pulse/logger",
-      "relation": "IMPORTS"
-    },
-    {
-      "source": "backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts",
-      "target": "@vehicle-pulse/shared",
       "relation": "IMPORTS"
     },
     {

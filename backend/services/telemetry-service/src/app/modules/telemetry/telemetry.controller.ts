@@ -36,6 +36,25 @@ const recordTelemetry = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const recordTelemetryBatch = catchAsync(async (req: Request, res: Response) => {
+  const logger = req.app.locals.logger || console;
+  const items = Array.isArray(req.body) ? req.body : (Array.isArray(req.body?.events) ? req.body.events : [req.body]);
+
+  const batchResult = await TelemetryService.recordTelemetryBatch(items, logger);
+
+  sendResponse(res, {
+    statusCode: 202,
+    success: true,
+    message: `Batch of ${batchResult.publishedCount} telemetry events accepted and queued to Kafka`,
+    data: {
+      status: "queued",
+      topic: "vehicle.telemetry.raw",
+      publishedCount: batchResult.publishedCount,
+      errors: batchResult.errors,
+    },
+  });
+});
+
 const getVehicleHistory = catchAsync(async (req: Request, res: Response) => {
   const { vehicleId, from, to, page, limit } = req.query as Record<string, string>;
 
@@ -111,6 +130,7 @@ const getVehicleHourlyStats = catchAsync(async (req: Request, res: Response) => 
 
 export const TelemetryController = {
   recordTelemetry,
+  recordTelemetryBatch,
   getVehicleHistory,
   getLatestVehicleTelemetry,
   findNearbyTelemetry,

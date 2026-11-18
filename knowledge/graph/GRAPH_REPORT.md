@@ -1,10 +1,10 @@
 # VehiclePulse — Codebase Knowledge Graph Report
 
-Generated on: 2026-11-18T10:08:59.817Z
+Generated on: 2026-11-18T10:26:46.493Z
 
 ## Summary
 - Total Tracked Artifacts: 245
-- Total Dependency Relationships: 619
+- Total Dependency Relationships: 618
 
 ## Subsystem Structure
 1. **Backend Workspaces** (`backend/packages/*`)
@@ -370,7 +370,6 @@ Generated on: 2026-11-18T10:08:59.817Z
 - `backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/app/kafka/mongoConsumer.ts` -> `../modules/telemetry/telemetry.service.js`
 - `backend/services/telemetry-service/src/app/kafka/redisStateConsumer.ts` -> `@vehicle-pulse/logger`
-- `backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts` -> `@vehicle-pulse/shared`
 - `backend/services/telemetry-service/src/app/kafka/telemetryProducer.ts` -> `@vehicle-pulse/logger`
 - `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `express`
 - `backend/services/telemetry-service/src/app/modules/device/device.controller.ts` -> `@vehicle-pulse/shared`

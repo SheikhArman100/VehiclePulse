@@ -6,6 +6,7 @@ import { TelemetryQueryValidations } from "./telemetry.interface.js";
 const router = express.Router();
 
 router.post("/", TelemetryController.recordTelemetry);
+router.post("/batch", TelemetryController.recordTelemetryBatch);
 
 router.get(
   "/history",

@@ -1,4 +1,4 @@
-import { Kafka, logLevel, type KafkaConfig, type Producer, type Consumer, type Admin } from "kafkajs";
+import { Kafka, logLevel, CompressionTypes, type KafkaConfig, type Producer, type Consumer, type Admin } from "kafkajs";
 
 export interface KafkaClientOptions {
   clientId: string;
@@ -22,4 +22,5 @@ export const createKafkaClient = (options: KafkaClientOptions): Kafka => {
   return new Kafka(config);
 };
 
+export { CompressionTypes };
 export type { Kafka, Producer, Consumer, Admin };

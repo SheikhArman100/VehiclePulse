@@ -1,7 +1,14 @@
-import { createKafkaClient, type Producer, metrics, injectTraceContext } from "@vehicle-pulse/shared";
+import {
+  createKafkaClient,
+  type Producer,
+  metrics,
+  injectTraceContext,
+  CompressionTypes,
+} from "@vehicle-pulse/shared";
 import {
   KAFKA_TOPICS,
   TelemetryRawEventSchema,
+  fastValidateTelemetryRawEvent,
   type TelemetryRawEvent,
 } from "@vehicle-pulse/event-contracts";
 import type { Logger } from "@vehicle-pulse/logger";
@@ -25,6 +32,10 @@ let isConnected = false;
 
 /**
  * Initializes and connects the KafkaJS producer for Telemetry Service.
+ *
+ * Micro-batching & compression optimizations (Phase 36):
+ * - maxInFlightRequests: 5 (pipelined requests with idempotent producer)
+ * - CompressionTypes.GZIP applied to batches to minimize socket/network overhead
  */
 const initProducer = async (options: TelemetryProducerOptions): Promise<Producer> => {
   if (producerInstance && isConnected) {
@@ -39,7 +50,7 @@ const initProducer = async (options: TelemetryProducerOptions): Promise<Producer
   producerInstance = kafka.producer({
     allowAutoTopicCreation: false,
     idempotent: true, // Idempotent producer guarantees exactly-once delivery within a single session
-    maxInFlightRequests: 1, // Required when idempotent is true
+    maxInFlightRequests: 5, // Pipelining up to 5 concurrent in-flight requests per socket
     retry: {
       initialRetryTime: 100,
       retries: 5,
@@ -48,7 +59,7 @@ const initProducer = async (options: TelemetryProducerOptions): Promise<Producer
 
   await producerInstance.connect();
   isConnected = true;
-  options.logger.info("Kafka producer successfully connected for Telemetry Service");
+  options.logger.info("Kafka producer successfully connected for Telemetry Service (optimized)");
 
   return producerInstance;
 };
@@ -70,7 +81,7 @@ const disconnectProducer = async (logger: Logger): Promise<void> => {
  * Publishes a validated TelemetryRawEvent to `vehicle.telemetry.raw`.
  *
  * Guarantees:
- * - Validated strictly against TelemetryRawEventSchema before publishing.
+ * - Validated strictly against TelemetryRawEventSchema / fast-path before publishing.
  * - Partition key is explicitly `event.vehicleId` ensuring per-vehicle ordering.
  */
 const publishTelemetryEvent = async (
@@ -81,19 +92,25 @@ const publishTelemetryEvent = async (
     throw new Error("Kafka producer is not connected. Call initProducer first.");
   }
 
-  // 1. Validate event schema strictly
-  const parseResult = TelemetryRawEventSchema.safeParse(event);
-  if (!parseResult.success) {
-    const errorMsg = `Invalid telemetry event contract: ${parseResult.error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ")}`;
-    logger.warn({ errors: parseResult.error.format() }, errorMsg);
-    return {
-      published: false,
-      topic: KAFKA_TOPICS.TELEMETRY_RAW,
-      error: errorMsg,
-    };
-  }
+  // 1. Validate event schema (fast-path check first, fallback to safeParse)
+  const fastResult = fastValidateTelemetryRawEvent(event);
+  let validatedEvent: TelemetryRawEvent;
 
-  const validatedEvent: TelemetryRawEvent = parseResult.data;
+  if (fastResult.success) {
+    validatedEvent = fastResult.data;
+  } else {
+    const parseResult = TelemetryRawEventSchema.safeParse(event);
+    if (!parseResult.success) {
+      const errorMsg = `Invalid telemetry event contract: ${parseResult.error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ")}`;
+      logger.warn({ errors: parseResult.error.format() }, errorMsg);
+      return {
+        published: false,
+        topic: KAFKA_TOPICS.TELEMETRY_RAW,
+        error: errorMsg,
+      };
+    }
+    validatedEvent = parseResult.data;
+  }
 
   // 2. Publish to Kafka with partition key = vehicleId and W3C traceparent headers
   try {
@@ -132,7 +149,7 @@ const publishTelemetryEvent = async (
 };
 
 /**
- * Publishes a batch of telemetry events.
+ * Publishes a batch of telemetry events with GZIP compression and fast-path validation.
  */
 const publishTelemetryBatch = async (
   events: unknown[],
@@ -153,15 +170,22 @@ const publishTelemetryBatch = async (
   const errors: string[] = [];
 
   for (const raw of events) {
-    const parseResult = TelemetryRawEventSchema.safeParse(raw);
-    if (!parseResult.success) {
-      errors.push(
-        parseResult.error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ")
-      );
-      continue;
+    const fastResult = fastValidateTelemetryRawEvent(raw);
+    let event: TelemetryRawEvent;
+
+    if (fastResult.success) {
+      event = fastResult.data;
+    } else {
+      const parseResult = TelemetryRawEventSchema.safeParse(raw);
+      if (!parseResult.success) {
+        errors.push(
+          parseResult.error.errors.map((e) => `${e.path.join(".")}: ${e.message}`).join(", ")
+        );
+        continue;
+      }
+      event = parseResult.data;
     }
 
-    const event = parseResult.data;
     validMessages.push({
       key: event.vehicleId,
       value: JSON.stringify(event),
@@ -176,10 +200,17 @@ const publishTelemetryBatch = async (
   }
 
   if (validMessages.length > 0) {
+    // Apply GZIP compression when batch size is significant (>= 10 messages) to save bandwidth
+    const compression = validMessages.length >= 10 ? CompressionTypes.GZIP : CompressionTypes.None;
     await producerInstance.send({
       topic: KAFKA_TOPICS.TELEMETRY_RAW,
+      compression,
       messages: validMessages,
     });
+    metrics.kafkaMessagesProducedTotal.inc(
+      { topic: KAFKA_TOPICS.TELEMETRY_RAW },
+      validMessages.length
+    );
   }
 
   return {

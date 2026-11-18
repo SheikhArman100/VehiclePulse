@@ -66,14 +66,15 @@ async function runWorker(
   body: any,
   count: number,
   latencies: number[],
-  failures: { count: number }
+  failures: { count: number; lastError?: string }
 ) {
   for (let i = 0; i < count; i++) {
     try {
       const lat = await makeRequest(url, method, body);
       latencies.push(lat);
-    } catch {
+    } catch (err: any) {
       failures.count++;
+      failures.lastError = err?.message || String(err);
     }
   }
 }
@@ -81,7 +82,7 @@ async function runWorker(
 async function runBenchmark(name: string, options: LoadTestOptions) {
   console.log(`\nBenchmarking: ${name} (Concurrency: ${options.concurrency}, Requests: ${options.totalRequests})...`);
   const latencies: number[] = [];
-  const failures = { count: 0 };
+  const failures = { count: 0, lastError: undefined as string | undefined };
   const requestsPerWorker = Math.floor(options.totalRequests / options.concurrency);
 
   const startTime = process.hrtime();
@@ -114,7 +115,7 @@ async function runBenchmark(name: string, options: LoadTestOptions) {
   };
 
   summaries.push(summary);
-  console.log(` -> ${reqPerSec} req/sec | p50: ${summary.p50Ms}ms | p95: ${summary.p95Ms}ms | p99: ${summary.p99Ms}ms | Failures: ${failures.count}`);
+  console.log(` -> ${reqPerSec} req/sec | p50: ${summary.p50Ms}ms | p95: ${summary.p95Ms}ms | p99: ${summary.p99Ms}ms | Failures: ${failures.count}${failures.lastError ? ` (${failures.lastError})` : ""}`);
 }
 
 async function main() {
@@ -184,6 +185,39 @@ async function main() {
         },
       },
     },
+  });
+
+  // 2b. High-Throughput Batch Ingestion (POST :80/api/telemetry/v1/telemetry/batch) [Phase 36 Optimization]
+  const sampleBatch = Array.from({ length: 50 }).map((_, i) => ({
+    eventId: `c3d4e5f6-a1b2-4c3d-8e4f-5a6b7c8d9e${(i % 90 + 10)}`,
+    eventType: "telemetry.raw",
+    version: "1.0.0",
+    vehicleId: `veh_bench_batch_${i % 10}`,
+    deviceId: `dev_bench_batch_${i % 10}`,
+    timestamp: new Date().toISOString(),
+    data: {
+      speed: 65.0,
+      rpm: 2500,
+      fuelLevelPercent: 80.0,
+      engineTemperatureCelsius: 86.0,
+      batteryVoltage: 13.8,
+      odometerKm: 15000.0,
+      engineStatus: "ON",
+      accelerationG: 0.01,
+      location: {
+        latitude: 37.7749,
+        longitude: -122.4194,
+        heading: 90,
+      },
+    },
+  }));
+
+  await runBenchmark("Nginx Bulk Batch Ingest (POST :80/api/telemetry/v1/telemetry/batch - 50 msgs/req)", {
+    url: "http://localhost:80/api/telemetry/v1/telemetry/batch",
+    method: "POST",
+    concurrency: 20,
+    totalRequests: 200, // 200 req * 50 = 10,000 events total
+    body: sampleBatch,
   });
 
   // 3. PostgreSQL Analytics Summary Read API (GET :80/api/analytics/v1/summary)
