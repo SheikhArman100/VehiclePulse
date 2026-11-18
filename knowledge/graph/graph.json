@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-16T07:58:10.560Z",
-    "nodeCount": 239,
-    "edgeCount": 610
+    "generatedAt": "2026-11-18T06:17:41.270Z",
+    "nodeCount": 240,
+    "edgeCount": 613
   },
   "nodes": [
     {
@@ -345,6 +345,11 @@
       "id": "backend/README.md",
       "label": "README.md",
       "type": "md"
+    },
+    {
+      "id": "backend/scripts/drills/run-failure-drills.ts",
+      "label": "run-failure-drills.ts",
+      "type": "ts"
     },
     {
       "id": "backend/services/alert-service/package.json",
@@ -1651,6 +1656,21 @@
     {
       "source": "backend/packages/shared/src/vehicleState.ts",
       "target": "@vehicle-pulse/logger",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/scripts/drills/run-failure-drills.ts",
+      "target": "kafkajs",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/scripts/drills/run-failure-drills.ts",
+      "target": "node:child_process",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/scripts/drills/run-failure-drills.ts",
+      "target": "ws",
       "relation": "IMPORTS"
     },
     {
