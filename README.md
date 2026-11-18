@@ -1,159 +1,202 @@
-# Softograph AI OS — Developer Edition
+# VehiclePulse — Distributed Telemetry & Real-Time Event Streaming Platform
 
-A streamlined, developer-only build loop for turning specs, PRDs, and user stories into verified production software using AI coding harnesses (**opencode**, **Antigravity**, or **Claude Code**).
+**VehiclePulse** is an enterprise-grade, high-throughput vehicle telematics and event streaming platform built with **Node.js, TypeScript, Apache Kafka (KRaft), MongoDB, PostgreSQL, MySQL, Redis, RabbitMQ, and Next.js 15**.
+
+The platform demonstrates distributed systems engineering, decoupled event-driven architectures, idempotent stream processing, multi-datastore CQRS, disaster recovery chaos drills, high-throughput batching, and observability — **all runnable locally on 100% free and open-source infrastructure** with zero paid cloud dependencies.
 
 ---
 
-## 1. Quick Start
+## 1. High-Level Architecture & Topology
 
-### Step 1: Harness Configuration
-Configure your AI coding harness to point to this repository:
-- **opencode** (default & recommended)
-- **Antigravity**
-- **Claude Code**
+```text
+                   +--------------------------------------------------------+
+                   |           Edge Gateway / Reverse Proxy                 |
+                   |               (Nginx Port 80)                          |
+                   +--------------------------------------------------------+
+                          |                 |                   |        |
+         POST /telemetry  |  REST Queries   |  Live WebSocket   |        | UI Requests
+         (6,050 evt/sec)  |                 |  (/ws Upgrade)    |        | (Next.js)
+                          v                 v                   v        v
+           +---------------------+   +-------------+    +-------------------+
+           |  Telemetry Service  |   |  Analytics  |    |  Frontend Web UI  |
+           |    (Express :4001)  |   |  & Alerts   |    |  (Next.js :3000)  |
+           +---------------------+   +-------------+    +-------------------+
+             |                 |
+(Kafka-First |                 | (Oplog Change Stream)
+ Ingestion)  v                 v
+   +--------------------+  +----------------------+
+   | Kafka KRaft Cluster|  | MongoDB Time-Series  |
+   | vehicle.telemetry  |  |  (Raw GPS & Fleet)   |
+   +--------------------+  +----------------------+
+     |          |          |
+     |          |          | (Kafka Consumer Groups)
+     v          v          v
++----------+ +----------+ +---------------+
+|PostgreSQL| |  MySQL   | |  Redis State  |
+|Analytics | |  Alerts  | | (Pub/Sub &    |
+| Service  | | Service  | |  GEO Queries) |
++----------+ +----------+ +---------------+
+     ^                          |
+     |                          v
+     |                WebSocket Live Stream
+     |
++-----------------------------------------+
+| RabbitMQ Asynchronous Job & DLQ Worker  |
+|   (Vehicle Commands & Edge Actuation)   |
++-----------------------------------------+
+```
 
-Detailed setup instructions live in [docs/INSTALL.md](docs/INSTALL.md).
+---
 
-### Step 2: Core Developer Skills
-Loaded directly from `skills/team/<skill-name>/`:
+## 2. Core Service Responsibilities & Data Ownership
 
-| Skill | `capabilities` | Purpose | When to reach for it |
+| Service / Component | Port | Primary Datastore | Key Responsibility & Ownership |
 |---|---|---|---|
-| **[`dev-orchestrator`](skills/team/dev-orchestrator)** | `dev.scaffold` | Scaffolds the codebase from specs, breaks tasks into milestones, and organizes the build session. | Project kickoff or major feature architecture. |
-| **[`claude-code-protocol`](skills/team/claude-code-protocol)** | `dev.protocol` | Enforces session discipline, Git push verification, and autonomous agent handoffs (`---AGENT-DONE---`). | Active coding sessions. |
-| **[`frontend-design`](skills/team/frontend-design)** | `code.frontend` | Production-grade UI/component engineering and visual quality standards. | Building UI, dashboards, and client-facing interfaces. |
-| **[`ponytail`](skills/team/ponytail)** | `code.simplify.lean` | Enforces YAGNI, anti-bloat decision ladder, and minimal code diff footprint. | Active coding, refactoring, and dependency checks. |
-| **[`graphify`](skills/team/graphify)** | `code.analyze.graph` | Builds AST call graphs, schema maps, and queryable knowledge graphs. | Codebase onboarding, reconnaissance, caller tracing, and Gate 0. |
+| **Nginx Reverse Proxy** | `80` | *None* | Unified local entry point, rate limiting (200r/s ingest, 50r/s API), security headers, WebSocket upgrades. |
+| **Telemetry Service** | `4001` | **MongoDB 7.0 (rs0)** | Vehicle/device inventory, fast-path telemetry ingestion, Kafka publishing (`vehicle.telemetry.raw`), time-series queries. |
+| **Analytics Service** | `4002` | **PostgreSQL 16** | Consumes telemetry, calculates hourly/daily vehicle rollups, tracks trips, materializes analytical summaries. |
+| **Alert Service** | `4003` | **MySQL 8.4** | Rule evaluation engine (overspeeding, harsh braking, high temp), incident lifecycle (OPEN -> ACK -> RESOLVED). |
+| **Command Worker** | *Background* | **RabbitMQ 3.13** | Decoupled asynchronous vehicle command execution, dead-letter exchanges (DLQ), exponential backoff retries. |
+| **Redis Real-Time State** | `6379` | **Redis 7.4** | Latest vehicle telemetry snapshot, geospatial queries (`GEOADD`/`GEOSEARCH`), Pub/Sub channel for WebSockets. |
+| **Frontend Web** | `3000` | *Client Browser* | Metronic-styled operational dashboards, dynamic OpenStreetMap fleet view, real-time gauges, incident triage. |
+| **Observability Stack** | `9090` / `3001` | **Prometheus & Grafana**| Centralized scraping of microservice `/metrics`, W3C `traceparent` OpenTelemetry tracing, pre-provisioned dashboards. |
 
-> **`capabilities` is not decoration.** The planner binds a skill to a plan step by
-> exact match on this key. A skill without it is never dispatched, regardless of how
-> good its description is. `node tools/verify-workflow.mjs` fails the build if any
-> skill is missing one.
+---
 
-### Step 3: Launching a Build
+## 3. Key Technical Capabilities & Evidence
 
-**In Antigravity (Fully Autonomous):**  
-Simply prompt your feature description:
-```text
-Build feature: [describe feature / paste user story or spec]
+### 3.1 Performance & Micro-Batching (Phase 35 & 36)
+- **Isolated Kafka Producer:** Peaked at **47,714 msg/sec** on 500-event batches with dynamic GZIP compression.
+- **Bulk Batch Ingestion:** Added `POST /api/v1/telemetry/batch` enabling edge hardware to stream **6,050 events/sec** through Nginx.
+- **Single-Event Optimization:** Raised single-event HTTP ingestion throughput by **+48.3% (513 -> 761 req/s)** and cut p99 latency from **128.8ms down to 50.7ms**.
+- *Report:* [docs/benchmarks/OPTIMIZATION_REPORT.md](docs/benchmarks/OPTIMIZATION_REPORT.md).
+
+### 3.2 Chaos Drills & Disaster Recovery (Phase 33)
+- Tested 10 failure scenarios against live Docker containers with 10/10 PASS:
+  1. Analytics consumer kill -> Kafka lag grew -> restarted and caught up in 1s.
+  2. Alert Service kill -> MySQL consumer recovery.
+  3. Redis hard restart -> graceful degradation and reconnect.
+  4. RabbitMQ worker termination -> task queue buffering and recovery.
+  5. Broker failure & consumer partition rebalancing.
+  6. PostgreSQL pause/unpause.
+  7. Duplicate event delivery -> idempotent upsert verified.
+  8. Corrupt poison-pill payload -> dead-letter handling verified.
+  9. WebSocket abrupt disconnect -> reconnect and snapshot recovery.
+  10. Container crash -> volume persistence verified across all datastores.
+- *Report:* [docs/reports/FAILURE_DRILLS_AND_RECOVERY_EVIDENCE.md](docs/reports/FAILURE_DRILLS_AND_RECOVERY_EVIDENCE.md).
+
+### 3.3 Multi-Broker Kafka KRaft Lab (Phase 34)
+- Verified a dedicated 3-node KRaft cluster (`docker-compose.kafka-cluster.yml`) with partition replication factor 3 and `min.insync.replicas: 2`.
+- Validated hard broker kill (`docker stop kafka-1`), automatic leader re-election, in-sync replica (ISR) contraction to `[2, 3]`, and clean recovery upon restart.
+- *Architecture Document:* [docs/architecture/MULTI_BROKER_KAFKA_LAB.md](docs/architecture/MULTI_BROKER_KAFKA_LAB.md).
+
+### 3.4 Production-Style Docker & Edge Hardening (Phase 37)
+- Multi-stage Docker builds across all backend microservices and Next.js standalone frontend.
+- **Non-root execution** (`uid=1000(node) gid=1000(node)`) to eliminate container breakout risks.
+- **`dumb-init` PID 1 signal forwarding** ensuring clean `SIGTERM` connection draining.
+- **Nginx rate limiting and security headers** (`X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `X-XSS-Protection: 1; mode=block`).
+- *Guide:* [docs/architecture/PRODUCTION_HARDENING_GUIDE.md](docs/architecture/PRODUCTION_HARDENING_GUIDE.md).
+
+---
+
+## 4. Local Quick Start & Reproduction
+
+### Prerequisites
+- **Node.js**: `v20.x` or `v22.x`+
+- **Docker & Docker Compose**: Docker Desktop with Linux Engine running
+- **RAM**: Minimum 8 GB free RAM (16 GB recommended)
+
+### Step 1: Start Infrastructure & Microservices
+```bash
+# Start all core data stores and backend services via Docker
+docker compose -f backend/docker-compose.yml up -d
+
+# Check that all 11 core containers are running and healthy
+docker compose -f backend/docker-compose.yml ps
 ```
-Antigravity automatically executes all 6 quality gates end-to-end as defined in [`AGENTS.md`](AGENTS.md).
 
-**In opencode / Claude Code:**  
-Prompt the session to load the orchestrator:
-```text
-Load skill: skills/team/dev-orchestrator
-Here is the spec: [path to spec / PRD]
-Scaffold the project structure and decompose it into a gated milestone plan.
+*Optional: Start with observability (Prometheus & Grafana dashboards on :3001):*
+```bash
+docker compose -f backend/docker-compose.yml --profile full up -d
+```
+
+### Step 2: Run Prisma Database Migrations
+```bash
+# Deploy PostgreSQL Analytics migrations
+npm --prefix backend --workspace=@vehicle-pulse/analytics-service exec prisma migrate deploy
+
+# Deploy MySQL Alerts migrations
+npm --prefix backend --workspace=@vehicle-pulse/alert-service exec prisma migrate deploy
+```
+
+### Step 3: Run the Vehicle Simulator
+Simulate 10 realistic vehicles emitting driving telemetry through the Nginx reverse proxy:
+```bash
+npm --prefix backend --workspace=@vehicle-pulse/telemetry-generator run start -- \
+  --vehicles 10 \
+  --rate 2 \
+  --duration 30 \
+  --output http \
+  --endpoint http://localhost:80/api/telemetry/v1/telemetry
+```
+
+### Step 4: Launch the Frontend Web Dashboard
+In a separate terminal:
+```bash
+cd frontend/web
+npm install
+npm run dev
+```
+Open **[http://localhost:3000](http://localhost:3000)** (or **[http://localhost:80](http://localhost:80)** via Nginx) to view:
+- **Fleet Map (`/map`)**: Real-time vehicle location tracking via OpenStreetMap.
+- **Vehicle Detail (`/vehicles/:id`)**: Live gauges for speed, battery, fuel, and command dispatch.
+- **Alerts Triage (`/alerts`)**: Live incident tracking and acknowledge/resolve workflow.
+- **Analytics (`/analytics`)**: Fleet rollups and trip statistics.
+- **Kafka Topology (`/kafka`)**: Topic partitions, offsets, and consumer group lag.
+
+---
+
+## 5. Running Automated Verification & Benchmarks
+
+All test harnesses are reproducible locally:
+
+```bash
+# 1. Run all Unit & Contract Tests
+npm --prefix backend --workspace=@vehicle-pulse/event-contracts test
+npm --prefix backend --workspace=@vehicle-pulse/telemetry-service exec node --test dist/tests/producer.test.js
+
+# 2. Run Failure & Chaos Drills (10/10 automated scenarios)
+npm --prefix backend --workspace=@vehicle-pulse/telemetry-generator exec tsx ../../scripts/drills/run-failure-drills.ts
+
+# 3. Run Multi-Broker Kafka Cluster Lab
+npm --prefix backend --workspace=@vehicle-pulse/telemetry-generator exec tsx ../../scripts/drills/run-kafka-cluster-lab.ts
+
+# 4. Run HTTP Concurrency & Batch Ingestion Benchmark
+npm --prefix backend --workspace=@vehicle-pulse/telemetry-generator exec tsx ../../scripts/benchmarks/http-benchmark.ts
+
+# 5. Run Isolated Kafka Producer Throughput Benchmark
+npm --prefix backend --workspace=@vehicle-pulse/telemetry-generator exec tsx ../../scripts/benchmarks/producer-benchmark.ts
+
+# 6. Verify Architecture & Agent Workflow Integrity
+node tools/verify-workflow.mjs
 ```
 
 ---
 
-## 2. Multi-Agent Development Pipeline
+## 6. Architecture Decisions & Constraints Registry
 
-Tasks flow across specialized personas coordinated by [`agents-orchestrator`](agents/third-party/agents-orchestrator.md):
-
-```
-Spec / PRD
-   ↓
-Gate 0    — Architecture & Data Access Matrix (engineering-backend-architect)
-Gate 0.5  — Data Migration Planning           (conditional, brownfield only)
-Gate 1    — Feature Implementation            (engineering-senior-developer / engineering-frontend-developer)
-Gate 1.5a — UI & Visual Design                (design-ui-designer)
-Gate 1.5  — Runtime Integration Verification  (testing-integration-tester)
-Gate 2    — Code Simplification & Security    (code-simplifier + security-check)
-Gate 2.75 — Deployment Topology               (deployment-topologist)
-Gate 3    — Demo UX Walkthrough               (testing-demo-walkthrough-validator)
-   ↓
-Verified Code Release
-```
-
-### The Developer Agents
-
-[`agents/MANIFEST.md`](agents/MANIFEST.md) is the **canonical registry** — it maps each gate to its owner and lists the optional roles that are not shipped. Summary:
-
-- **Orchestration & gates:** `agents-orchestrator`, `build-validator`, `code-simplifier`, `security-check`, `verify-app`
-- **Engineering:** `engineering-backend-architect`, `engineering-senior-developer`, `engineering-frontend-developer`, `engineering-rapid-prototyper`, `engineering-security-engineer`, `engineering-ai-engineer`, `engineering-technical-writer`
-- **UI & testing:** `design-ui-designer`, `ux-researcher`, `testing-api-tester`, `testing-integration-tester`
-- **Release & handover:** `deployment-topologist`, `evidence-collector`, `project-shepherd`, `testing-demo-walkthrough-validator`
-
-Some pipeline roles have no agent file in this edition. When a template reaches one
-it **skips and logs the skip** — it never substitutes another agent. See
-[`agents/MANIFEST.md` §5](agents/MANIFEST.md).
+- **Zero Paid Dependencies Policy:** Every library, map tile (OpenStreetMap Leaflet), database, broker, and monitoring tool is 100% free and runnable on localhost without API keys or credit cards.
+- **At-Least-Once Delivery & Idempotent Processing:** Microservices use deterministic UUID event IDs (`eventId`) and compound natural keys (`vehicleId` + `timestamp` bucket) to guarantee duplicate suppression across network retries.
+- **Explicit Offsets After Persistence:** Kafka consumers (`eachBatch`) only commit Kafka offsets *after* durable persistence in PostgreSQL, MongoDB, or MySQL, eliminating data loss during consumer crash.
+- **Nginx Single Entry Point:** Direct frontend-to-database communication is strictly forbidden; all traffic flows through Nginx on port 80.
+- **No Speculative Auth:** The system intentionally focuses on core data streaming, resilience, and operational engineering; no fake JWT stubs or speculative RBAC bloat.
 
 ---
 
-## 3. Autonomous Execution Protocol
+## 7. Teardown & Clean Reset
 
-During autonomous multi-agent pipelines, every agent session follows
-[`docs/PIPELINE_PROTOCOL.md`](docs/PIPELINE_PROTOCOL.md):
-
-### The Git Model — agents propose, humans execute
-
-**An agent never runs a git command that writes.** No `commit`, no `push`, no
-`checkout`, no `branch`, no `merge`, no PR. It reads git state freely, then hands you
-the commands:
-
-```text
-## Proposed Git Workflow  — not executed, for your review
-
-⚠ Ran on `main`? → branch first. Do not commit here.
-
-Working tree: 12 files changed, +380 −220
-
-Review first:
-  git status --short && git diff --stat && git diff
-
-Then:
-  git checkout -b ai/[project-slug]-[phase]-[YYYY-MM-DD]
-  git add <paths>
-  git commit -m "[component] brief description"
-  git push -u origin ai/[project-slug]-[phase]-[YYYY-MM-DD]
-  gh pr create --title "..." --body "..." --base main
+To stop all containers and cleanly remove volumes:
+```bash
+docker compose -f backend/docker-compose.yml down -v
 ```
-
-You read the diff, adjust what you want, and run it. A commit is where work becomes
-history — review has to happen before that, not after.
-
-### The Completion Signal
-
-Every session that writes files ends with:
-
-```text
----AGENT-DONE---
-Agent: [agent name]
-Feature: [feature ID]
-Output: [file paths]
-Status: PASS | PASS (STATIC ONLY) | FAIL | NEEDS-REVIEW
-Self-check: PASS | SELF-CORRECTED ([detail])
-Scope: [touched files]
-Issues: [none | description]
-Next agent: [next agent | GATE | END]
----
-```
-
-`PASS (STATIC ONLY)` means verified by reading, not by running — it must name the
-missing toolchain and the unverified criterion.
-
-→ Full protocol: [`docs/PIPELINE_PROTOCOL.md`](docs/PIPELINE_PROTOCOL.md).
-→ Branch and PR rules for you: [`docs/GIT-WORKFLOW.md`](docs/GIT-WORKFLOW.md).
-
----
-
-## 4. Key Developer Documentation
-
-- [**AGENTS.md**](AGENTS.md): Core autonomous agent directives; configures Antigravity to run all 6 gates end-to-end.
-- [**Developer Guide**](docs/DEVELOPER-GUIDE.md): Brain-Soul-Body model and custom agent creation.
-- [**Developer Quickstart**](docs/FOR-DEVELOPERS.md): Day-to-day command and skill cheat sheet.
-- [**Pipeline Protocol**](docs/PIPELINE_PROTOCOL.md): Autonomous handoffs, gate thresholds, and error handling.
-- [**Git Workflow**](docs/GIT-WORKFLOW.md): Branching, PR session close, and remote tracking rules.
-- [**Installation Guide**](docs/INSTALL.md): Step-by-step setup for opencode, Antigravity, and Claude Code.
-- [**Project Scaffolding**](docs/NEW_PROJECT_SETUP.md): Step-by-step scaffolding guide for new repositories.
-
----
-
-## 5. Golden Rule
-
-> **Verify from runtime reality, never from model claims.**
-> Always execute integration tests (`Gate 1.5`), verify running services, and report
-> honestly when something could not be verified — before it is committed, not after.
+To restart cleanly from a blank state, re-run Step 1 and Step 2 above.
