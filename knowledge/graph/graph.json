@@ -1,9 +1,9 @@
 {
   "meta": {
     "project": "VehiclePulse",
-    "generatedAt": "2026-11-18T06:17:41.270Z",
-    "nodeCount": 240,
-    "edgeCount": 613
+    "generatedAt": "2026-11-18T08:31:11.372Z",
+    "nodeCount": 242,
+    "edgeCount": 615
   },
   "nodes": [
     {
@@ -34,6 +34,11 @@
     {
       "id": "backend/infrastructure/grafana/provisioning/datasources/prometheus.yml",
       "label": "prometheus.yml",
+      "type": "yml"
+    },
+    {
+      "id": "backend/infrastructure/kafka/docker-compose.kafka-cluster.yml",
+      "label": "docker-compose.kafka-cluster.yml",
       "type": "yml"
     },
     {
@@ -349,6 +354,11 @@
     {
       "id": "backend/scripts/drills/run-failure-drills.ts",
       "label": "run-failure-drills.ts",
+      "type": "ts"
+    },
+    {
+      "id": "backend/scripts/drills/run-kafka-cluster-lab.ts",
+      "label": "run-kafka-cluster-lab.ts",
       "type": "ts"
     },
     {
@@ -1671,6 +1681,16 @@
     {
       "source": "backend/scripts/drills/run-failure-drills.ts",
       "target": "ws",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/scripts/drills/run-kafka-cluster-lab.ts",
+      "target": "kafkajs",
+      "relation": "IMPORTS"
+    },
+    {
+      "source": "backend/scripts/drills/run-kafka-cluster-lab.ts",
+      "target": "node:child_process",
       "relation": "IMPORTS"
     },
     {
